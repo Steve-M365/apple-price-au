@@ -1,0 +1,738 @@
+{
+  "_comment": [
+    "Declarative registry for scripts/normalise.py. No parsing logic lives here.",
+    "models are tried in order: the first pattern that matches wins, so more",
+    "specific models (iPad Air, Magic Keyboard for iPad Air) precede generic",
+    "ones (iPad). 'emit' lists the configuration axes that participate in the",
+    "product_id; the code always writes them in the canonical SLUG_AXIS_ORDER.",
+    "'required' lists the axes that must be present after defaults are applied;",
+    "it defaults to 'emit' when omitted.",
+    "'defaults' are catalogue-anchored axes the Apple JSON-LD page title omits",
+    "for the current generation. They never override a value found in the",
+    "title, and a default that would alias a different catalogue configuration",
+    "raises NormalisationCollision instead of merging."
+  ],
+  "models": [
+    {
+      "family": "ipad_keyboard",
+      "category": "accessory",
+      "match": "magic\\s+keyboard\\s+for\\s+ipad\\s+air",
+      "model": "Magic Keyboard for iPad Air",
+      "slug": "magic-keyboard-ipad-air",
+      "name": "{model} {screen_size} ({chip_short}) {layout} {colour}",
+      "emit": [
+        "screen_size",
+        "chip",
+        "layout",
+        "colour"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {
+        "type": "keyboard"
+      },
+      "generation": null
+    },
+    {
+      "family": "macbook_air",
+      "category": "mac",
+      "match": "macbook\\s+air",
+      "model": "MacBook Air",
+      "slug": "macbook-air",
+      "name": "{model} {screen_size} {chip_short} {memory} {storage} {colour}",
+      "emit": [
+        "screen_size",
+        "chip",
+        "memory",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "memory",
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "macbook_pro",
+      "category": "mac",
+      "match": "macbook\\s+pro",
+      "model": "MacBook Pro",
+      "slug": "macbook-pro",
+      "name": "{model} {screen_size} {chip_short} {memory} {storage} {colour}",
+      "emit": [
+        "screen_size",
+        "chip",
+        "memory",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "memory",
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "mac_mini",
+      "category": "mac",
+      "match": "mac\\s+mini",
+      "model": "Mac mini",
+      "slug": "mac-mini",
+      "name": "{model} {screen_size} {chip_short} {memory} {storage} {colour}",
+      "emit": [
+        "chip",
+        "memory",
+        "storage"
+      ],
+      "capacities": [
+        "memory",
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "imac",
+      "category": "mac",
+      "match": "imac",
+      "model": "iMac",
+      "slug": "imac",
+      "name": "{model} {screen_size} {chip_short} {memory} {storage} {colour}",
+      "emit": [
+        "screen_size",
+        "chip",
+        "memory",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "memory",
+        "storage"
+      ],
+      "defaults": {},
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "ipad_air",
+      "category": "ipad",
+      "match": "ipad\\s+air",
+      "model": "iPad Air",
+      "slug": "ipad-air",
+      "name": "{model} {screen_size} {chip_short} {storage} {colour} ({connectivity})",
+      "emit": [
+        "screen_size",
+        "chip",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "chip": "Apple M4",
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "ipad_pro",
+      "category": "ipad",
+      "match": "ipad\\s+pro",
+      "model": "iPad Pro",
+      "slug": "ipad-pro",
+      "name": "{model} {screen_size} {chip_short} {storage} {colour} ({connectivity})",
+      "emit": [
+        "screen_size",
+        "chip",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "chip": "Apple M5",
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "ipad",
+      "category": "ipad",
+      "match": "ipad",
+      "model": "iPad",
+      "slug": "ipad",
+      "name": "{model} {screen_size} {chip_short} {storage} {colour} ({connectivity})",
+      "emit": [
+        "screen_size",
+        "chip",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "screen_size": "11-inch",
+        "chip": "Apple A16",
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "iphone_18_pro",
+      "category": "iphone",
+      "match": "iphone\\s+18\\s+pro",
+      "model": "iPhone 18 Pro",
+      "slug": "iphone-18-pro",
+      "name": "{model} {screen_size} {storage} {colour}",
+      "emit": [
+        "screen_size",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "screen_size": "6.3-inch",
+        "connectivity": "5G"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "iphone_17",
+      "category": "iphone",
+      "match": "iphone\\s+17",
+      "model": "iPhone 17",
+      "slug": "iphone-17",
+      "name": "{model} {screen_size} {storage} {colour}",
+      "emit": [
+        "screen_size",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "screen_size": "6.3-inch",
+        "connectivity": "5G"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "iphone_air",
+      "category": "iphone",
+      "match": "iphone\\s+air",
+      "model": "iPhone Air",
+      "slug": "iphone-air",
+      "name": "{model} {screen_size} {storage} {colour}",
+      "emit": [
+        "screen_size",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "screen_size": "6.5-inch",
+        "connectivity": "5G"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "apple_watch_series",
+      "category": "watch",
+      "match": "apple\\s+watch\\s+series\\s+(?P<number>\\d{1,2})",
+      "model": "Apple Watch Series {number}",
+      "slug": "watch-series-{number}",
+      "name": "{model} {size} {colour} {case_material} {connectivity} ({band})",
+      "emit": [
+        "size",
+        "colour",
+        "case_material",
+        "connectivity"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": null,
+      "required": [
+        "size",
+        "colour",
+        "case_material",
+        "connectivity",
+        "band"
+      ]
+    },
+    {
+      "family": "apple_watch_se",
+      "category": "watch",
+      "match": "apple\\s+watch\\s+se\\s+(?P<number>\\d{1,2})",
+      "model": "Apple Watch SE {number}",
+      "slug": "watch-se-{number}",
+      "name": "{model} {size} {colour} {case_material} {connectivity} ({band})",
+      "emit": [
+        "size",
+        "colour",
+        "case_material",
+        "connectivity"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": null,
+      "required": [
+        "size",
+        "colour",
+        "case_material",
+        "connectivity",
+        "band"
+      ]
+    },
+    {
+      "family": "airpods_pro",
+      "category": "airpods",
+      "match": "airpods\\s+pro\\s+(?P<number>\\d{1,2})",
+      "model": "AirPods Pro {number}",
+      "slug": "airpods-pro-{number}",
+      "name": "{model} {colour} ({case})",
+      "emit": [],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": "{number}"
+    },
+    {
+      "family": "airpods_max",
+      "category": "airpods",
+      "match": "airpods\\s+max\\s+(?P<number>\\d{1,2})",
+      "model": "AirPods Max {number}",
+      "slug": "airpods-max-{number}",
+      "name": "{model} {colour}",
+      "emit": [
+        "colour"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": "{number}"
+    },
+    {
+      "family": "airpods",
+      "category": "airpods",
+      "match": "airpods\\s+(?P<number>\\d{1,2})",
+      "model": "AirPods {number}",
+      "slug": "airpods-{number}",
+      "name": "{model} with {case}",
+      "emit": [
+        "case"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": "{number}"
+    },
+    {
+      "family": "apple_tv",
+      "category": "tv",
+      "match": "apple\\s+tv\\s+4k",
+      "model": "Apple TV 4K",
+      "slug": "tv-4k",
+      "name": "{model} ({generation})",
+      "emit": [
+        "generation"
+      ],
+      "capacities": [],
+      "defaults": {
+        "generation": "4th generation"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "homepod_mini",
+      "category": "homepod",
+      "match": "homepod\\s+mini\\s+(?P<number>\\d{1,2})",
+      "model": "HomePod mini {number}",
+      "slug": "homepod-mini-{number}",
+      "name": "{model} {colour}",
+      "emit": [
+        "colour"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": "{number}"
+    },
+    {
+      "family": "apple_pencil",
+      "category": "accessory",
+      "match": "apple\\s+pencil\\s+pro",
+      "model": "Apple Pencil Pro",
+      "slug": "pencil-pro",
+      "name": "{model}",
+      "emit": [],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {
+        "type": "stylus"
+      },
+      "generation": null
+    }
+  ],
+  "colours": [
+    {
+      "canonical": "Space Grey",
+      "aliases": [
+        "space grey",
+        "space gray"
+      ]
+    },
+    {
+      "canonical": "Space Black",
+      "aliases": [
+        "space black"
+      ]
+    },
+    {
+      "canonical": "Midnight",
+      "aliases": [
+        "midnight"
+      ]
+    },
+    {
+      "canonical": "Starlight",
+      "aliases": [
+        "starlight"
+      ]
+    },
+    {
+      "canonical": "Silver",
+      "aliases": [
+        "silver"
+      ]
+    },
+    {
+      "canonical": "Graphite",
+      "aliases": [
+        "graphite"
+      ]
+    },
+    {
+      "canonical": "Jet Black",
+      "aliases": [
+        "jet black"
+      ]
+    },
+    {
+      "canonical": "Black",
+      "aliases": [
+        "black"
+      ]
+    },
+    {
+      "canonical": "White",
+      "aliases": [
+        "white"
+      ]
+    },
+    {
+      "canonical": "Blue",
+      "aliases": [
+        "blue"
+      ]
+    },
+    {
+      "canonical": "Sky Blue",
+      "aliases": [
+        "sky blue"
+      ]
+    },
+    {
+      "canonical": "Deep Blue",
+      "aliases": [
+        "deep blue"
+      ]
+    },
+    {
+      "canonical": "Sierra Blue",
+      "aliases": [
+        "sierra blue"
+      ]
+    },
+    {
+      "canonical": "Alpine Green",
+      "aliases": [
+        "alpine green"
+      ]
+    },
+    {
+      "canonical": "Green",
+      "aliases": [
+        "green"
+      ]
+    },
+    {
+      "canonical": "Pink",
+      "aliases": [
+        "pink"
+      ]
+    },
+    {
+      "canonical": "Purple",
+      "aliases": [
+        "purple"
+      ]
+    },
+    {
+      "canonical": "Lavender",
+      "aliases": [
+        "lavender"
+      ]
+    },
+    {
+      "canonical": "Yellow",
+      "aliases": [
+        "yellow"
+      ]
+    },
+    {
+      "canonical": "Orange",
+      "aliases": [
+        "orange"
+      ]
+    },
+    {
+      "canonical": "Cosmic Orange",
+      "aliases": [
+        "cosmic orange"
+      ]
+    },
+    {
+      "canonical": "Red",
+      "aliases": [
+        "red",
+        "(product)red",
+        "product red"
+      ]
+    },
+    {
+      "canonical": "Gold",
+      "aliases": [
+        "gold"
+      ]
+    },
+    {
+      "canonical": "Rose Gold",
+      "aliases": [
+        "rose gold"
+      ]
+    },
+    {
+      "canonical": "Teal",
+      "aliases": [
+        "teal"
+      ]
+    },
+    {
+      "canonical": "Ultramarine",
+      "aliases": [
+        "ultramarine"
+      ]
+    },
+    {
+      "canonical": "Sage",
+      "aliases": [
+        "sage"
+      ]
+    },
+    {
+      "canonical": "Mist Blue",
+      "aliases": [
+        "mist blue"
+      ]
+    },
+    {
+      "canonical": "Natural Titanium",
+      "aliases": [
+        "natural titanium"
+      ]
+    },
+    {
+      "canonical": "Desert Titanium",
+      "aliases": [
+        "desert titanium"
+      ]
+    },
+    {
+      "canonical": "Black Titanium",
+      "aliases": [
+        "black titanium"
+      ]
+    },
+    {
+      "canonical": "White Titanium",
+      "aliases": [
+        "white titanium"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "canonical": "Aluminium",
+      "aliases": [
+        "aluminium",
+        "aluminum"
+      ]
+    },
+    {
+      "canonical": "Titanium",
+      "aliases": [
+        "titanium"
+      ]
+    },
+    {
+      "canonical": "Stainless Steel",
+      "aliases": [
+        "stainless steel",
+        "stainless-steel"
+      ]
+    }
+  ],
+  "layouts": [
+    {
+      "canonical": "US English",
+      "aliases": [
+        "us english"
+      ]
+    },
+    {
+      "canonical": "British English",
+      "aliases": [
+        "british english"
+      ]
+    },
+    {
+      "canonical": "UK English",
+      "aliases": [
+        "uk english"
+      ]
+    },
+    {
+      "canonical": "Australian English",
+      "aliases": [
+        "australian english"
+      ]
+    },
+    {
+      "canonical": "ISO",
+      "aliases": [
+        "iso"
+      ]
+    }
+  ],
+  "filler_words": [
+    "and",
+    "after",
+    "air",
+    "alpine",
+    "aluminium",
+    "aluminum",
+    "anodized",
+    "apple",
+    "australian",
+    "band",
+    "braided",
+    "british",
+    "by",
+    "case",
+    "cellular",
+    "chip",
+    "color",
+    "colour",
+    "core",
+    "cores",
+    "cpu",
+    "dark",
+    "display",
+    "english",
+    "fi",
+    "for",
+    "gb",
+    "generation",
+    "glass",
+    "gps",
+    "gpu",
+    "inch",
+    "inches",
+    "iso",
+    "keyboard",
+    "latest",
+    "leather",
+    "link",
+    "loop",
+    "lte",
+    "magic",
+    "max",
+    "memory",
+    "mil",
+    "mini",
+    "mm",
+    "mount",
+    "nano",
+    "nd",
+    "new",
+    "nike",
+    "ocean",
+    "of",
+    "plus",
+    "pro",
+    "rd",
+    "se",
+    "series",
+    "size",
+    "solo",
+    "sport",
+    "stainless",
+    "stand",
+    "standard",
+    "steel",
+    "storage",
+    "st",
+    "tb",
+    "texture",
+    "the",
+    "th",
+    "titanium",
+    "trail",
+    "uk",
+    "unified",
+    "us",
+    "vesa",
+    "wi",
+    "wifi",
+    "with"
+  ]
+}

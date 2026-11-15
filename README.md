@@ -136,8 +136,8 @@ its paths exist; M2–M4 paths do not.
 | [PRD.md](docs/PRD.md) | Problem, users, scope, non-scope, success measures, MVP acceptance | Current |
 | [BRAND.md](docs/BRAND.md) | Provisional name, trademark position, rename checklist | Current |
 | [AGENTS.md](AGENTS.md) | Team, board usage, non-negotiables, how to work a card | Current |
-| `docs/OPERATIONS.md` | Runbook and collection procedures; deployment is in DEPLOYMENT.md | Planned (M4, `APA-049`) |
-| `docs/GIFT-CARD-RULES.md` | Gift-card valuation rules referenced by `.env.example` | Planned (M3, `APA-031`) |
+| `docs/OPERATIONS.md` | Runbook and collection procedures; deployment is in DEPLOYMENT.md | Planned (M6, `APA-049`) |
+| `docs/GIFT-CARD-RULES.md` | Gift-card valuation rules referenced by `.env.example` | Planned (M4, `APA-031`) |
 | `docs/ROADMAP.md` | Future work beyond Milestone 4 | Planned |
 
 ## How the repository is built

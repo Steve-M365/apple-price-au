@@ -250,10 +250,11 @@ def test_validate_data_workflow_runs_the_gate_without_strict(repo_root: Path) ->
     for block in gate_blocks:
         assert "--strict" not in _clean(block), (
             "validate-data.yml must not run --strict while require_adapter_modules is false; "
-            "APA-030 flips it in the adapter-framework commit"
+            "APA-017 (the adapter framework) flips it in the commit that lands it"
         )
-    assert "APA-030" in _raw(path), (
-        "record the --strict handover to APA-030 in a comment so it is not forgotten"
+    assert "require_adapter_modules" in _raw(path), (
+        "the handover comment must name the config key that gates --strict, not a card id: "
+        "card ids shift as the board grows, so pinning one makes this test rot"
     )
 
 

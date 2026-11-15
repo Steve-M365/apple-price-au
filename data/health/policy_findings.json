@@ -1,0 +1,14 @@
+{
+  "findings": [
+    {
+      "seller_id": "apple_au",
+      "robots_url": "https://www.apple.com/robots.txt",
+      "status": 200,
+      "allowed": true,
+      "crawl_delay_seconds": null,
+      "checked_at": "2026-11-15T11:04:23.271905Z",
+      "evidence_file": "fixtures/policy/apple_com_au.txt",
+      "notes": "ALLOWED (robots.txt allows /au/shop/buy-mac/macbook-air/13-inch-midnight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage: 5 rule(s) apply to this user agent and none match); ALLOWED (robots.txt allows /au/shop/product/airpods-pro-3: 5 rule(s) apply to this user agent and none match); ALLOWED (robots.txt allows /au/store: 5 rule(s) apply to this user agent and none match). robots.txt content-type: text/plain; charset=utf-8."
+    }
+  ]
+}

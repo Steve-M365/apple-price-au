@@ -18,7 +18,7 @@
         "connectivity": "Wi-Fi"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-mac/macbook-air/13-inch-midnight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
-      "apple_rrp_aud": 2099.00,
+      "apple_rrp_aud": 2099.0,
       "rrp_verification": "verified",
       "education_eligible": true,
       "status": "active",
@@ -45,7 +45,7 @@
         "connectivity": "Wi-Fi"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage",
-      "apple_rrp_aud": 2499.00,
+      "apple_rrp_aud": 2499.0,
       "rrp_verification": "verified",
       "education_eligible": true,
       "status": "active",
@@ -73,7 +73,7 @@
         "connectivity": "Wi-Fi"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-mac/macbook-pro/14-inch-space-black-standard-display-apple-m6-chip-12-core-cpu-12-core-gpu-16gb-memory-1tb-storage",
-      "apple_rrp_aud": 3199.00,
+      "apple_rrp_aud": 3199.0,
       "rrp_verification": "verified",
       "education_eligible": true,
       "status": "active",
@@ -100,7 +100,7 @@
         "stand": "Standard stand"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-mac/imac/24-inch-blue-m6-chip-10-core-cpu-10-core-gpu-16gb-memory-256gb-storage-stand",
-      "apple_rrp_aud": 2399.00,
+      "apple_rrp_aud": 2399.0,
       "rrp_verification": "verified",
       "education_eligible": true,
       "status": "active",
@@ -125,7 +125,7 @@
         "connectivity": "Wi-Fi"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-256gb-storage",
-      "apple_rrp_aud": 1449.00,
+      "apple_rrp_aud": 1449.0,
       "rrp_verification": "verified",
       "education_eligible": true,
       "status": "active",
@@ -151,7 +151,7 @@
         "connectivity": "Wi-Fi"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-ipad/ipad/128gb-blue-wifi",
-      "apple_rrp_aud": 749.00,
+      "apple_rrp_aud": 749.0,
       "rrp_verification": "verified",
       "education_eligible": true,
       "status": "active",
@@ -177,7 +177,7 @@
         "connectivity": "Wi-Fi"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi",
-      "apple_rrp_aud": 1249.00,
+      "apple_rrp_aud": 1249.0,
       "rrp_verification": "verified",
       "education_eligible": true,
       "status": "active",
@@ -204,7 +204,7 @@
         "display": "Standard glass"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-ipad/ipad-pro/11-inch-display-256gb-space-black-wifi-standard-glass",
-      "apple_rrp_aud": 1999.00,
+      "apple_rrp_aud": 1999.0,
       "rrp_verification": "verified",
       "education_eligible": true,
       "status": "active",
@@ -229,7 +229,7 @@
         "connectivity": "5G"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-iphone/iphone-17/6.3-inch-display-256gb-black",
-      "apple_rrp_aud": 1549.00,
+      "apple_rrp_aud": 1549.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -254,7 +254,7 @@
         "connectivity": "5G"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-iphone/iphone-18-pro/6.3-inch-display-256gb-black",
-      "apple_rrp_aud": 2099.00,
+      "apple_rrp_aud": 2099.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -279,7 +279,7 @@
         "connectivity": "5G"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-iphone/iphone-air/6.5-inch-display-256gb-space-black",
-      "apple_rrp_aud": 1899.00,
+      "apple_rrp_aud": 1899.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -305,7 +305,7 @@
         "band": "After Dark Black Nike Sport Band"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-watch/apple-watch/42mm-gps-space-gray-aluminium-after-dark-black-nike-sport-band",
-      "apple_rrp_aud": 649.00,
+      "apple_rrp_aud": 649.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -331,7 +331,7 @@
         "band": "Black Sport Band"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-watch/apple-watch-se/40-mm-gps-midnight-aluminium-black-sport-band-se",
-      "apple_rrp_aud": 399.00,
+      "apple_rrp_aud": 399.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -354,7 +354,7 @@
         "case": "Wireless Charging Case"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-airpods/airpods-5/with-wireless-charging-case",
-      "apple_rrp_aud": 249.00,
+      "apple_rrp_aud": 249.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -376,7 +376,7 @@
         "generation": "3"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-airpods/airpods-pro-3",
-      "apple_rrp_aud": 429.00,
+      "apple_rrp_aud": 429.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -399,7 +399,7 @@
         "colour": "Midnight"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-airpods/airpods-max-2/midnight",
-      "apple_rrp_aud": 999.00,
+      "apple_rrp_aud": 999.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -421,7 +421,7 @@
         "generation": "4th generation"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-tv/apple-tv-4k",
-      "apple_rrp_aud": 449.00,
+      "apple_rrp_aud": 449.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -444,7 +444,7 @@
         "colour": "Midnight"
       },
       "apple_au_url": "https://www.apple.com/au/shop/buy-homepod/homepod-mini/midnight",
-      "apple_rrp_aud": 229.00,
+      "apple_rrp_aud": 229.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -466,7 +466,7 @@
         "type": "stylus"
       },
       "apple_au_url": "https://www.apple.com/au/shop/product/mx2d3za/a/apple-pencil-pro",
-      "apple_rrp_aud": 219.00,
+      "apple_rrp_aud": 219.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
@@ -486,19 +486,20 @@
       "model": "Magic Keyboard for iPad Air",
       "configuration": {
         "screen_size": "11-inch",
+        "chip": "Apple M4",
         "type": "keyboard",
         "layout": "US English",
         "colour": "White"
       },
       "apple_au_url": "https://www.apple.com/au/shop/product/mdfv4za/a/magic-keyboard-for-ipad-air-11",
-      "apple_rrp_aud": 449.00,
+      "apple_rrp_aud": 449.0,
       "rrp_verification": "verified",
       "education_eligible": false,
       "status": "active",
       "priority": "normal",
       "specs_source_url": "https://www.apple.com/au/shop/product/mdfv4za/a/magic-keyboard-for-ipad-air-11",
       "created_at": "2026-11-15T00:00:00Z",
-      "updated_at": "2026-11-15T00:00:00Z"
+      "updated_at": "2026-11-15T11:20:00Z"
     }
   ],
   "generated_at": "2026-11-15T10:24:22Z",

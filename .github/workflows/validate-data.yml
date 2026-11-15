@@ -86,7 +86,7 @@ jobs:
         id: validate
         # NOTE: run WITHOUT --strict while config/validation.yml has
         # require_adapter_modules: false, otherwise the pre-adapter warnings
-        # turn the gate red by default. APA-030 flips this workflow to
+        # turn the gate red by default. APA-017 flips this workflow to
         # `--strict` in the same commit that lands the adapter framework, so no
         # adapter can ship behind a green gate without existing.
         run: |

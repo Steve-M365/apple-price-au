@@ -58,8 +58,9 @@ Flow: `backlog → ready → in_progress → in_review → done`, with `blocked`
 escape hatch. Workers claim their own card. **Only the director moves cards to
 `done`, `ready` or across owners.**
 
-Card IDs are `APA-NNN` in milestone order: M1 `APA-001..010`, M2 `020..025`,
-M3 `030..041`, M4 `050..054`, M5 `060..070`, M6 `080..084`, M7 `090..093`.
+Card IDs are sequential `APA-NNN` in milestone order, so ranges shift as cards
+are added. Do not assume a range: `python3 .kanban/kanban.py list` is the only
+authority on what exists. Current head is around `APA-055`.
 
 ## Non-negotiables
 
