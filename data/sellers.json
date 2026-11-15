@@ -1,0 +1,1185 @@
+{
+  "sellers": [
+    {
+      "seller_id": "apple_au",
+      "display_name": "Apple Australia",
+      "seller_type": "apple_direct",
+      "website": "https://www.apple.com/au/",
+      "product_search_url": "https://www.apple.com/au/store",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare",
+        "gift_card"
+      ],
+      "collection_method": "automated_jsonld",
+      "rate_limit_rps": 0.33,
+      "crawl_delay_seconds": 3,
+      "authorised_reseller": true,
+      "authorised_evidence_url": "https://www.apple.com/au/",
+      "warranty_policy_url": "https://www.apple.com/au/legal/warranty/",
+      "returns_policy_url": "https://www.apple.com/au/shop/help/returns_refund",
+      "delivery_policy_url": "https://www.apple.com/au/shop/help/shipping_delivery",
+      "trust_score_inputs": {
+        "apple_authorised": 1.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 1.0,
+        "stock_reporting": 1.0,
+        "price_transparency": 1.0
+      },
+      "adapter_module": "scripts.collectors.apple_au",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Apple's own Australian storefront; JSON-LD on product pages with HTML fallback (APA-011). Prices are GST-inclusive AUD as displayed. Authorised by definition - Apple is the vendor of record."
+    },
+    {
+      "seller_id": "apple_education_au",
+      "display_name": "Apple Education Store Australia",
+      "seller_type": "apple_direct",
+      "website": "https://www.apple.com/au-edu/store",
+      "product_search_url": "https://www.apple.com/au-edu/store",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "accessory",
+        "applecare",
+        "education"
+      ],
+      "collection_method": "automated_jsonld",
+      "rate_limit_rps": 0.33,
+      "crawl_delay_seconds": 3,
+      "authorised_reseller": true,
+      "authorised_evidence_url": "https://www.apple.com/au/shop/browse/home/education_routing",
+      "warranty_policy_url": "https://www.apple.com/au/legal/warranty/",
+      "returns_policy_url": "https://www.apple.com/au/shop/help/returns_refund",
+      "delivery_policy_url": "https://www.apple.com/au/shop/help/shipping_delivery",
+      "trust_score_inputs": {
+        "apple_authorised": 1.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 1.0,
+        "stock_reporting": 1.0,
+        "price_transparency": 1.0
+      },
+      "adapter_module": "scripts.collectors.apple_education",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Education pricing is eligibility-gated (student, teacher, institution) and is stored as a separate offer type from retail (APA-012, AGENTS.md rule 5). Never merged into retail pricing."
+    },
+    {
+      "seller_id": "jbhifi",
+      "display_name": "JB Hi-Fi",
+      "seller_type": "national_reseller",
+      "website": "https://www.jbhifi.com.au/",
+      "product_search_url": "https://www.jbhifi.com.au/search?query=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare",
+        "gift_card"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": "https://www.jbhifi.com.au/pages/refunds-and-warranties-guide",
+      "returns_policy_url": "https://www.jbhifi.com.au/pages/help-and-support/returns",
+      "delivery_policy_url": "https://www.jbhifi.com.au/pages/help-and-support/what-are-the-delivery-options-for-online-purchases",
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.9,
+        "stock_reporting": 0.9,
+        "price_transparency": 0.9
+      },
+      "adapter_module": "",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Enabled as a curated source. Automated collection is pending a robots.txt and terms-of-service review; the policy decision is recorded under APA-018 before any adapter is enabled. Search endpoint answered HTTP 429 to a single non-browser request on 2026-11-15, which reinforces the curated-first posture."
+    },
+    {
+      "seller_id": "officeworks",
+      "display_name": "Officeworks",
+      "seller_type": "national_reseller",
+      "website": "https://www.officeworks.com.au/",
+      "product_search_url": "https://www.officeworks.com.au/shop/search?searchTerm=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "accessory",
+        "applecare"
+      ],
+      "collection_method": "automated_html",
+      "rate_limit_rps": 0.2,
+      "crawl_delay_seconds": 3,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": "https://www.officeworks.com.au/information/policies/return-policy",
+      "delivery_policy_url": "https://www.officeworks.com.au/information/policies/delivery-policy",
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.9,
+        "stock_reporting": 0.9,
+        "price_transparency": 0.9
+      },
+      "adapter_module": "scripts.collectors.officeworks",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Automated HTML on a deliberately slow schedule (0.2 rps, 3 s delay) to stay well inside the site's tolerance (APA-019). No dedicated warranty page was found; warranty terms sit inside the returns policy, so warranty_policy_url is null rather than guessed."
+    },
+    {
+      "seller_id": "harvey_norman",
+      "display_name": "Harvey Norman",
+      "seller_type": "national_reseller",
+      "website": "https://www.harveynorman.com.au/",
+      "product_search_url": "https://www.harveynorman.com.au/search?q=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare"
+      ],
+      "collection_method": "automated_html",
+      "rate_limit_rps": 0.2,
+      "crawl_delay_seconds": 3,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": "https://www.harveynorman.com.au/customer-service/warranty",
+      "returns_policy_url": "https://www.harveynorman.com.au/returns-policy",
+      "delivery_policy_url": "https://www.harveynorman.com.au/customer-service/delivery",
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.9,
+        "stock_reporting": 0.8,
+        "price_transparency": 0.9
+      },
+      "adapter_module": "scripts.collectors.harvey_norman",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Automated HTML candidate (APA-020). Search, warranty, returns and delivery pages all answered HTTP 200 on 2026-11-15. Stocks Apple across consumer categories, including television and home audio."
+    },
+    {
+      "seller_id": "the_good_guys",
+      "display_name": "The Good Guys",
+      "seller_type": "national_reseller",
+      "website": "https://www.thegoodguys.com.au/",
+      "product_search_url": "https://www.thegoodguys.com.au/search?q=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": "https://www.thegoodguys.com.au/returns-refunds-and-repairs",
+      "returns_policy_url": "https://www.thegoodguys.com.au/returns-refunds-and-repairs",
+      "delivery_policy_url": "https://www.thegoodguys.com.au/help-centre/delivery-collection",
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.9,
+        "stock_reporting": 0.9,
+        "price_transparency": 0.9
+      },
+      "adapter_module": "",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Enabled as a curated source until the robots.txt and terms check is recorded under APA-021. Warranty guidance is the returns, refunds and repairs page; no separate warranty page was verified, so warranty_policy_url points at that combined page rather than a guessed URL."
+    },
+    {
+      "seller_id": "bing_lee",
+      "display_name": "Bing Lee",
+      "seller_type": "national_reseller",
+      "website": "https://www.binglee.com.au/",
+      "product_search_url": "https://www.binglee.com.au/search?q=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare"
+      ],
+      "collection_method": "automated_html",
+      "rate_limit_rps": 0.2,
+      "crawl_delay_seconds": 3,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.8,
+        "price_transparency": 0.9
+      },
+      "adapter_module": "scripts.collectors.bing_lee",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "The brief listed bingelee.com.au, which does not resolve; the correct domain is binglee.com.au, confirmed by public DNS (A record via Cloudflare) on 2026-11-15. The site answers HTTP 403 to non-browser clients, so automation is slow (0.2 rps, 3 s) and the robots.txt check is mandatory before the adapter is switched on (APA-022). Returns, warranty and delivery pages could not be captured through the block, so those URLs are null pending human confirmation."
+    },
+    {
+      "seller_id": "beyond_the_box",
+      "display_name": "Beyond the Box",
+      "seller_type": "specialist_reseller",
+      "website": "https://www.beyondthebox.com.au/",
+      "product_search_url": "https://www.beyondthebox.com.au/search?q=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare"
+      ],
+      "collection_method": "automated_html",
+      "rate_limit_rps": 0.25,
+      "crawl_delay_seconds": 3,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": "https://www.beyondthebox.com.au/policies/refund-policy",
+      "delivery_policy_url": "https://www.beyondthebox.com.au/policies/shipping-policy",
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.8,
+        "stock_reporting": 0.7,
+        "price_transparency": 0.9
+      },
+      "adapter_module": "scripts.collectors.beyond_the_box",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Specialist Apple reseller with a Shopify storefront; refund and shipping policies captured HTTP 200 on 2026-11-15. No warranty page was found, so warranty_policy_url is null. Search endpoint returned HTTP 429 to a single request, which is why the rate limit is set low (APA-023)."
+    },
+    {
+      "seller_id": "mobileciti",
+      "display_name": "Mobileciti",
+      "seller_type": "specialist_reseller",
+      "website": "https://www.mobileciti.com.au/",
+      "product_search_url": "https://www.mobileciti.com.au/searchanise/result?q=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "accessory"
+      ],
+      "collection_method": "automated_html",
+      "rate_limit_rps": 0.33,
+      "crawl_delay_seconds": 3,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": "https://www.mobileciti.com.au/warranty",
+      "returns_policy_url": "https://www.mobileciti.com.au/help?data-tab=return",
+      "delivery_policy_url": "https://www.mobileciti.com.au/help?data-tab=shipping",
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 0.7,
+        "returns_clarity": 0.7,
+        "stock_reporting": 0.7,
+        "price_transparency": 0.7
+      },
+      "adapter_module": "scripts.collectors.mobileciti",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Specialist reseller; the site's own search redirects to a Searchanise endpoint, which is recorded as the search URL. Grey-import risk: provenance must be checked per listing and no grey-import unit may be presented as Apple-authorised stock (APA-024)."
+    },
+    {
+      "seller_id": "amazon_au",
+      "display_name": "Amazon Australia",
+      "seller_type": "online_marketplace",
+      "website": "https://www.amazon.com.au/",
+      "product_search_url": "https://www.amazon.com.au/s?k=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 0.2,
+        "returns_clarity": 0.6,
+        "stock_reporting": 0.5,
+        "price_transparency": 0.5
+      },
+      "adapter_module": "",
+      "enabled": true,
+      "enabled_reason": null,
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Enabled as a curated marketplace source. The seller of record varies per offer, so only offers sold by Amazon AU or an identified authorised reseller may be published; every third-party offer goes to the review queue (APA-025). The Product Advertising API is the intended route once credentials exist. In trust_score_inputs, marketplace_third_party_risk is scored so that 1.0 means no third-party exposure and 0.0 means an open marketplace. The search endpoint answered HTTP 503 to a non-browser request on 2026-11-15, so the path is recorded but unconfirmed."
+    },
+    {
+      "seller_id": "kogan",
+      "display_name": "Kogan",
+      "seller_type": "online_marketplace",
+      "website": "https://www.kogan.com/au/",
+      "product_search_url": "https://www.kogan.com/au/search/?q=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "accessory"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 0.2,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.4
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled after (a) the marketplace seller-of-record check is implemented and (b) grey-import provenance rules are signed off, so that Kogan Marketplace stock is never shown as authorised Apple stock.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Open marketplace with substantial grey-import and third-party stock. Domain answered HTTP 403 to non-browser clients on 2026-11-15; the search path is recorded but unconfirmed."
+    },
+    {
+      "seller_id": "ebay_au",
+      "display_name": "eBay Australia",
+      "seller_type": "online_marketplace",
+      "website": "https://www.ebay.com.au/",
+      "product_search_url": "https://www.ebay.com.au/sch/i.html?_nkw=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 0.1,
+        "returns_clarity": 0.4,
+        "stock_reporting": 0.3,
+        "price_transparency": 0.3
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled once a per-listing seller allow-list (Apple AU, identified authorised resellers) and a used/refurbished exclusion are implemented.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Open marketplace. Used, refurbished and grey-import listings are common; nothing from here may be published without an identified seller. Domain answered HTTP 403 on 2026-11-15; the search path is recorded but unconfirmed."
+    },
+    {
+      "seller_id": "betta",
+      "display_name": "Betta Home Living",
+      "seller_type": "national_reseller",
+      "website": "https://www.betta.com.au/",
+      "product_search_url": "https://www.betta.com.au/search?q=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": "https://www.betta.com.au/pages/returns-and-refunds",
+      "delivery_policy_url": "https://www.betta.com.au/pages/how-we-deliver",
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.8,
+        "stock_reporting": 0.7,
+        "price_transparency": 0.8
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled once store-level stock reporting is understood, because Betta is a franchise network and online availability varies by store.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Store network (franchise model); returns and delivery pages verified HTTP 200 on 2026-11-15. Search endpoint answered HTTP 429 to a single request, so automation would need a slow schedule."
+    },
+    {
+      "seller_id": "next_byte",
+      "display_name": "Next Byte",
+      "seller_type": "specialist_reseller",
+      "website": null,
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "accessory",
+        "applecare",
+        "business"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.3,
+        "stock_reporting": 0.3,
+        "price_transparency": 0.3
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and blocked: no live storefront could be confirmed. Would be enabled only after a human confirms the current trading domain and that prices are published.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "domain unverified - needs human confirmation. nextbyte.com.au resolves to a parked domain advertised for sale and nextbyte.com is a parked lander (checked 2026-11-15). No prices may be attributed to Next Byte until a live site is confirmed."
+    },
+    {
+      "seller_id": "my_byte",
+      "display_name": "My Byte",
+      "seller_type": "specialist_reseller",
+      "website": "https://mybyte.com.au/",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "accessory",
+        "applecare"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 0.9,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.5
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled after a category and stock review plus a robots.txt check, since the site is small and stock depth is shallow.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Domain mybyte.com.au resolved and answered HTTP 200 on 2026-11-15 (www redirects to the apex). No product search URL was confirmed, so it is null rather than guessed."
+    },
+    {
+      "seller_id": "macfixit_au",
+      "display_name": "Macfixit Australia",
+      "seller_type": "specialist_reseller",
+      "website": "https://www.macfixit.com.au/",
+      "product_search_url": "https://www.macfixit.com.au/search?q=apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "accessory",
+        "applecare"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": "https://www.macfixit.com.au/policies/refund-policy",
+      "delivery_policy_url": "https://support.macfixit.com.au/article/7-shipping-charges-delivery-times",
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 0.9,
+        "returns_clarity": 0.8,
+        "stock_reporting": 0.6,
+        "price_transparency": 0.8
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled once the parts-and-accessories catalogue is mapped, since most of the range is not Apple-branded hardware and must not be matched to Apple products.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Primarily parts, tools and accessories rather than Apple hardware. Refund policy and the support-site delivery article both answered HTTP 200 on 2026-11-15. Search endpoint returned HTTP 429 to a single request."
+    },
+    {
+      "seller_id": "woolworths",
+      "display_name": "Woolworths (Everyday Rewards gift cards)",
+      "seller_type": "gift_card_seller",
+      "website": "https://www.woolworths.com.au/",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "gift_card"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.6,
+        "stock_reporting": 0.5,
+        "price_transparency": 0.7
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled when the gift-card feed under APA-032 is built; it needs a curated, evidence-backed record of the discounted card and its terms before any effective price can be published.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Gift-card source only: discounted Apple-redeemable or retailer gift cards earned through Everyday Rewards. No product prices come from this source. The site answered HTTP 403 to non-browser clients on 2026-11-15 and no gift-card page path could be verified, so the search URL and policy URLs are null."
+    },
+    {
+      "seller_id": "coles",
+      "display_name": "Coles (Flybuys or Velocity gift cards)",
+      "seller_type": "gift_card_seller",
+      "website": "https://www.coles.com.au/",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "gift_card"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.6,
+        "stock_reporting": 0.5,
+        "price_transparency": 0.7
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled with the curated gift-card feed (APA-032), once flybuys or Velocity redemption value can be evidenced rather than assumed.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Gift-card and loyalty-point source only. Points are a distinct value channel and must not be double-counted with a gift-card discount or cashback (AGENTS.md rule 6). The site answered HTTP 403 on 2026-11-15 and no gift-card path could be verified, so the search and policy URLs are null."
+    },
+    {
+      "seller_id": "shopback",
+      "display_name": "ShopBack (Apple cashback)",
+      "seller_type": "gift_card_seller",
+      "website": "https://www.shopback.com.au/",
+      "product_search_url": "https://www.shopback.com.au/apple",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "cashback"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.7
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled with the curated cashback feed under APA-032; cashback rates change frequently and need a captured source plus an effective date before display.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Cashback channel only. The Apple merchant page answered HTTP 200 on 2026-11-15. Cashback applies to distinct spend and must never be stacked on the same dollar as a gift-card discount (rule 6). Terms and returns URLs are null because no verified path was found."
+    },
+    {
+      "seller_id": "shopback_gift_cards",
+      "display_name": "ShopBack Gift Cards",
+      "seller_type": "gift_card_seller",
+      "website": "https://www.shopback.com.au/gift-cards",
+      "product_search_url": "https://www.shopback.com.au/gift-cards",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "gift_card"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.7
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled with the curated gift-card feed (APA-032) once the discounted card range and its redemption terms are captured with evidence.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Discounted retailer gift-card storefront inside ShopBack. The gift-card page answered HTTP 200 on 2026-11-15. A listing only counts when a discounted card that is redeemable for Apple products is observed."
+    },
+    {
+      "seller_id": "prezzee",
+      "display_name": "Prezzee",
+      "seller_type": "gift_card_seller",
+      "website": "https://prezzee.com.au/en-au",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "gift_card"
+      ],
+      "collection_method": "curated",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.6
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2. Would be enabled with the curated gift-card feed (APA-032); Apple-redeemable cards are not always listed, so the feed needs an observation date and an explicit not-available state.",
+      "quote_only": false,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Discounted retailer gift cards. www.prezzee.com.au redirects to prezzee.com.au/en-au (HTTP 200 on 2026-11-15). No Apple-specific gift-card path was verified (candidate paths return 404), so the search URL is null rather than guessed. The help centre answered HTTP 403."
+    },
+    {
+      "seller_id": "apple_business",
+      "display_name": "Apple Business Store",
+      "seller_type": "apple_direct",
+      "website": "https://www.apple.com/au/business/",
+      "product_search_url": "https://www.apple.com/au/business/",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "accessory",
+        "applecare",
+        "business"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": true,
+      "authorised_evidence_url": "https://www.apple.com/au/business/",
+      "warranty_policy_url": "https://www.apple.com/au/legal/warranty/",
+      "returns_policy_url": "https://www.apple.com/au/shop/help/returns_refund",
+      "delivery_policy_url": "https://www.apple.com/au/shop/help/shipping_delivery",
+      "trust_score_inputs": {
+        "apple_authorised": 1.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 1.0,
+        "stock_reporting": 0.5,
+        "price_transparency": 0.5
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and quote-only: business pricing for ABN holders is not published, so no price can be captured without a quote. Would be enabled only as a quote-request route, never as a price source.",
+      "quote_only": true,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Quote-only route. Business pricing varies by agreement and volume, so any figure is a quote with a reference number and an expiry, not a list price."
+    },
+    {
+      "seller_id": "apple_business_manager",
+      "display_name": "Apple Business Manager (Apps and Books / VPP)",
+      "seller_type": "apple_direct",
+      "website": "https://business.apple.com/",
+      "product_search_url": "https://business.apple.com/",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "accessory",
+        "business"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": true,
+      "authorised_evidence_url": "https://business.apple.com/",
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 1.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.4
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and quote-only: Apps and Books volume pricing requires an organisation account and is not publicly listed. Would only ever be a quote-request route.",
+      "quote_only": true,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Volume purchasing for organisations through Apple Business Manager and Apps and Books. Requires an authenticated organisation account, which this project must never attempt to access (AGENTS.md rule 3); values come from a quote supplied by the buyer."
+    },
+    {
+      "seller_id": "apple_trade_in",
+      "display_name": "Apple Trade In",
+      "seller_type": "apple_direct",
+      "website": "https://www.apple.com/au/shop/trade-in",
+      "product_search_url": "https://www.apple.com/au/shop/trade-in",
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "accessory"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": true,
+      "authorised_evidence_url": "https://www.apple.com/au/shop/trade-in",
+      "warranty_policy_url": "https://www.apple.com/au/legal/warranty/",
+      "returns_policy_url": "https://www.apple.com/au/shop/help/returns_refund",
+      "delivery_policy_url": "https://www.apple.com/au/shop/help/shipping_delivery",
+      "trust_score_inputs": {
+        "apple_authorised": 1.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 1.0,
+        "stock_reporting": 0.5,
+        "price_transparency": 0.5
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and quote-only: trade-in credit depends on device condition and is quoted at assessment, so no value can be presented as a price. Would be enabled as an indicative credit range with an explicit expiry only.",
+      "quote_only": true,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Trade-in credit is an offset against a purchase, not a discount on the same dollars as a gift card or cashback (rule 6). Estimates are indicative and must be labelled as such; the page answered HTTP 200 on 2026-11-15."
+    },
+    {
+      "seller_id": "mac_centre",
+      "display_name": "Mac Centre",
+      "seller_type": "business_reseller",
+      "website": "https://www.maccentre.com.au/",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "accessory",
+        "applecare",
+        "business"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.4
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and quote-only: a business reseller route. Would be enabled only to record a quote, once the reseller's Apple authorisation and pricing terms are confirmed in writing.",
+      "quote_only": true,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Domain maccentre.com.au answered HTTP 200 on 2026-11-15. No public catalogue search was confirmed (tested paths return 404), so product_search_url is null. Quote-only route."
+    },
+    {
+      "seller_id": "ct",
+      "display_name": "CT",
+      "seller_type": "business_reseller",
+      "website": "https://www.ct.com.au/",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "accessory",
+        "applecare",
+        "business"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.4
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and quote-only: an IT solutions reseller route. Would be enabled only to record a quote against a confirmed ABN purchase.",
+      "quote_only": true,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Domain ct.com.au answered HTTP 200 on 2026-11-15. No public Apple price catalogue was confirmed, so product_search_url is null. Quote-only route."
+    },
+    {
+      "seller_id": "edunet",
+      "display_name": "Edunet",
+      "seller_type": "education_reseller",
+      "website": "https://www.edunet.com.au/",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "accessory",
+        "applecare",
+        "education"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.4
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and quote-only: an education reseller route that requires school or institution eligibility. Would be enabled only to record an institutional quote.",
+      "quote_only": true,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Domain edunet.com.au answered HTTP 200 on 2026-11-15. Education channel: pricing is eligibility-gated and must never be merged with retail (rule 5). Quote-only route."
+    },
+    {
+      "seller_id": "first_focus",
+      "display_name": "First Focus",
+      "seller_type": "business_reseller",
+      "website": "https://www.firstfocus.com.au/",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "accessory",
+        "applecare",
+        "business"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.4
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and quote-only: a managed service provider route where hardware is bundled into a service agreement. Would be enabled only to record a quote.",
+      "quote_only": true,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Domain firstfocus.com.au answered HTTP 200 on 2026-11-15. Hardware is generally quoted as part of a managed service, so no public price exists to collect. Quote-only route."
+    },
+    {
+      "seller_id": "synnex",
+      "display_name": "Synnex",
+      "seller_type": "business_reseller",
+      "website": "https://www.synnex.com.au/",
+      "product_search_url": null,
+      "country": "AU",
+      "supported_regions": [
+        "AU"
+      ],
+      "categories": [
+        "mac",
+        "ipad",
+        "accessory",
+        "applecare",
+        "business"
+      ],
+      "collection_method": "manual",
+      "rate_limit_rps": 0.0,
+      "crawl_delay_seconds": 5,
+      "authorised_reseller": null,
+      "authorised_evidence_url": null,
+      "warranty_policy_url": null,
+      "returns_policy_url": null,
+      "delivery_policy_url": null,
+      "trust_score_inputs": {
+        "apple_authorised": 0.0,
+        "marketplace_third_party_risk": 1.0,
+        "returns_clarity": 0.5,
+        "stock_reporting": 0.4,
+        "price_transparency": 0.4
+      },
+      "adapter_module": "",
+      "enabled": false,
+      "enabled_reason": "Phase 2 and quote-only: a distributor route that requires a reseller account. Would be enabled only to record a quote obtained through a reseller.",
+      "quote_only": true,
+      "last_success_at": null,
+      "last_failure_at": null,
+      "notes": "Domain synnex.com.au answered HTTP 200 on 2026-11-15. Two-tier distribution: pricing is only visible to account holders, and this project must not attempt authenticated access (rule 3). Quote-only route."
+    }
+  ]
+}

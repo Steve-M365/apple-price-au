@@ -1,0 +1,124 @@
+{
+  "$defs": {
+    "RunError": {
+      "additionalProperties": false,
+      "description": "A single failure recorded during a collection run.",
+      "properties": {
+        "error_type": {
+          "minLength": 1,
+          "title": "Error Type",
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Product Id"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "message",
+        "error_type"
+      ],
+      "title": "RunError",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Outcome of one adapter run, including policy blocks and errors.",
+  "properties": {
+    "adapter": {
+      "minLength": 1,
+      "title": "Adapter",
+      "type": "string"
+    },
+    "blocked_by_policy": {
+      "minimum": 0,
+      "title": "Blocked By Policy",
+      "type": "integer"
+    },
+    "errors": {
+      "items": {
+        "$ref": "#/$defs/RunError"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "fetched": {
+      "minimum": 0,
+      "title": "Fetched",
+      "type": "integer"
+    },
+    "finished_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "matched": {
+      "minimum": 0,
+      "title": "Matched",
+      "type": "integer"
+    },
+    "parsed": {
+      "minimum": 0,
+      "title": "Parsed",
+      "type": "integer"
+    },
+    "rejected": {
+      "minimum": 0,
+      "title": "Rejected",
+      "type": "integer"
+    },
+    "run_id": {
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "started_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "adapter",
+    "started_at",
+    "finished_at",
+    "fetched",
+    "parsed",
+    "matched",
+    "rejected",
+    "blocked_by_policy"
+  ],
+  "title": "RunManifest",
+  "type": "object"
+}

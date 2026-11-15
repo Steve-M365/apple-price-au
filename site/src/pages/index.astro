@@ -1,0 +1,257 @@
+---
+/**
+ * Home.
+ *
+ * The build runs before collection has published anything, so this page is a
+ * real page with an honest empty state: it explains what Orchard will show and
+ * how it decides what to trust, and it renders no price at all. Every section
+ * below is a component that takes the full collection and degrades to an empty
+ * state, so later milestones fill the page without changing its structure.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import HeroDeals from "../components/HeroDeals.astro";
+import BiggestDrops from "../components/BiggestDrops.astro";
+import EducationOffers from "../components/EducationOffers.astro";
+import GiftCards from "../components/GiftCards.astro";
+import RecentlyUpdated from "../components/RecentlyUpdated.astro";
+import DataFreshness from "../components/DataFreshness.astro";
+import {
+  loadDeals,
+  loadGiftCards,
+  loadOffers,
+  loadProducts,
+  loadSellers,
+  mostRecentCapture,
+} from "../lib/data";
+import { formatMelbourneDateTime } from "../lib/format";
+
+// Build-time reads of data/*.json. Missing files load as empty collections.
+const products = loadProducts();
+const offers = loadOffers();
+const deals = loadDeals();
+const giftCards = loadGiftCards();
+const sellers = loadSellers();
+
+// Freshness budget in hours. config/freshness.yml is owned by the data agent;
+// until it is published this build uses a 24-hour budget.
+const MAX_AGE_HOURS = 24;
+
+const observationCount = offers.length + deals.length + giftCards.length;
+const hasPublishedData = products.length > 0 && observationCount > 0;
+const latestCapture = mostRecentCapture([...offers, ...deals, ...giftCards]);
+const latestCaptureLabel = formatMelbourneDateTime(latestCapture);
+
+const verificationLevels = [
+  {
+    term: "Verified",
+    detail:
+      "Captured directly from the seller's published price, with the source URL and the moment of capture recorded.",
+  },
+  {
+    term: "Indicative",
+    detail:
+      "A real capture that is older than the freshness budget. It is shown as indicative, never as a current price.",
+  },
+  {
+    term: "Curated, unverified",
+    detail:
+      "Recorded from a curated feed we could not capture directly, because a site's terms or bot protection said no. It is labelled, never silently promoted.",
+  },
+  {
+    term: "Unverified",
+    detail:
+      "No usable evidence. The amount is withheld and the entry renders as unavailable rather than as a bargain.",
+  },
+] as const;
+
+const purchaseRoutes = [
+  "Apple retail",
+  "Apple Education Store",
+  "Corporate EPP",
+  "Business quote",
+  "Certified refurbished",
+  "Trade-in value",
+  "Gift cards and cashback",
+] as const;
+---
+
+<BaseLayout
+  title="Apple prices in Australia"
+  description="Orchard tracks Apple prices from Apple Australia and Australian retailers. Every price is an observation with a source and a timestamp — never a guess."
+>
+  <!-- Hero. No prices, no counts dressed up as evidence. -->
+  <div class="max-w-3xl">
+    <p class="text-caption font-semibold uppercase tracking-widest text-accent-strong">
+      Australia only · AUD only
+    </p>
+    <h1 class="mt-3 text-display font-semibold text-ink">
+      Apple prices in Australia, tracked honestly.
+    </h1>
+    <p class="mt-5 text-body-lg text-ink-muted">
+      Orchard follows what Apple Australia and Australian retailers actually publish, keeps the
+      education store separate from retail, and shows every price with the moment it was captured.
+      When a price goes stale, it is labelled indicative. When there is no price, it is not shown.
+    </p>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a
+        class="inline-flex min-h-11 items-center rounded-md bg-accent px-5 py-2 font-semibold text-ink-inverse no-underline hover:bg-accent-strong"
+        href="#deals"
+      >
+        See the deal sections
+      </a>
+      <a
+        class="inline-flex min-h-11 items-center rounded-md border border-line bg-white px-5 py-2 font-semibold text-ink no-underline hover:border-accent hover:text-accent-strong"
+        href="#trust"
+      >
+        How verification works
+      </a>
+    </div>
+  </div>
+
+  <!-- Data status: the honest banner for an empty build. -->
+  <aside
+    aria-labelledby="data-status-heading"
+    class="mt-10 rounded-[var(--radius-card)] border border-line bg-surface px-5 py-4 sm:px-6"
+  >
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+      <h2 id="data-status-heading" class="text-body font-semibold text-ink">
+        {hasPublishedData ? "Tracking is live" : "Data not yet published"}
+      </h2>
+      <span class:list={["chip", hasPublishedData ? "chip--success" : "chip--warning"]}>
+        {hasPublishedData ? "Observations published" : "Empty site, by design"}
+      </span>
+    </div>
+    {hasPublishedData ? (
+      <div class="mt-2 space-y-2 text-body text-ink-muted">
+        <p>
+          {observationCount} observation{observationCount === 1 ? "" : "s"} published across
+          products, deals and gift cards.
+        </p>
+        <DataFreshness capturedAt={latestCapture} maxAgeHours={MAX_AGE_HOURS} />
+      </div>
+    ) : (
+      <div class="mt-2 space-y-2 text-body text-ink-muted">
+        <p>
+          No prices are shown yet. That is deliberate: every number on Orchard must trace to a
+          captured source with a timestamp, so an empty tracker renders an empty page rather than an
+          example price, an estimated discount or a placeholder.
+        </p>
+        <p>
+          The collection pipeline publishes to{" "}
+          <code class="font-mono text-caption">data/*.json</code>, and this site renders from that
+          at build time.
+          {latestCaptureLabel
+            ? `Last capture: ${latestCaptureLabel}.`
+            : "No capture has been recorded yet."}
+        </p>
+      </div>
+    )}
+  </aside>
+
+  <!-- Trust model. -->
+  <Section
+    id="trust"
+    eyebrow="The trust model"
+    title="A price is an observation, not a promise"
+    intro="Orchard is not affiliated with Apple, and it does not sell anything. It records what a seller published, when it was published, and how confident we are in the capture. Four labels carry all of that meaning."
+    class="mt-16"
+  >
+    <div class="grid gap-4 md:grid-cols-2">
+      {verificationLevels.map((level) => (
+        <div class="card p-5">
+          <h3 class="text-body-lg font-semibold text-ink">{level.term}</h3>
+          <p class="mt-1 text-body text-ink-muted">{level.detail}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <div>
+        <h3 class="text-heading font-semibold text-ink">What is compared</h3>
+        <p class="mt-2 text-body text-ink-muted">
+          A purchase route is only comparable when its eligibility is comparable. Education pricing
+          needs eligibility, a business quote needs an ABN, and a gift-card discount applies to
+          distinct spend — not on top of a price drop.
+        </p>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {purchaseRoutes.map((route) => (
+            <li class="chip">{route}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-heading font-semibold text-ink">What is never done</h3>
+        <ul class="mt-2 space-y-2 text-body text-ink-muted">
+          <li>No price is estimated, rounded or inferred from a previous listing.</li>
+          <li>A stale capture is never presented as a current price.</li>
+          <li>Education and retail prices are never merged.</li>
+          <li>A discount is never counted twice across gift card, cashback and trade-in.</li>
+          <li>Authentication, CAPTCHAs and bot protection are never bypassed.</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <div class="mt-16 space-y-16">
+    <Section
+      id="deals"
+      eyebrow="Hero deals"
+      title="The strongest published deals"
+      intro="Ranked by what a source actually published, with the capture time attached to every card."
+    >
+      <HeroDeals deals={deals} products={products} sellers={sellers} maxAgeHours={MAX_AGE_HOURS} />
+    </Section>
+
+    <Section
+      id="drops"
+      eyebrow="Biggest drops"
+      title="Price reductions, not bonuses"
+      intro="A drop only counts when the same product and seller were captured at a lower price than before. Gift-card value and cashback are tracked apart from this list."
+    >
+      <BiggestDrops
+        deals={deals}
+        products={products}
+        sellers={sellers}
+        maxAgeHours={MAX_AGE_HOURS}
+      />
+    </Section>
+
+    <Section
+      id="education"
+      eyebrow="Education"
+      title="Education pricing, kept separate"
+      intro="The Apple Education Store is tracked as its own route, with its own eligibility. It is never blended into retail figures."
+    >
+      <EducationOffers
+        offers={offers}
+        products={products}
+        sellers={sellers}
+        maxAgeHours={MAX_AGE_HOURS}
+      />
+    </Section>
+
+    <Section
+      id="gift-cards"
+      eyebrow="Gift cards"
+      title="Gift-card value, counted once"
+      intro="A discounted gift card lowers what you pay, on distinct spend. Its value is recorded with terms and validity dates, and it is never stacked into another discount."
+    >
+      <GiftCards giftCards={giftCards} maxAgeHours={MAX_AGE_HOURS} />
+    </Section>
+
+    <Section
+      id="recent"
+      eyebrow="Recently updated"
+      title="Latest observations"
+      intro="The newest captures across every route, newest first. Freshness is measured in hours since capture; this build uses a twenty-four hour budget until the freshness configuration is published."
+    >
+      <RecentlyUpdated
+        offers={offers}
+        products={products}
+        sellers={sellers}
+        maxAgeHours={MAX_AGE_HOURS}
+      />
+    </Section>
+  </div>
+</BaseLayout>

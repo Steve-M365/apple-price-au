@@ -1,0 +1,163 @@
+{
+  "$defs": {
+    "PriceBasis": {
+      "description": "Why the captured price is the price that it is.",
+      "enum": [
+        "advertised",
+        "member",
+        "bundle",
+        "clearance",
+        "quote",
+        "edu",
+        "epp"
+      ],
+      "title": "PriceBasis",
+      "type": "string"
+    },
+    "VerificationStatus": {
+      "description": "How much evidence backs a record.",
+      "enum": [
+        "verified",
+        "indicative",
+        "curated_unverified",
+        "unverified"
+      ],
+      "title": "VerificationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A captured Apple Education Store price for an eligible buyer.\n\n``saving_aud`` and ``saving_pct`` must agree with the prices to within one\ncent, so a stale or mistyped discount cannot be published.",
+  "properties": {
+    "annual_limit_source_url": {
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Annual Limit Source Url",
+      "type": "string"
+    },
+    "annual_limit_summary": {
+      "minLength": 1,
+      "title": "Annual Limit Summary",
+      "type": "string"
+    },
+    "captured_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "eligibility": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Eligibility",
+      "type": "array"
+    },
+    "freshness_max_age_hours": {
+      "default": 24,
+      "exclusiveMinimum": 0,
+      "maximum": 720,
+      "title": "Freshness Max Age Hours",
+      "type": "integer"
+    },
+    "in_stock": {
+      "title": "In Stock",
+      "type": "boolean"
+    },
+    "offer_id": {
+      "minLength": 1,
+      "title": "Offer Id",
+      "type": "string"
+    },
+    "price_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Price Aud",
+      "type": "number"
+    },
+    "price_basis": {
+      "$ref": "#/$defs/PriceBasis",
+      "default": "edu"
+    },
+    "product_id": {
+      "minLength": 1,
+      "title": "Product Id",
+      "type": "string"
+    },
+    "run_id": {
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "saving_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Saving Aud",
+      "type": "number"
+    },
+    "saving_pct": {
+      "description": "Percentage between 0 and 100 with at most two decimal places.",
+      "maximum": 100,
+      "minimum": 0,
+      "multipleOf": 0.01,
+      "title": "Saving Pct",
+      "type": "number"
+    },
+    "seller_id": {
+      "minLength": 1,
+      "title": "Seller Id",
+      "type": "string"
+    },
+    "source_hash": {
+      "description": "Content hash of the captured evidence: 'sha256:' followed by 64 lowercase hex characters.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Source Hash",
+      "type": "string"
+    },
+    "standard_price_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Standard Price Aud",
+      "type": "number"
+    },
+    "url": {
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Url",
+      "type": "string"
+    },
+    "verification": {
+      "minLength": 1,
+      "title": "Verification",
+      "type": "string"
+    },
+    "verification_status": {
+      "$ref": "#/$defs/VerificationStatus"
+    }
+  },
+  "required": [
+    "offer_id",
+    "product_id",
+    "seller_id",
+    "url",
+    "price_aud",
+    "standard_price_aud",
+    "saving_aud",
+    "saving_pct",
+    "eligibility",
+    "verification",
+    "annual_limit_summary",
+    "annual_limit_source_url",
+    "in_stock",
+    "verification_status",
+    "captured_at",
+    "source_hash",
+    "run_id"
+  ],
+  "title": "EducationOffer",
+  "type": "object"
+}

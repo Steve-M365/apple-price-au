@@ -1,0 +1,15 @@
+{
+  "product_id": "apple-ipad-air-11-inch-m4-128gb-space-grey",
+  "url": "https://www.apple.com/au/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi",
+  "final_url": "https://www.apple.com/au/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T10:24:22Z",
+  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$1,249.00",
+  "price_numeric": 1249.0,
+  "currency": "AUD",
+  "page_sku": "MH304X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"11-inch iPad Air Wi‑Fi 128GB — Space Grey\" … nd\",\"name\":\"Apple\"},\"model\":\"iPad Air\",\"color\":\"Space Grey\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":1249.00,\"sku\":\"MH304X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-finish-select-gallery-202405-11inch-space-gray-wifi?wid=5120&hei=2880&fmt=jpeg&qlt=90&.v=1713820129982\",\"description\":\"Buy an iPad Air from only A$104.08 per month with Afterpay Pay Monthly. Plus, trade in to lower your monthly payments. Buy now with free shipping.\",\"additionalProperty\":[{\"@type\":\"PropertyValue\",\"propertyID\":\"storage_capacity\",\"name\":\"Storage\",\"value\":\"128GB\"},{\"@type\":\"PropertyValue\",\"propertyID\":\"size\",\"name\":\"S",
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; rendered string 'A$1,249.00' also found in the HTML at offset 138518"
+}

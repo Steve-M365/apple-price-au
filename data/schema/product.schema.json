@@ -1,0 +1,190 @@
+{
+  "$defs": {
+    "Category": {
+      "description": "Product category tracked by Orchard.",
+      "enum": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "Priority": {
+      "description": "Collection urgency for a product.",
+      "enum": [
+        "high",
+        "normal"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "ProductStatus": {
+      "description": "Lifecycle state of a catalogue product.",
+      "enum": [
+        "active",
+        "discontinued",
+        "superseded"
+      ],
+      "title": "ProductStatus",
+      "type": "string"
+    },
+    "RrpVerdict": {
+      "description": "Whether a product's Apple RRP field is backed by evidence.",
+      "enum": [
+        "verified",
+        "unverified"
+      ],
+      "title": "RrpVerdict",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One Apple product configuration.\n\n``configuration`` carries the variant axes. Known keys are listed in\n:data:`KNOWN_CONFIGURATION_KEYS`; extra keys are permitted so new axes do\nnot need a model change. Values are always strings (``\"512GB\"``,\n``\"16GB\"``), never numbers.",
+  "properties": {
+    "apple_au_url": {
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Apple Au Url",
+      "type": "string"
+    },
+    "apple_rrp_aud": {
+      "anyOf": [
+        {
+          "description": "Australian dollar amount with exactly two decimal places.",
+          "multipleOf": 0.01,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Apple Rrp Aud"
+    },
+    "apple_sku": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Apple Sku"
+    },
+    "brand": {
+      "const": "Apple",
+      "default": "Apple",
+      "title": "Brand",
+      "type": "string"
+    },
+    "category": {
+      "$ref": "#/$defs/Category"
+    },
+    "configuration": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Configuration",
+      "type": "object"
+    },
+    "created_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "education_eligible": {
+      "default": false,
+      "title": "Education Eligible",
+      "type": "boolean"
+    },
+    "family": {
+      "minLength": 1,
+      "title": "Family",
+      "type": "string"
+    },
+    "gtin": {
+      "anyOf": [
+        {
+          "pattern": "^(\\d{8}|\\d{12,14})$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gtin"
+    },
+    "model": {
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "priority": {
+      "$ref": "#/$defs/Priority",
+      "default": "normal"
+    },
+    "product_id": {
+      "minLength": 1,
+      "title": "Product Id",
+      "type": "string"
+    },
+    "rrp_verification": {
+      "$ref": "#/$defs/RrpVerdict",
+      "default": "unverified"
+    },
+    "specs_source_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Specs Source Url"
+    },
+    "status": {
+      "$ref": "#/$defs/ProductStatus",
+      "default": "active"
+    },
+    "updated_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "product_id",
+    "category",
+    "family",
+    "name",
+    "model",
+    "apple_au_url",
+    "created_at",
+    "updated_at"
+  ],
+  "title": "Product",
+  "type": "object"
+}

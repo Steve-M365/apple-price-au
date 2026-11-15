@@ -1,0 +1,31 @@
+{
+  "source": "apple.com/au product pages",
+  "fetched_at": "2026-11-15T10:24:22Z",
+  "fetched": 20,
+  "verified": 20,
+  "unverified": 0,
+  "urls_attempted": [
+    "https://www.apple.com/au/shop/buy-mac/macbook-air/13-inch-midnight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+    "https://www.apple.com/au/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage",
+    "https://www.apple.com/au/shop/buy-mac/macbook-pro/14-inch-space-black-standard-display-apple-m6-chip-12-core-cpu-12-core-gpu-16gb-memory-1tb-storage",
+    "https://www.apple.com/au/shop/buy-mac/imac/24-inch-blue-m6-chip-10-core-cpu-10-core-gpu-16gb-memory-256gb-storage-stand",
+    "https://www.apple.com/au/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-256gb-storage",
+    "https://www.apple.com/au/shop/buy-ipad/ipad/128gb-blue-wifi",
+    "https://www.apple.com/au/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi",
+    "https://www.apple.com/au/shop/buy-ipad/ipad-pro/11-inch-display-256gb-space-black-wifi-standard-glass",
+    "https://www.apple.com/au/shop/buy-iphone/iphone-17/6.3-inch-display-256gb-black",
+    "https://www.apple.com/au/shop/buy-iphone/iphone-18-pro/6.3-inch-display-256gb-black",
+    "https://www.apple.com/au/shop/buy-iphone/iphone-air/6.5-inch-display-256gb-space-black",
+    "https://www.apple.com/au/shop/buy-watch/apple-watch/42mm-gps-space-gray-aluminium-after-dark-black-nike-sport-band",
+    "https://www.apple.com/au/shop/buy-watch/apple-watch-se/40-mm-gps-midnight-aluminium-black-sport-band-se",
+    "https://www.apple.com/au/shop/buy-airpods/airpods-5/with-wireless-charging-case",
+    "https://www.apple.com/au/shop/buy-airpods/airpods-pro-3",
+    "https://www.apple.com/au/shop/buy-airpods/airpods-max-2/midnight",
+    "https://www.apple.com/au/shop/buy-tv/apple-tv-4k",
+    "https://www.apple.com/au/shop/buy-homepod/homepod-mini/midnight",
+    "https://www.apple.com/au/shop/product/mx2d3za/a/apple-pencil-pro",
+    "https://www.apple.com/au/shop/product/mdfv4za/a/magic-keyboard-for-ipad-air-11"
+  ],
+  "blockers": [],
+  "method": "Each product page was fetched with curl/urllib using a desktop Safari/Chrome User-Agent. The price is read from the server-rendered JSON-LD Product offers[].price (priceCurrency AUD) and cross-checked against the A$ string rendered in the HTML. Only the JSON-LD offer fragment is stored, never the page."
+}

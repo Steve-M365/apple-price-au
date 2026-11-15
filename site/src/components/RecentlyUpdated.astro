@@ -1,0 +1,52 @@
+---
+/**
+ * RecentlyUpdated — the newest captures across every purchase route, so the
+ * page can show what Orchard has actually observed most recently.
+ */
+import type { Offer, Product, Seller } from "../lib/data";
+import { indexById } from "../lib/data";
+import { offerKindLabel, productLabel, sellerLabel, sortByCaptureDesc } from "../lib/present";
+import Price from "./Price.astro";
+import DataFreshness from "./DataFreshness.astro";
+import EmptyState from "./EmptyState.astro";
+
+export interface Props {
+  offers: Offer[];
+  products?: Product[];
+  sellers?: Seller[];
+  maxAgeHours?: number;
+  limit?: number;
+}
+
+const { offers, products = [], sellers = [], maxAgeHours = 24, limit = 6 } = Astro.props;
+const productsById = indexById(products);
+const recent = sortByCaptureDesc(offers).slice(0, limit);
+---
+
+{recent.length === 0 ? (
+  <EmptyState
+    title="No observations yet"
+    message="Every price on Orchard begins as an observation: a product, a seller, an amount in AUD and the moment it was captured. This list shows the most recent ones, newest first, as soon as collection begins."
+  />
+) : (
+  <ul class="divide-y divide-line border-y border-line">
+    {recent.map((offer) => (
+      <li class="flex flex-wrap items-center justify-between gap-4 py-4">
+        <div class="min-w-0">
+          <p class="text-body font-semibold text-ink">
+            {productLabel(productsById.get(offer.productId))}
+          </p>
+          <p class="text-caption text-ink-muted">
+            {offerKindLabel(offer.kind)}
+            <span aria-hidden="true"> · </span>
+            {sellerLabel(offer.sellerId, sellers)}
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <Price amountAud={offer.priceAud} verification={offer.verification} size="body" />
+          <DataFreshness capturedAt={offer.capturedAt} maxAgeHours={maxAgeHours} />
+        </div>
+      </li>
+    ))}
+  </ul>
+)}

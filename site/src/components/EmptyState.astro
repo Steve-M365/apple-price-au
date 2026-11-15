@@ -1,0 +1,23 @@
+---
+/**
+ * EmptyState — the honest answer when a collection has nothing published yet.
+ * Deliberately quiet: no placeholder prices, no skeleton numbers.
+ */
+export interface Props {
+  title?: string;
+  message: string;
+  class?: string;
+}
+
+const { title = "Nothing published yet", message, class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    "rounded-[var(--radius-card)] border border-dashed border-line bg-surface/60 px-5 py-6",
+    className,
+  ]}
+>
+  <p class="text-body font-semibold text-ink">{title}</p>
+  <p class="mt-1 max-w-2xl text-body text-ink-muted">{message}</p>
+</div>

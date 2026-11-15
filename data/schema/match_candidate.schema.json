@@ -1,0 +1,136 @@
+{
+  "$defs": {
+    "MatchMethod": {
+      "description": "How a listing was tied to a catalogue product.",
+      "enum": [
+        "apple_sku",
+        "gtin",
+        "config",
+        "fuzzy",
+        "manual"
+      ],
+      "title": "MatchMethod",
+      "type": "string"
+    },
+    "MatchStatus": {
+      "description": "Lifecycle of a seller-listing to product match.",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "auto_published"
+      ],
+      "title": "MatchStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A proposed link between a raw seller listing and a catalogue product.",
+  "properties": {
+    "candidate_id": {
+      "minLength": 1,
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "captured_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "confidence": {
+      "description": "Match or price confidence in the closed interval [0, 1].",
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "config_diff": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Config Diff",
+      "type": "array"
+    },
+    "decided_at": {
+      "anyOf": [
+        {
+          "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Decided At"
+    },
+    "decided_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Decided By"
+    },
+    "method": {
+      "$ref": "#/$defs/MatchMethod"
+    },
+    "proposed_product_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Proposed Product Id"
+    },
+    "raw_price_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Raw Price Aud",
+      "type": "number"
+    },
+    "raw_title": {
+      "minLength": 1,
+      "title": "Raw Title",
+      "type": "string"
+    },
+    "seller_id": {
+      "minLength": 1,
+      "title": "Seller Id",
+      "type": "string"
+    },
+    "source_hash": {
+      "description": "Content hash of the captured evidence: 'sha256:' followed by 64 lowercase hex characters.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Source Hash",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/MatchStatus",
+      "default": "pending"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "seller_id",
+    "raw_title",
+    "raw_price_aud",
+    "method",
+    "confidence",
+    "source_hash",
+    "captured_at"
+  ],
+  "title": "MatchCandidate",
+  "type": "object"
+}

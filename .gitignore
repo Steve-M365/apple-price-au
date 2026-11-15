@@ -1,0 +1,34 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+
+# Node / Astro
+node_modules/
+site/dist/
+site/.astro/
+site/.vercel/
+
+# OS and editor
+.DS_Store
+.idea/
+.vscode/
+
+# Tooling scratch
+.kanban/.board-*.json
+*.log
+
+# Local collection cache (never committed)
+.cache/http/

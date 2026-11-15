@@ -1,0 +1,289 @@
+{
+  "$defs": {
+    "MatchMethod": {
+      "description": "How a listing was tied to a catalogue product.",
+      "enum": [
+        "apple_sku",
+        "gtin",
+        "config",
+        "fuzzy",
+        "manual"
+      ],
+      "title": "MatchMethod",
+      "type": "string"
+    },
+    "MatchStatus": {
+      "description": "Lifecycle of a seller-listing to product match.",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "auto_published"
+      ],
+      "title": "MatchStatus",
+      "type": "string"
+    },
+    "PriceBasis": {
+      "description": "Why the captured price is the price that it is.",
+      "enum": [
+        "advertised",
+        "member",
+        "bundle",
+        "clearance",
+        "quote",
+        "edu",
+        "epp"
+      ],
+      "title": "PriceBasis",
+      "type": "string"
+    },
+    "PromotionType": {
+      "description": "Mechanism behind a promotion attached to an offer.",
+      "enum": [
+        "sale",
+        "clearance",
+        "bundle",
+        "member",
+        "gift_card",
+        "cashback"
+      ],
+      "title": "PromotionType",
+      "type": "string"
+    },
+    "StockStatus": {
+      "description": "Observed stock state at the moment of capture.",
+      "enum": [
+        "in_stock",
+        "low_stock",
+        "out_of_stock",
+        "preorder",
+        "unknown"
+      ],
+      "title": "StockStatus",
+      "type": "string"
+    },
+    "VerificationStatus": {
+      "description": "How much evidence backs a record.",
+      "enum": [
+        "verified",
+        "indicative",
+        "curated_unverified",
+        "unverified"
+      ],
+      "title": "VerificationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A single captured retail price observation.\n\n``freshness_max_age_hours`` is the budget this observation was collected\nunder; the validator turns it into a soft warning when the record is stale.\n``confidence`` is the product match confidence, not price confidence.",
+  "properties": {
+    "bundle": {
+      "default": false,
+      "title": "Bundle",
+      "type": "boolean"
+    },
+    "bundle_contents": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Bundle Contents",
+      "type": "array"
+    },
+    "captured_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "confidence": {
+      "description": "Match or price confidence in the closed interval [0, 1].",
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "delivery_cost_aud": {
+      "default": "0.00",
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Delivery Cost Aud",
+      "type": "number"
+    },
+    "delivery_cost_verified": {
+      "default": false,
+      "title": "Delivery Cost Verified",
+      "type": "boolean"
+    },
+    "delivery_estimate": {
+      "default": "",
+      "title": "Delivery Estimate",
+      "type": "string"
+    },
+    "freshness_max_age_hours": {
+      "default": 24,
+      "exclusiveMinimum": 0,
+      "maximum": 720,
+      "title": "Freshness Max Age Hours",
+      "type": "integer"
+    },
+    "grey_import": {
+      "default": false,
+      "title": "Grey Import",
+      "type": "boolean"
+    },
+    "in_stock": {
+      "title": "In Stock",
+      "type": "boolean"
+    },
+    "match_method": {
+      "$ref": "#/$defs/MatchMethod"
+    },
+    "match_status": {
+      "$ref": "#/$defs/MatchStatus",
+      "default": "pending"
+    },
+    "offer_id": {
+      "minLength": 1,
+      "title": "Offer Id",
+      "type": "string"
+    },
+    "pickup_available": {
+      "default": false,
+      "title": "Pickup Available",
+      "type": "boolean"
+    },
+    "pickup_locations": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Pickup Locations",
+      "type": "array"
+    },
+    "price_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Price Aud",
+      "type": "number"
+    },
+    "price_basis": {
+      "$ref": "#/$defs/PriceBasis"
+    },
+    "product_id": {
+      "minLength": 1,
+      "title": "Product Id",
+      "type": "string"
+    },
+    "promotion": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Promotion"
+    },
+    "promotion_type": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PromotionType"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "rrp_aud": {
+      "anyOf": [
+        {
+          "description": "Australian dollar amount with exactly two decimal places.",
+          "multipleOf": 0.01,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rrp Aud"
+    },
+    "run_id": {
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "seller_id": {
+      "minLength": 1,
+      "title": "Seller Id",
+      "type": "string"
+    },
+    "sold_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sold By"
+    },
+    "source_hash": {
+      "description": "Content hash of the captured evidence: 'sha256:' followed by 64 lowercase hex characters.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Source Hash",
+      "type": "string"
+    },
+    "stock_status": {
+      "$ref": "#/$defs/StockStatus",
+      "default": "unknown"
+    },
+    "url": {
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Url",
+      "type": "string"
+    },
+    "verification_status": {
+      "$ref": "#/$defs/VerificationStatus"
+    },
+    "was_price_aud": {
+      "anyOf": [
+        {
+          "description": "Australian dollar amount with exactly two decimal places.",
+          "multipleOf": 0.01,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Was Price Aud"
+    }
+  },
+  "required": [
+    "offer_id",
+    "product_id",
+    "seller_id",
+    "url",
+    "price_aud",
+    "price_basis",
+    "in_stock",
+    "confidence",
+    "match_method",
+    "verification_status",
+    "captured_at",
+    "source_hash",
+    "run_id"
+  ],
+  "title": "Offer",
+  "type": "object"
+}

@@ -1,0 +1,146 @@
+---
+/**
+ * BaseLayout — the single shell every page renders inside.
+ *
+ * Owns: document language, metadata, canonical URL, Open Graph basics, the skip
+ * link, the primary navigation and the footer disclaimer slot. Pages own their
+ * content via <slot />.
+ */
+import "../styles/global.css";
+
+export interface Props {
+  /** Page title, without the site suffix. */
+  title: string;
+  /** Meta description, roughly 50–160 characters. */
+  description: string;
+  /** Override the canonical path (defaults to the current pathname). */
+  canonicalPath?: string;
+  /** Set true for utility pages that should stay out of search results. */
+  noindex?: boolean;
+}
+
+const { title, description, canonicalPath, noindex = false } = Astro.props;
+
+const siteName = "Orchard";
+const siteOrigin = Astro.site ?? new URL("https://example.github.io/apple-price-au");
+// BASE_URL always ends with "/", and is "/" for a root-domain deploy. Prefixing
+// links with it keeps a GitHub Pages project site working under its subpath.
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : `${rawBase}/`;
+const withBase = (path: string): string => `${base}${path.replace(/^\/+/, "")}`;
+const trimTrailingSlash = (path: string): string => path.replace(/\/+$/, "") || "/";
+const canonical = new URL(canonicalPath ? withBase(canonicalPath) : Astro.url.pathname, siteOrigin);
+const pageTitle = `${title} · ${siteName}`;
+
+const navigation = [
+  { label: "Products", href: "products" },
+  { label: "Deals", href: "deals" },
+  { label: "Education", href: "education" },
+  { label: "Gift Cards", href: "gift-cards" },
+  { label: "Business", href: "business" },
+  { label: "Watchlist", href: "watchlist" },
+] as const;
+
+const currentPath = trimTrailingSlash(Astro.url.pathname);
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#f7f7f4" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- Open Graph basics. No fabricated preview imagery: the favicon is all we ship. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_AU" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="sitemap" href={`${base}sitemap-index.xml`} />
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <a class="skip-link" href="#main-content">
+      Skip to content
+    </a>
+
+    <header class="border-b border-line bg-canvas/95">
+      <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-4 py-4 sm:px-6">
+        <a href={base} class="flex items-baseline gap-2 no-underline" aria-label="Orchard home">
+          <span class="text-heading font-semibold tracking-tight text-ink">Orchard</span>
+          <span class="hidden text-caption text-ink-muted sm:inline">Apple prices, AU</span>
+        </a>
+        <nav aria-label="Primary" class="w-full sm:ml-auto sm:w-auto">
+          <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-body">
+            {navigation.map((item) => {
+              const href = withBase(item.href);
+              const isCurrent = currentPath === trimTrailingSlash(href);
+              return (
+                <li>
+                  <a
+                    href={href}
+                    aria-current={isCurrent ? "page" : undefined}
+                    class:list={[
+                      "rounded-sm py-1 no-underline transition-colors hover:text-accent-strong",
+                      isCurrent ? "font-semibold text-ink" : "text-ink-muted",
+                    ]}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main
+      id="main-content"
+      tabindex="-1"
+      class="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6 sm:py-14"
+    >
+      <slot />
+    </main>
+
+    <footer class="mt-8 border-t border-line bg-surface">
+      <div class="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-8 text-caption text-ink-muted sm:px-6">
+        <slot name="disclaimer">
+          <p class="max-w-3xl">
+            Orchard is an independent tracker of publicly listed Australian Apple prices. It is not
+            affiliated with, endorsed by or sponsored by Apple Inc. Apple, iPhone, iPad, Mac and
+            related marks are trademarks of Apple Inc. Prices are observations with a timestamp,
+            never a guarantee.
+          </p>
+        </slot>
+        <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span>Prices in AUD. Times shown in Melbourne time.</span>
+          <span aria-hidden="true">·</span>
+          <a class="underline decoration-line underline-offset-4 hover:text-ink" href={base}>
+            Home
+          </a>
+          <span aria-hidden="true">·</span>
+          <a
+            class="underline decoration-line underline-offset-4 hover:text-ink"
+            href={`${base}sitemap-index.xml`}
+          >
+            Sitemap
+          </a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

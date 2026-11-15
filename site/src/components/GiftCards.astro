@@ -1,0 +1,78 @@
+---
+/**
+ * GiftCards — gift-card offers with their face value, discounted price and
+ * terms. The discount is shown once, on distinct spend; it is never added to a
+ * price drop to manufacture a bigger saving.
+ */
+import type { GiftCardOffer } from "../lib/data";
+import { formatAud, formatMelbourneDate, formatPercentPoints } from "../lib/format";
+import Price from "./Price.astro";
+import DataFreshness from "./DataFreshness.astro";
+import EmptyState from "./EmptyState.astro";
+
+export interface Props {
+  giftCards: GiftCardOffer[];
+  maxAgeHours?: number;
+  limit?: number;
+}
+
+const { giftCards, maxAgeHours = 24, limit = 6 } = Astro.props;
+
+const offers = [...giftCards]
+  .sort((a, b) => (b.discountPercent ?? -1) - (a.discountPercent ?? -1))
+  .slice(0, limit);
+---
+
+{offers.length === 0 ? (
+  <EmptyState
+    title="No gift-card offers captured yet"
+    message="Gift-card value is tracked separately from product prices. When a retailer publishes a discounted gift card with terms and validity dates, it is recorded here — and kept apart from any cashback or trade-in value."
+  />
+) : (
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {offers.map((offer) => {
+      const validTo = formatMelbourneDate(offer.validTo);
+      return (
+        <li class="card flex flex-col gap-3 p-5">
+          <div>
+            <h3 class="text-body-lg font-semibold text-ink">
+              {offer.sellerName ?? offer.sellerId}
+            </h3>
+            <p class="text-caption text-ink-muted">
+              {offer.discountPercent !== null
+                ? `${formatPercentPoints(offer.discountPercent)} off face value`
+                : "Discount recorded in source terms"}
+            </p>
+          </div>
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            {offer.faceValueAud !== null && (
+              <span class="text-body font-semibold tabular-nums text-ink">
+                {formatAud(offer.faceValueAud)}
+                <abbr
+                  title="Australian dollars"
+                  class="ml-1 text-caption font-medium uppercase tracking-wide text-ink-muted no-underline"
+                >
+                  AUD
+                </abbr>
+                <span class="sr-only"> face value</span>
+              </span>
+            )}
+            <Price amountAud={offer.priceAud} verification={offer.verification} size="body" />
+          </div>
+          {offer.terms && <p class="text-caption text-ink-muted">{offer.terms}</p>}
+          {validTo && <p class="text-caption text-ink-muted">Valid to {validTo}</p>}
+          <DataFreshness capturedAt={offer.capturedAt} maxAgeHours={maxAgeHours} />
+          {offer.url && (
+            <a
+              class="mt-auto text-body font-semibold text-accent underline decoration-line underline-offset-4 hover:text-accent-strong"
+              href={offer.url}
+              rel="noopener noreferrer"
+            >
+              View the retailer terms
+            </a>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+)}

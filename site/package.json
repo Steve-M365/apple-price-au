@@ -1,0 +1,31 @@
+{
+  "name": "orchard-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Orchard — Australia-only Apple price tracker. Static site built with Astro.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.5",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^5.18.2",
+    "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "prettier": "^3.10.1",
+    "prettier-plugin-astro": "^1.1.2",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.6"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

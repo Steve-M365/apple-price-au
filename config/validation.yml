@@ -1,0 +1,12 @@
+# Validation gate configuration.
+#
+# Read by scripts/validation/validate_data.py. Every value here changes what
+# fails the build, so changes need a card and a reason.
+review_queue_warn_threshold: 25
+
+# Until the collector cards land (APA-030 onward), an enabled seller whose
+# adapter module does not exist yet is reported as a warning rather than a hard
+# failure. This keeps the foundation milestone's gate honest and green instead
+# of red-by-default. APA-030 flips this to true in the same commit that adds the
+# framework, so no adapter can ever ship a green gate without existing.
+require_adapter_modules: false

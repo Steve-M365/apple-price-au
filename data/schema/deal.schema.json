@@ -1,0 +1,171 @@
+{
+  "$defs": {
+    "DealType": {
+      "description": "The kind of saving a deal describes.",
+      "enum": [
+        "price_drop",
+        "rrp_discount",
+        "all_time_low",
+        "education",
+        "gift_card",
+        "retailer_gift_card",
+        "cashback",
+        "bundle",
+        "clearance",
+        "restock"
+      ],
+      "title": "DealType",
+      "type": "string"
+    },
+    "VerificationStatus": {
+      "description": "How much evidence backs a record.",
+      "enum": [
+        "verified",
+        "indicative",
+        "curated_unverified",
+        "unverified"
+      ],
+      "title": "VerificationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A saving on one product at one seller, with the evidence behind it.\n\n``reference_price_aud`` is the price the saving is measured against and\n``reference_type`` names that basis (``rrp``, ``previous_price``,\n``all_time_low``, ``market_median``). ``effective_price_aud`` is optional\nand carries a price after gift cards or cashback, never instead of the\nadvertised price.",
+  "properties": {
+    "captured_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "confidence": {
+      "description": "Match or price confidence in the closed interval [0, 1].",
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "current_price_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Current Price Aud",
+      "type": "number"
+    },
+    "deal_id": {
+      "minLength": 1,
+      "title": "Deal Id",
+      "type": "string"
+    },
+    "deal_type": {
+      "$ref": "#/$defs/DealType"
+    },
+    "effective_price_aud": {
+      "anyOf": [
+        {
+          "description": "Australian dollar amount with exactly two decimal places.",
+          "multipleOf": 0.01,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effective Price Aud"
+    },
+    "evidence_url": {
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Evidence Url",
+      "type": "string"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "offer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Offer Id"
+    },
+    "product_id": {
+      "minLength": 1,
+      "title": "Product Id",
+      "type": "string"
+    },
+    "reference_price_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Reference Price Aud",
+      "type": "number"
+    },
+    "reference_type": {
+      "minLength": 1,
+      "title": "Reference Type",
+      "type": "string"
+    },
+    "rule_version": {
+      "minLength": 1,
+      "title": "Rule Version",
+      "type": "string"
+    },
+    "saving_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Saving Aud",
+      "type": "number"
+    },
+    "saving_pct": {
+      "description": "Percentage between 0 and 100 with at most two decimal places.",
+      "maximum": 100,
+      "minimum": 0,
+      "multipleOf": 0.01,
+      "title": "Saving Pct",
+      "type": "number"
+    },
+    "seller_id": {
+      "minLength": 1,
+      "title": "Seller Id",
+      "type": "string"
+    },
+    "verification_status": {
+      "$ref": "#/$defs/VerificationStatus"
+    }
+  },
+  "required": [
+    "deal_id",
+    "deal_type",
+    "product_id",
+    "seller_id",
+    "current_price_aud",
+    "reference_price_aud",
+    "reference_type",
+    "saving_aud",
+    "saving_pct",
+    "confidence",
+    "evidence_url",
+    "captured_at",
+    "verification_status",
+    "rule_version"
+  ],
+  "title": "Deal",
+  "type": "object"
+}

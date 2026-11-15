@@ -1,0 +1,205 @@
+{
+  "$defs": {
+    "CardType": {
+      "description": "Which gift card family an offer belongs to.",
+      "enum": [
+        "apple_gift_card",
+        "retailer_gift_card"
+      ],
+      "title": "CardType",
+      "type": "string"
+    },
+    "GiftCardChannel": {
+      "description": "Where the gift card can be bought.",
+      "enum": [
+        "in_store",
+        "online",
+        "both"
+      ],
+      "title": "GiftCardChannel",
+      "type": "string"
+    },
+    "VerificationStatus": {
+      "description": "How much evidence backs a record.",
+      "enum": [
+        "verified",
+        "indicative",
+        "curated_unverified",
+        "unverified"
+      ],
+      "title": "VerificationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A purchased-discount gift card or loyalty points promotion.\n\n``effective_value_aud`` is the cash cost of the card after the assumed value\nof any points earned. ``effective_discount_pct`` must match\n``(face_value_aud - effective_value_aud) / face_value_aud`` within one basis\npoint tolerance.",
+  "properties": {
+    "assumed_point_value_aud": {
+      "default": "0.005",
+      "description": "Signed Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Assumed Point Value Aud",
+      "type": "number"
+    },
+    "bonus_points_per_dollar": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "default": "0",
+      "title": "Bonus Points Per Dollar"
+    },
+    "card_type": {
+      "$ref": "#/$defs/CardType"
+    },
+    "channel": {
+      "$ref": "#/$defs/GiftCardChannel"
+    },
+    "daily_limit_cards": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Daily Limit Cards"
+    },
+    "effective_discount_pct": {
+      "description": "Percentage between 0 and 100 with at most two decimal places.",
+      "maximum": 100,
+      "minimum": 0,
+      "multipleOf": 0.01,
+      "title": "Effective Discount Pct",
+      "type": "number"
+    },
+    "effective_value_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Effective Value Aud",
+      "type": "number"
+    },
+    "ends_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Ends At",
+      "type": "string"
+    },
+    "evidence_snapshot": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Snapshot"
+    },
+    "face_value_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Face Value Aud",
+      "type": "number"
+    },
+    "loyalty_program": {
+      "minLength": 1,
+      "title": "Loyalty Program",
+      "type": "string"
+    },
+    "offer_id": {
+      "minLength": 1,
+      "title": "Offer Id",
+      "type": "string"
+    },
+    "points_earned": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "default": "0",
+      "title": "Points Earned"
+    },
+    "purchase_price_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Purchase Price Aud",
+      "type": "number"
+    },
+    "risks": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Risks",
+      "type": "array"
+    },
+    "seller_id": {
+      "minLength": 1,
+      "title": "Seller Id",
+      "type": "string"
+    },
+    "source_url": {
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Source Url",
+      "type": "string"
+    },
+    "starts_at": {
+      "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+      "format": "date-time",
+      "title": "Starts At",
+      "type": "string"
+    },
+    "terms_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Terms Url"
+    },
+    "verification_status": {
+      "$ref": "#/$defs/VerificationStatus"
+    }
+  },
+  "required": [
+    "offer_id",
+    "card_type",
+    "seller_id",
+    "loyalty_program",
+    "channel",
+    "face_value_aud",
+    "purchase_price_aud",
+    "effective_value_aud",
+    "effective_discount_pct",
+    "starts_at",
+    "ends_at",
+    "source_url",
+    "verification_status",
+    "risks"
+  ],
+  "title": "GiftCardOffer",
+  "type": "object"
+}

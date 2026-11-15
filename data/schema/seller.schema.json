@@ -1,0 +1,302 @@
+{
+  "$defs": {
+    "CollectionMethod": {
+      "description": "How a seller's prices are captured.",
+      "enum": [
+        "automated_html",
+        "automated_jsonld",
+        "automated_api",
+        "curated",
+        "manual"
+      ],
+      "title": "CollectionMethod",
+      "type": "string"
+    },
+    "SellerCategory": {
+      "description": "Coverage a seller is registered for.\n\nThis is a superset of :class:`Category`: a seller may also cover business\nsales, education, gift cards or cashback, none of which are product\ncategories.",
+      "enum": [
+        "mac",
+        "ipad",
+        "iphone",
+        "watch",
+        "airpods",
+        "tv",
+        "homepod",
+        "accessory",
+        "applecare",
+        "business",
+        "education",
+        "gift_card",
+        "cashback"
+      ],
+      "title": "SellerCategory",
+      "type": "string"
+    },
+    "SellerType": {
+      "description": "Commercial shape of a seller.",
+      "enum": [
+        "apple_direct",
+        "national_reseller",
+        "specialist_reseller",
+        "online_marketplace",
+        "telco",
+        "business_reseller",
+        "education_reseller",
+        "gift_card_seller"
+      ],
+      "title": "SellerType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A retailer, marketplace, telco or gift-card seller serving Australia.",
+  "properties": {
+    "adapter_module": {
+      "default": "",
+      "description": "Dotted module path for automated collection; empty for curated/manual sellers.",
+      "title": "Adapter Module",
+      "type": "string"
+    },
+    "authorised_evidence_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authorised Evidence Url"
+    },
+    "authorised_reseller": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authorised Reseller"
+    },
+    "categories": {
+      "items": {
+        "$ref": "#/$defs/SellerCategory"
+      },
+      "minItems": 1,
+      "title": "Categories",
+      "type": "array"
+    },
+    "collection_method": {
+      "$ref": "#/$defs/CollectionMethod"
+    },
+    "country": {
+      "default": "AU",
+      "maxLength": 2,
+      "minLength": 2,
+      "title": "Country",
+      "type": "string"
+    },
+    "crawl_delay_seconds": {
+      "maximum": 120,
+      "minimum": 0,
+      "title": "Crawl Delay Seconds",
+      "type": "number"
+    },
+    "delivery_policy_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delivery Policy Url"
+    },
+    "display_name": {
+      "minLength": 1,
+      "title": "Display Name",
+      "type": "string"
+    },
+    "enabled": {
+      "default": true,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "enabled_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Enabled Reason"
+    },
+    "last_failure_at": {
+      "anyOf": [
+        {
+          "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Failure At"
+    },
+    "last_success_at": {
+      "anyOf": [
+        {
+          "description": "Timezone-aware timestamp, stored in UTC, serialised as ISO 8601 with a trailing Z.",
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Success At"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "product_search_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Product Search Url"
+    },
+    "quote_only": {
+      "default": false,
+      "title": "Quote Only",
+      "type": "boolean"
+    },
+    "rate_limit_rps_float": {
+      "description": "Requests per second permitted for this seller's adapter; 0 for curated-only sellers.",
+      "maximum": 20,
+      "minimum": 0,
+      "title": "Rate Limit Rps Float",
+      "type": "number"
+    },
+    "returns_policy_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Returns Policy Url"
+    },
+    "seller_id": {
+      "minLength": 1,
+      "title": "Seller Id",
+      "type": "string"
+    },
+    "seller_type": {
+      "$ref": "#/$defs/SellerType"
+    },
+    "supported_regions": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Supported Regions",
+      "type": "array"
+    },
+    "trust_score_inputs": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "title": "Trust Score Inputs",
+      "type": "object"
+    },
+    "warranty_policy_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warranty Policy Url"
+    },
+    "website": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Website"
+    }
+  },
+  "required": [
+    "seller_id",
+    "display_name",
+    "seller_type",
+    "categories",
+    "collection_method",
+    "rate_limit_rps_float",
+    "crawl_delay_seconds"
+  ],
+  "title": "Seller",
+  "type": "object"
+}

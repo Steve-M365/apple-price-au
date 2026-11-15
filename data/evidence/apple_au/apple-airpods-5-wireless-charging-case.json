@@ -1,0 +1,15 @@
+{
+  "product_id": "apple-airpods-5-wireless-charging-case",
+  "url": "https://www.apple.com/au/shop/buy-airpods/airpods-5/with-wireless-charging-case",
+  "final_url": "https://www.apple.com/au/shop/buy-airpods/airpods-5/with-wireless-charging-case",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T10:24:22Z",
+  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$249.00",
+  "price_numeric": 249.0,
+  "currency": "AUD",
+  "page_sku": "MKFT4X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"AirPods 5 with Wireless Charging Case\" … /au/shop/buy-airpods/airpods-5/with-wireless-charging-case\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":249.00,\"sku\":\"MKFT4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-5-wcc-select-202609?wid=976&hei=916&fmt=jpeg&qlt=90&.v=1787009771195\",\"description\":\"AirPods 5 are here. Discover the magic of Active Noise Cancellation. Free shipping and engraving at apple.com/au.\"}",
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; rendered string 'A$249.00' also found in the HTML at offset 125914"
+}

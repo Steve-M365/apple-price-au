@@ -1,0 +1,15 @@
+{
+  "product_id": "apple-tv-4k-4th-generation",
+  "url": "https://www.apple.com/au/shop/buy-tv/apple-tv-4k",
+  "final_url": "https://www.apple.com/au/shop/buy-tv/apple-tv-4k",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T10:24:22Z",
+  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$449.00",
+  "price_numeric": 449.0,
+  "currency": "AUD",
+  "page_sku": "MLFF4X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Apple TV 4K\" … yOfPage\":\"https://www.apple.com/au/shop/buy-tv/apple-tv-4k\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":449.00,\"sku\":\"MLFF4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/apple-tv-4k-hero-select-202610?wid=1076&hei=1070&fmt=jpeg&qlt=90&.v=1790131173589\",\"description\":\"Apple TV 4K with Siri AI. Movies, shows and live TV and sports, in 4K Dolby Vision and HDR10+. You could get Apple TV free for 3 months. Learn more at apple.com/au.\"}",
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; rendered string 'A$449.00' also found in the HTML at offset 123092"
+}

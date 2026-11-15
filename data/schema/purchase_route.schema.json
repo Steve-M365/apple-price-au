@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "PurchaseRouteType": {
+      "description": "A way of buying Apple hardware in Australia.",
+      "enum": [
+        "apple_retail",
+        "apple_education",
+        "epp",
+        "business_quote",
+        "gift_card",
+        "cashback"
+      ],
+      "title": "PurchaseRouteType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One way of buying a product, with its effective price and caveats.",
+  "properties": {
+    "confidence": {
+      "description": "Match or price confidence in the closed interval [0, 1].",
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "effective_price_aud": {
+      "description": "Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Effective Price Aud",
+      "type": "number"
+    },
+    "label": {
+      "minLength": 1,
+      "title": "Label",
+      "type": "string"
+    },
+    "rank": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rank"
+    },
+    "requires": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Requires",
+      "type": "array"
+    },
+    "route_type": {
+      "$ref": "#/$defs/PurchaseRouteType"
+    },
+    "saving_vs_rrp_aud": {
+      "description": "Signed Australian dollar amount with exactly two decimal places.",
+      "multipleOf": 0.01,
+      "title": "Saving Vs Rrp Aud",
+      "type": "number"
+    },
+    "source_urls": {
+      "items": {
+        "format": "uri",
+        "maxLength": 2083,
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Urls",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "route_type",
+    "label",
+    "effective_price_aud",
+    "saving_vs_rrp_aud",
+    "confidence",
+    "source_urls"
+  ],
+  "title": "PurchaseRoute",
+  "type": "object"
+}

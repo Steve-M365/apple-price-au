@@ -1,0 +1,58 @@
+---
+/**
+ * DataFreshness — when an observation was captured, in Melbourne time.
+ *
+ * Renders "Last checked <time>" when the capture is inside its freshness
+ * budget, and "Indicative — last checked <time>" once it is stale. It never
+ * renders a price and it never claims a capture that does not exist.
+ *
+ * The badge has a fixed minimum height so switching between fresh and stale
+ * (or between timestamps of different lengths) does not shift the layout.
+ */
+import { formatMelbourneDateTime, freshnessState } from "../lib/format";
+
+export interface Props {
+  /** UTC ISO timestamp of the capture, or null when nothing was captured. */
+  capturedAt: string | Date | null;
+  /** Freshness budget in hours, from config/freshness.yml once it exists. */
+  maxAgeHours: number;
+  class?: string;
+}
+
+const { capturedAt, maxAgeHours, class: className } = Astro.props;
+
+const state = freshnessState(capturedAt, maxAgeHours);
+const time = formatMelbourneDateTime(capturedAt);
+const iso =
+  typeof capturedAt === "string"
+    ? capturedAt
+    : capturedAt instanceof Date && !Number.isNaN(capturedAt.getTime())
+      ? capturedAt.toISOString()
+      : undefined;
+
+const variantClass =
+  state === "fresh" ? "chip--success" : state === "stale" ? "chip--warning" : undefined;
+---
+
+<p
+  class:list={["flex min-h-6 flex-wrap items-center gap-2 text-caption text-ink-muted", className]}
+  data-freshness={state}
+>
+  <span class:list={["chip min-h-6 whitespace-normal text-left", variantClass]}>
+    {state === "stale" && time ? (
+      <>
+        <span class="font-semibold">Indicative</span>
+        <span aria-hidden="true">—</span>
+        <span>
+          last checked <time datetime={iso}>{time}</time>
+        </span>
+      </>
+    ) : state === "fresh" && time ? (
+      <span>
+        Last checked <time datetime={iso}>{time}</time>
+      </span>
+    ) : (
+      <span>Not yet checked</span>
+    )}
+  </span>
+</p>

@@ -1,0 +1,1173 @@
+{
+  "project": "Orchard (apple-price-au)",
+  "updated": "2026-11-15T10:16:05Z",
+  "cards": [
+    {
+      "id": "APA-001",
+      "title": "Repo scaffold, toolchain pins and formatting",
+      "type": "chore",
+      "priority": "P0",
+      "status": "ready",
+      "owner": "apple-scaffold",
+      "labels": [
+        "m1",
+        "scaffold"
+      ],
+      "description": "Create the working tree: .gitignore, .python-version (3.12), pyproject.toml driven by uv, ruff config, package.json + tsconfig for the site, astro.config.mjs, .env.example, .editorconfig. Nothing in this card may contain retailer logic or product data.",
+      "acceptance": [
+        "`uv sync` succeeds from a clean clone and produces uv.lock",
+        "`npm ci` succeeds from a clean clone and produces package-lock.json",
+        "`ruff check` and `ruff format --check` pass on the empty tree",
+        "`.env.example` documents every variable the pipeline reads, with no real values",
+        "`.gitignore` excludes .env, node_modules, dist, .astro, __pycache__, .venv"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-002",
+      "title": "Pydantic domain models and JSON Schema export",
+      "type": "feature",
+      "priority": "P0",
+      "status": "ready",
+      "owner": "apple-data",
+      "labels": [
+        "m1",
+        "models"
+      ],
+      "description": "Implement scripts/models/ with Pydantic v2 models for Product, Seller, Offer, EducationOffer, GiftCardOffer, Deal, MatchCandidate, RunManifest, PurchaseRoute. Field names and enums must match docs/DATA-MODEL.md exactly. Extra fields on the canonical shapes from the product spec are additive only.",
+      "acceptance": [
+        "All ten models import from scripts.models and validate the documented examples",
+        "Enum values are enforced for category, seller_type, stock_status, price_basis, promotion_type, verification_status, deal_type, match_method",
+        "`python -m scripts.models.export_schema` writes JSON Schema to data/schema/",
+        "`mypy --strict scripts/models` passes",
+        "Invalid prices (negative, non-numeric, wrong currency) are rejected with a typed error"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-003",
+      "title": "Validation CLI with hard and soft failures",
+      "type": "feature",
+      "priority": "P0",
+      "status": "ready",
+      "owner": "apple-data",
+      "labels": [
+        "m1",
+        "validation"
+      ],
+      "description": "scripts/validation/validate_data.py validates every committed dataset against the models plus dataset-level invariants. Hard failures must stop a deploy; soft failures must surface as warnings in the report and the job summary.",
+      "acceptance": [
+        "Exit code 0 on a clean tree, 1 on any hard failure, 2 on unexpected crash",
+        "`--json` emits a machine-readable report consumed by later workflows",
+        "Referential integrity is enforced: every offer product_id exists in products.json, every seller_id exists in sellers.json",
+        "Freshness fields are required on every offer: captured_at, source_hash, verification_status",
+        "Hard-failure paths are covered by tests and produce actionable messages naming the file and field"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-004",
+      "title": "Seller registry with 21 documented sellers",
+      "type": "feature",
+      "priority": "P0",
+      "status": "ready",
+      "owner": "apple-data",
+      "labels": [
+        "m1",
+        "registry"
+      ],
+      "description": "data/sellers.json holds every Phase 1, Phase 2 and business/education source with all twelve required attributes from the plan plus capability flags. Phase 2 sellers are present but disabled, with an explicit reason. No seller is enabled on a guess: enabled sources need a policy decision recorded.",
+      "acceptance": [
+        "All 21 sources present with stable seller_id values matching the plan's numbering",
+        "Every entry has: display name, seller_type, website, search URL, country, regions, categories, collection method, rate limit, crawl delay, authorised status + evidence URL, warranty/returns/delivery URLs, trust inputs, adapter module, enabled flag",
+        "Enabled sellers are exactly the Phase 1 consumer set that the collection posture permits",
+        "Each disabled seller carries enabled_reason explaining what would enable it",
+        "Registry validates against the Seller model and is covered by a test"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-005",
+      "title": "Seed catalogue: 20 products with evidenced Apple AU RRP",
+      "type": "feature",
+      "priority": "P0",
+      "status": "ready",
+      "owner": "apple-data",
+      "labels": [
+        "m1",
+        "catalogue"
+      ],
+      "description": "data/products.json seeds 20 products spanning Mac, iPad, iPhone, Apple Watch, AirPods, Apple TV, HomePod and accessories. Every RRP must be captured from an Apple AU page with the source URL and capture timestamp recorded. Do not invent a price: if a page cannot be read, mark the product rrp_verification as unverified and record what blocked it.",
+      "acceptance": [
+        "20 products validate against the Product model",
+        "Coverage spans at least 6 of the 9 categories",
+        "Every product has apple_au_url, apple_sku where Apple publishes one, and a priced RRP with evidence_url and captured_at",
+        "Configuration objects are complete enough to disambiguate storage, memory and colour variants",
+        "education_eligible is set from Apple's own education eligibility, not assumed",
+        "A test asserts no duplicate product_id and no null RRP without an unverified marker"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-006",
+      "title": "Dataset invariant checks and freshness policy",
+      "type": "feature",
+      "priority": "P1",
+      "status": "ready",
+      "owner": "apple-data",
+      "labels": [
+        "m1",
+        "validation"
+      ],
+      "description": "Codify the 'never present an unverified price as current' rule as executable policy: per-seller freshness_max_age_hours, automatic stale marking, and a guard that refuses to publish an offer whose age exceeds its threshold without the stale marker.",
+      "acceptance": [
+        "config/freshness.yml defines thresholds per seller type and per source class",
+        "A helper computes effective verification_status from captured_at and the threshold",
+        "Tests cover fresh, boundary and stale cases",
+        "Any offer past its threshold is rendered as indicative by the site contract (field present in output)"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-007",
+      "title": "Test suite foundation and coverage gate",
+      "type": "chore",
+      "priority": "P1",
+      "status": "ready",
+      "owner": "apple-qa",
+      "labels": [
+        "m1",
+        "testing"
+      ],
+      "description": "Stand up tests/ with pytest, respx and coverage config. This card owns the harness, not other cards' tests: schema/model/validation tests belong to apple-data, site tests to apple-web, workflow tests to apple-qa.",
+      "acceptance": [
+        "`pytest -q` runs with no network access and passes",
+        "Coverage config excludes generated files and reports per-module",
+        "A failing validation fixture is proven to fail the suite",
+        "tests/conftest.py provides reusable loaders for data/*.json and fixtures/"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-008",
+      "title": "Docs wave 1: README, architecture, data model, registry, brand",
+      "type": "docs",
+      "priority": "P1",
+      "status": "ready",
+      "owner": "apple-docs",
+      "labels": [
+        "m1",
+        "docs"
+      ],
+      "description": "Write the implementation-ready documents for what actually exists after M1. No aspirational features: if it is not built, it belongs in ROADMAP.md as future work. Include the provisional brand decision and the rename checklist.",
+      "acceptance": [
+        "README.md: what it is, what it is not, quickstart, repo map, disclaimers",
+        "docs/ARCHITECTURE.md: pipeline stages, trust boundaries, isolation model, why no database",
+        "docs/DATA-MODEL.md: every entity, every field, the SQLite target DDL, migration path",
+        "docs/SOURCE-REGISTRY.md: all 21 sources, safest method, policy status, what would enable Phase 2",
+        "docs/BRAND.md: provisional brand, trademark position, rename checklist",
+        "AGENTS.md: team, board usage, non-negotiables, how to work a card",
+        "Australian English throughout; no marketing filler"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-009",
+      "title": "Astro scaffold with Tailwind and an empty build",
+      "type": "feature",
+      "priority": "P1",
+      "status": "ready",
+      "owner": "apple-web",
+      "labels": [
+        "m1",
+        "site"
+      ],
+      "description": "Create the Astro 5 project with Tailwind 4, a base layout, design tokens and a placeholder home page. The build must pass and deploy an empty-but-valid site. No fabricated data on the page.",
+      "acceptance": [
+        "`npm run build` produces site/dist with a valid index.html",
+        "Tailwind is wired and a design token file defines the palette and type scale",
+        "BaseLayout sets lang=\"en-AU\", viewport, and the not-affiliated disclaimer slot",
+        "No page renders a price that does not come from data/*.json",
+        "Build runs offline"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-010",
+      "title": "Kanban, agent team definitions and CI skeleton",
+      "type": "chore",
+      "priority": "P0",
+      "status": "done",
+      "owner": "apple-director",
+      "labels": [
+        "m1",
+        "process"
+      ],
+      "description": "The board, the director and specialist agent definitions, and the first validate-data workflow stub so the team has a shared source of truth and a gate from day one.",
+      "acceptance": [
+        "`.kanban/kanban.py` supports list/show/next/claim/move/block/add/stats/render",
+        "board.json seeds every milestone card with acceptance criteria",
+        "`.opencode/agents/` defines apple-director plus six specialists with disjoint file ownership",
+        "`.github/workflows/validate-data.yml` runs the validation CLI on push and PR",
+        "AGENTS.md documents the flow: backlog -> ready -> in_progress -> in_review -> done"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-011",
+      "title": "Apple AU collector: JSON-LD with HTML fallback",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m2",
+        "collector"
+      ],
+      "description": "Collect Apple AU product pages for the catalogue. Prefer JSON-LD Product/Offer blocks; fall back to server-rendered markup. Record availability, promotions and the product URL. No JavaScript execution.",
+      "acceptance": [
+        "Parses name, price, availability and URL from saved fixtures for every seeded product",
+        "Promotion is recorded only when present in the markup, never inferred from a date",
+        "Unparseable page raises a typed ParseError captured per product, not a crash",
+        "Fixture-based tests pass with the network disabled"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-012",
+      "title": "Apple Education collector and eligibility metadata",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m2",
+        "collector",
+        "education"
+      ],
+      "description": "Collect apple.com/au-edu/store pricing and derive saving_aud and saving_pct against the standard price. Record UNiDAYS verification and Apple's stated purchase limits as metadata with source URLs. Verify live how pricing is displayed before asserting it in docs.",
+      "acceptance": [
+        "Education offers validate against EducationOffer including standard_price_aud, saving_aud, saving_pct",
+        "eligibility array matches Apple's published categories",
+        "annual_limit_summary is sourced from Apple, not paraphrased from memory",
+        "saving_pct recomputation is asserted in a test to two decimal places",
+        "Observed behaviour of the store (public price display vs gated) is written into SOURCE-REGISTRY.md"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-013",
+      "title": "Product normaliser and deterministic product_id",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "m2",
+        "matching"
+      ],
+      "description": "Normalise Apple titles into the canonical product_id slug and configuration object. Deterministic and idempotent: the same input always yields the same identifier, and a rename never silently changes one.",
+      "acceptance": [
+        "product_id format is stable and documented in DATA-MODEL.md",
+        "Storage/memory/colour normalisation handles Apple's abbreviations (e.g. 16GB vs 16 GB)",
+        "Collision cases are tested; a collision raises rather than overwriting",
+        "Re-running the normaliser over the catalogue is a no-op (idempotency test)"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-014",
+      "title": "Full Apple AU catalogue generation",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "m2",
+        "catalogue"
+      ],
+      "description": "Expand the seed catalogue to the full current Apple AU range using the collector output rather than hand entry. Generation must be diffable and idempotent.",
+      "acceptance": [
+        "Catalogue covers every active Apple AU category in scope",
+        "Generation is idempotent: a second run produces no diff",
+        "Discontinued products are marked superseded, not deleted",
+        "Catalogue size and category counts reported in the run summary"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-015",
+      "title": "Snapshot writer with hashing and run manifest",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m2",
+        "pipeline"
+      ],
+      "description": "Write immutable daily snapshots to data/snapshots/YYYY-MM-DD/<seller_id>.json with sha256 source hashes and a run manifest in data/runs/ recording fetched/parsed/matched/rejected counts.",
+      "acceptance": [
+        "Snapshots are append-only: an existing file is never silently overwritten",
+        "Every offer carries source_hash and run_id",
+        "Run manifest validates against RunManifest and is written even when the run fails",
+        "Timestamps are UTC ISO 8601; display timezone is applied only at render"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-016",
+      "title": "M2 review gate: verify 5 products against Apple AU",
+      "type": "chore",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-director",
+      "labels": [
+        "m2",
+        "gate"
+      ],
+      "description": "Human checkpoint. Pick five products at random from the generated catalogue and compare name, price and URL against apple.com/au. Record the comparison in docs/reports/ so the gate is auditable.",
+      "acceptance": [
+        "Five products compared field by field with screenshots or saved HTML as evidence",
+        "Any mismatch is logged as a card rather than quietly corrected",
+        "Result recorded in docs/reports/m2-gate.md with date and reviewer"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-017",
+      "title": "SourceAdapter protocol, rate limiter and robots gate",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "framework"
+      ],
+      "description": "One protocol every adapter implements, with a token-bucket rate limiter, per-source crawl delay, conditional requests, retries with jitter, a disk cache and a robots.txt gate that runs before any fetch.",
+      "acceptance": [
+        "RobotsDenied is a distinct outcome from a network error and is recorded as blocked_by_policy",
+        "Rate limiter is unit-tested against a virtual clock",
+        "Retries are bounded, jittered, and never retry a 403 into oblivion",
+        "A denied fetch cannot fall through to a parser"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-018",
+      "title": "JB Hi-Fi adapter with recorded policy decision",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "adapter"
+      ],
+      "description": "Implement JB Hi-Fi per the hybrid posture. Card requires a written policy check: if robots.txt or terms restrict automated collection, ship the curated path and record the decision. Do not build a bypass.",
+      "acceptance": [
+        "Policy check result recorded in adapter_health and SOURCE-REGISTRY.md",
+        "Adapter parses saved fixtures or the curated feed into valid Offer records",
+        "2+ fixtures cover price present, price absent, and out-of-stock",
+        "No CAPTCHA, fingerprint or bot-protection circumvention exists anywhere in the module"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-019",
+      "title": "Officeworks adapter",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "adapter"
+      ],
+      "description": "Low-rate adapter for Officeworks with pickup availability captured where the page exposes it.",
+      "acceptance": [
+        "Parses price, stock status and pickup availability from fixtures",
+        "Crawl delay respects the registry entry (1 request / 3s)",
+        "Fixture tests cover in-stock, out-of-stock and price-with-was-price"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-020",
+      "title": "Harvey Norman adapter",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "adapter"
+      ],
+      "description": "Adapter for Harvey Norman with per-store stock noise reduced to a single national stock status.",
+      "acceptance": [
+        "National stock status derived deterministically from per-store data",
+        "Fixtures cover multi-store stock variance",
+        "Store-specific prices are never merged into one offer"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-021",
+      "title": "The Good Guys adapter",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "adapter"
+      ],
+      "description": "The Good Guys shares a corporate group with JB Hi-Fi; reuse the policy finding and the adapter shape where the markup permits.",
+      "acceptance": [
+        "Policy decision recorded and cross-referenced with the JB Hi-Fi decision",
+        "Fixtures cover a clearance listing and a bundle listing",
+        "Bundles never masquerade as a bare product price"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-022",
+      "title": "Bing Lee adapter",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "adapter"
+      ],
+      "description": "Low-rate adapter for Bing Lee.",
+      "acceptance": [
+        "Parses price and stock from fixtures",
+        "Crawl delay respects the registry",
+        "Out-of-stock fixture covered"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-023",
+      "title": "Beyond the Box adapter",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "adapter"
+      ],
+      "description": "Adapter for the specialist reseller Beyond the Box.",
+      "acceptance": [
+        "Parses price and stock from fixtures",
+        "Specialist seller type carries its trust score inputs",
+        "Fixture tests pass"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-024",
+      "title": "Mobileciti adapter with grey-import safeguards",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "adapter"
+      ],
+      "description": "Mobileciti sells imported stock. Offers must carry a grey-import flag and stricter validation before they can rank above an authorised reseller.",
+      "acceptance": [
+        "Grey-import risk is recorded as a structured field, not a footnote",
+        "Warranty source (Apple AU vs seller) is captured where stated",
+        "An imported offer cannot be published as the best price without the flag visible"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-025",
+      "title": "Amazon AU adapter with marketplace safeguards",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "adapter",
+        "marketplace"
+      ],
+      "description": "Amazon AU is a marketplace. Only Amazon-sold or explicitly trusted third-party sellers may publish; everything else goes to review. Prefer an official API path if credentials exist.",
+      "acceptance": [
+        "sold_by is captured and enforced: non-Amazon sellers require a trust score above threshold",
+        "Third-party listings default to needs_review rather than published",
+        "Fixtures cover Amazon-sold, third-party, and used-condition listings",
+        "Used or refurbished items never match a new-product offer"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-026",
+      "title": "Layered product matching engine",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "matching"
+      ],
+      "description": "Implement the five layers in order: Apple SKU, GTIN/EAN, normalised configuration, fuzzy title with confidence, manual review. A match records method, confidence, normalised title and a configuration diff.",
+      "acceptance": [
+        "Layer order is enforced and tested: a SKU hit never falls through to fuzzy",
+        "Confidence is deterministic for identical inputs",
+        "Configuration diffs list every mismatched field",
+        "Any match below 0.85 is withheld from latest_offers.json"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-027",
+      "title": "Review queue and manual override file",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "matching"
+      ],
+      "description": "Uncertain matches land in data/matching/review_queue.json. Approvals and rejections are recorded in overrides.json and survive re-collection.",
+      "acceptance": [
+        "Review queue entries carry the evidence needed to decide: raw title, price, proposed product, diff",
+        "Overrides are applied before publishing and are never overwritten by a later run",
+        "A rejected candidate cannot re-enter the queue without a changed source_hash",
+        "Queue size delta is reported in every run summary"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-028",
+      "title": "Publish latest_offers.json with confidence reporting",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m3",
+        "pipeline"
+      ],
+      "description": "Assemble the published offer set for the site with best-price-per-product derivations and a per-seller confidence distribution report.",
+      "acceptance": [
+        "latest_offers.json validates and contains only published-confidence offers",
+        "Best price per product is derived, never hand-written",
+        "Per-seller confidence distribution written to data/health/",
+        "Sort order is stable across runs (no diff noise)"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-029",
+      "title": "Price-history engine with all-time low detection",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "m4",
+        "history"
+      ],
+      "description": "Derive per-product and per-seller series from snapshots. Compute all-time low, lowest-ever across sellers, and previous-captured price. Recomputation must be idempotent.",
+      "acceptance": [
+        "Series derive only from committed snapshots, never from latest_offers",
+        "ATL and lowest-ever-across-sellers are computed and unit-tested on synthetic series",
+        "Out-of-stock periods do not register as price drops",
+        "Compact series written to data/history/<product_id>.json for charting"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-030",
+      "title": "Deal engine with configurable thresholds",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "m4",
+        "deals"
+      ],
+      "description": "Deterministic deal detection covering price drop, RRP discount, all-time low, education saving, gift-card and cashback effective discount, bundle value, clearance and restock. Thresholds live in config/deal_rules.yml and every deal records its rule_version.",
+      "acceptance": [
+        "Every deal carries all eleven required fields including confidence and evidence URL",
+        "Golden-file tests on a synthetic 60-day series",
+        "A deal with an expired promotion is not published as current",
+        "Changing a threshold changes the output, proven by test",
+        "No deal is emitted without an evidence URL and captured_at"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-031",
+      "title": "Gift-card schema and effective-price calculator",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "m4",
+        "gift-card"
+      ],
+      "description": "Implement GiftCardOffer plus a pure calculator for effective purchase price after gift-card discount, cashback and loyalty points. Points are valued at a documented, configurable rate and never presented as cash.",
+      "acceptance": [
+        "effective_discount_pct is asserted equal to (face - effective)/face within 0.01",
+        "Points valuation is configurable and surfaced in output, never hard-coded silently",
+        "Calculator refuses to double-count a route (gift card + cashback on the same spend)",
+        "Property-based tests: no negative effective price, no discount above face value",
+        "Every gift-card offer carries a non-empty risks array"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-032",
+      "title": "Curated gift-card and cashback feeds",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "m4",
+        "gift-card",
+        "curated"
+      ],
+      "description": "Woolworths/Everyday Rewards, Coles/Flybuys or Velocity, ShopBack and Prezzee tracked as versioned curated offers with expiry windows and verification status. Collector stubs must fail closed.",
+      "acceptance": [
+        "current_offers.json and history.json validate",
+        "Every entry has source_url, starts_at, ends_at and verification_status",
+        "An unverified source produces no published offer and logs why",
+        "Expired offers are moved to history automatically"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-033",
+      "title": "Publish deal and gift-card feeds",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "m4",
+        "deals"
+      ],
+      "description": "Write data/deals/current_deals.json and history.json plus gift-card current offers for the site contract, with stable sort and expiry handling.",
+      "acceptance": [
+        "Feeds validate and are ordered deterministically",
+        "Deals reference only published offers",
+        "History append is idempotent across repeated runs in one day"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-034",
+      "title": "Design system: layout, tokens, navigation, disclaimers",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "The shared shell: header, nav, footer with the not-affiliated disclaimer, price-freshness badge, responsive type scale and accessibility baseline.",
+      "acceptance": [
+        "Layouts render at 320px, 768px and 1440px without horizontal scroll",
+        "Every page includes the freshnes/disclaimer slot and a last-checked component",
+        "Keyboard focus is visible on every interactive element",
+        "Colour contrast passes WCAG AA",
+        "No layout shift when the freshness badge loads"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-035",
+      "title": "Home page",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "Hero with top verified deals, biggest drops, education savings, gift-card opportunities, recently updated products and the trust notice.",
+      "acceptance": [
+        "Every module renders empty states when its feed is empty, never placeholder prices",
+        "Top deals are filtered to verified + fresh only",
+        "Data-freshness notice shows the true last collection time"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-036",
+      "title": "Product catalogue with search, filters and sort",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "Catalogue page with a prebuilt JSON index, URL-param filters and deterministic sorting.",
+      "acceptance": [
+        "Search works offline from a prebuilt index under 20KB gzipped",
+        "Filters: category, family, seller, price range, stock, education, pickup; all shareable via URL",
+        "Sort: price, discount, price drop, recently updated",
+        "Back button restores the previous filter state",
+        "Baseline listing renders without JavaScript"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-037",
+      "title": "Product detail with chart and route optimiser",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "The main conversion page: specs, RRP, education price, best retail, best effective, all offers, price history, stock history, ranked purchase routes and direct retailer links.",
+      "acceptance": [
+        "uPlot chart is lazy-loaded and renders from data/history",
+        "Every offer row shows seller, price, stock, captured_at and source link",
+        "Optimiser ranks retail, education, gift-card and cashback routes with eligibility and expiry warnings",
+        "EPP and trade-in are off unless the visitor enables and configures them",
+        "Stale offers render the indicative label and cannot win best price"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-038",
+      "title": "Deals page",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "Current drops, sales, clearance, bundles, all-time lows and gift-card opportunities, each with evidence and expiry.",
+      "acceptance": [
+        "Each deal card shows type, saving, confidence, source and captured time",
+        "Expired deals are excluded",
+        "Empty state per section"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-039",
+      "title": "Education page",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "Education pricing comparison, eligibility explanation, annual limits and education-specific deals.",
+      "acceptance": [
+        "Eligibility categories and verification vendor shown verbatim from the data",
+        "Education price is never merged into the best retail price",
+        "Comparison table states the saving in AUD and percent"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-040",
+      "title": "Gift cards page",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "Apple gift-card offers, retailer gift cards, cashback, effective-price calculator, historical best rates and risk warnings.",
+      "acceptance": [
+        "Calculator runs entirely client-side from published data",
+        "Risk and expiry warnings appear beside the offer, not buried",
+        "Points are labelled as points, never as cash"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-041",
+      "title": "Business and education page",
+      "type": "feature",
+      "priority": "P2",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "Procurement routes presented as quote/procurement/service options: Apple Business Store, ABM/VPP, Trade In, and the education and business reseller directory.",
+      "acceptance": [
+        "No consumer price is shown for a quote-based route",
+        "Every entry links to an official quote or contact page",
+        "Distinct visual treatment from consumer deals"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-042",
+      "title": "Browser-local watchlist",
+      "type": "feature",
+      "priority": "P2",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "Watchlist stored in localStorage with no account and no network calls.",
+      "acceptance": [
+        "Add/remove works across reloads",
+        "No PII and no cookies",
+        "Empty state explains the alerts roadmap",
+        "Clearing works"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-043",
+      "title": "SEO, structured data and feeds",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-web",
+      "labels": [
+        "m5",
+        "site"
+      ],
+      "description": "Metadata, canonical URLs, Product and Offer JSON-LD, sitemap and a deals RSS feed.",
+      "acceptance": [
+        "JSON-LD validates for product pages",
+        "Sitemap lists all indexable pages",
+        "RSS validates",
+        "Canonicals are absolute"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-044",
+      "title": "Accessibility and Lighthouse gate",
+      "type": "chore",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-qa",
+      "labels": [
+        "m5",
+        "quality"
+      ],
+      "description": "Automated accessibility and performance gate on the built site.",
+      "acceptance": [
+        "Lighthouse >=95 for performance, accessibility, SEO on home and product detail",
+        "axe reports zero violations",
+        "Gate runs in CI"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-045",
+      "title": "Seven collection and deployment workflows",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-qa",
+      "labels": [
+        "m6",
+        "ci"
+      ],
+      "description": "update-apple, update-retailers, update-gift-cards, update-deals, deploy-site, validate-data, nightly-full-refresh with jitter, concurrency limits, per-job isolation and artefacts.",
+      "acceptance": [
+        "actionlint passes on all seven",
+        "Each has workflow_dispatch and a documented schedule",
+        "A failure in one retailer job does not fail the others",
+        "Commit step only commits changed data files with conventional messages",
+        "Priority subset runs in under 5 minutes"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-046",
+      "title": "Deployment gate: validate before publish",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "owner": "apple-qa",
+      "labels": [
+        "m6",
+        "ci",
+        "deploy"
+      ],
+      "description": "deploy-site depends on validate-data. A schema failure must provably block deployment.",
+      "acceptance": [
+        "A deliberately broken dataset blocks the deploy (proven on a branch)",
+        "Pages artefact upload is atomic",
+        "Deploy records the data commit SHA in the page footer"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-047",
+      "title": "Discord alerts with dedupe",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-qa",
+      "labels": [
+        "m6",
+        "alerts"
+      ],
+      "description": "Alert selection using config/alerts.yml thresholds, rendered to Discord with all required fields, deduped via data/alerts/sent.json. Missing webhook is a warning, not a failure.",
+      "acceptance": [
+        "Every alert includes product, seller, current, previous, saving, effective, source, captured, expiry, link",
+        "Repeat runs send zero duplicates",
+        "Missing secret exits 0 with a warning",
+        "Alert selection logic is unit-tested against fixtures"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-048",
+      "title": "Run summaries and failure diagnostics",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-qa",
+      "labels": [
+        "m6",
+        "ci"
+      ],
+      "description": "Job summaries with per-source counts, failures and review-queue delta; diagnostics uploaded on failure.",
+      "acceptance": [
+        "Summary renders on every run",
+        "Failure artefacts contain the raw response and the parser error",
+        "No secrets appear in logs or artefacts"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-049",
+      "title": "Operations runbook",
+      "type": "docs",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-docs",
+      "labels": [
+        "m6",
+        "operations"
+      ],
+      "description": "docs/OPERATIONS.md plus COLLECTION-RUNBOOK, DEPLOYMENT, TESTING and alerts guidance.",
+      "acceptance": [
+        "A new operator can run, debug and roll back from the docs alone",
+        "Every failure mode in the risk register has a runbook entry",
+        "Docs reference real commands that work"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-050",
+      "title": "Adapter health checks and staleness alerting",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-adapter",
+      "labels": [
+        "m7",
+        "monitoring"
+      ],
+      "description": "Per-adapter success rate, last success and fixture drift detection, surfaced as data and as an alert.",
+      "acceptance": [
+        "adapter_health.json validates and is published",
+        "A source silent for beyond its threshold raises an alert",
+        "Fixture drift is detected when markup changes"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-051",
+      "title": "Data-quality report",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "m7",
+        "quality"
+      ],
+      "description": "Coverage, match confidence, staleness and unmatched counts, published as a page and a doc.",
+      "acceptance": [
+        "Counts are computed from data, not estimated",
+        "Report renders on the site and in docs/reports/",
+        "Regressions are visible without reading CI logs"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-052",
+      "title": "Snapshot retention and repository size guard",
+      "type": "chore",
+      "priority": "P2",
+      "status": "backlog",
+      "owner": "apple-qa",
+      "labels": [
+        "m7",
+        "ops"
+      ],
+      "description": "90-day snapshot retention with compact derived series and a CI size guard.",
+      "acceptance": [
+        "Retention job prunes only snapshots older than the window",
+        "History series survive pruning",
+        "CI fails if the repo exceeds the budget"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    },
+    {
+      "id": "APA-053",
+      "title": "Launch checklist and final documentation",
+      "type": "docs",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-docs",
+      "labels": [
+        "m7",
+        "launch"
+      ],
+      "description": "Complete the documentation set, the legal disclaimers, the roadmap and the launch checklist.",
+      "acceptance": [
+        "All sixteen documents exist and are current",
+        "Legal disclaimers reviewed against WA/AU comparison-site expectations",
+        "Launch checklist has an owner and a date per item"
+      ],
+      "created": "2026-11-15T10:16:05Z",
+      "updated": "2026-11-15T10:16:05Z",
+      "notes": []
+    }
+  ]
+}

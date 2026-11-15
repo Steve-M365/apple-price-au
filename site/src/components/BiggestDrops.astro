@@ -1,0 +1,63 @@
+---
+/**
+ * BiggestDrops — price reductions only, ranked by the published saving.
+ * Gift-card bonuses and cashback are deliberately excluded here: they are
+ * different routes to a lower price, not a drop in the sticker price.
+ */
+import type { Deal, Product, Seller } from "../lib/data";
+import { indexById } from "../lib/data";
+import {
+  dealSavingLabel,
+  isPriceDrop,
+  productLabel,
+  sellerLabel,
+  sortDealsBySaving,
+} from "../lib/present";
+import Price from "./Price.astro";
+import DataFreshness from "./DataFreshness.astro";
+import EmptyState from "./EmptyState.astro";
+
+export interface Props {
+  deals: Deal[];
+  products?: Product[];
+  sellers?: Seller[];
+  maxAgeHours?: number;
+  limit?: number;
+}
+
+const { deals, products = [], sellers = [], maxAgeHours = 24, limit = 5 } = Astro.props;
+const productsById = indexById(products);
+const drops = sortDealsBySaving(deals.filter(isPriceDrop)).slice(0, limit);
+---
+
+{drops.length === 0 ? (
+  <EmptyState
+    title="No price drops recorded yet"
+    message="This list fills only when a captured price is lower than the previous captured price for the same product and seller. A sale without a verifiable before-price is not a drop."
+  />
+) : (
+  <ul class="divide-y divide-line border-y border-line">
+    {drops.map((deal) => (
+      <li class="flex flex-wrap items-center justify-between gap-4 py-4">
+        <div class="min-w-0">
+          <p class="text-body font-semibold text-ink">
+            {deal.title ?? productLabel(productsById.get(deal.productId ?? ""))}
+          </p>
+          <p class="text-caption text-ink-muted">
+            {sellerLabel(deal.sellerId, sellers)}
+            {dealSavingLabel(deal) && (
+              <>
+                <span aria-hidden="true"> · </span>
+                {dealSavingLabel(deal)}
+              </>
+            )}
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <Price amountAud={deal.priceAud} verification={deal.verification} size="body" />
+          <DataFreshness capturedAt={deal.capturedAt} maxAgeHours={maxAgeHours} />
+        </div>
+      </li>
+    ))}
+  </ul>
+)}

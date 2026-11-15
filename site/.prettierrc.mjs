@@ -1,0 +1,12 @@
+/** @type {import("prettier").Config} */
+export default {
+  printWidth: 100,
+  proseWrap: "preserve",
+  plugins: ["prettier-plugin-astro"],
+  overrides: [
+    {
+      files: "*.astro",
+      options: { parser: "astro" },
+    },
+  ],
+};

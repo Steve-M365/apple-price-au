@@ -1,0 +1,76 @@
+---
+/**
+ * Price — the only component allowed to render money.
+ *
+ * Never prints a bare number: every amount carries an AUD denomination, and a
+ * missing price renders an em dash with an explicit "unverified" chip. A price
+ * marked unverified is rendered as unavailable rather than as a bargain.
+ */
+import type { Verification } from "../lib/data";
+import { formatAud } from "../lib/format";
+
+export interface Props {
+  /** Amount in Australian dollars, or null when nothing has been captured. */
+  amountAud: number | null;
+  /** Evidence level recorded with the capture. */
+  verification: Verification;
+  class?: string;
+  /** Visual size of the amount. */
+  size?: "body" | "heading";
+}
+
+const { amountAud, verification, class: className, size = "heading" } = Astro.props;
+
+const hasPrice =
+  typeof amountAud === "number" &&
+  Number.isFinite(amountAud) &&
+  amountAud >= 0 &&
+  // An unverified amount is withheld entirely: evidence first, digits second.
+  verification !== "unverified";
+const effectiveVerification: Verification = hasPrice ? verification : "unverified";
+
+const CHIPS: Record<Verification, { label: string; variant: string }> = {
+  verified: { label: "Verified", variant: "chip--success" },
+  indicative: { label: "Indicative", variant: "chip--warning" },
+  curated_unverified: { label: "Curated, unverified", variant: "chip--warning" },
+  unverified: { label: "Unverified", variant: "chip--danger" },
+};
+
+const chip = CHIPS[effectiveVerification];
+---
+
+<p
+  class:list={["flex flex-wrap items-baseline gap-x-2 gap-y-1", className]}
+  data-verification={effectiveVerification}
+>
+  {hasPrice ? (
+    <span
+      class:list={[
+        "font-semibold tabular-nums text-ink",
+        size === "heading" ? "text-heading" : "text-body",
+      ]}
+    >
+      {formatAud(amountAud)}
+      <abbr
+        title="Australian dollars"
+        class="ml-1 text-caption font-medium uppercase tracking-wide text-ink-muted no-underline"
+      >
+        AUD
+      </abbr>
+    </span>
+  ) : (
+    <>
+      <span
+        class:list={[
+          "font-semibold text-ink-muted",
+          size === "heading" ? "text-heading" : "text-body",
+        ]}
+        aria-hidden="true"
+      >
+        —
+      </span>
+      <span class="sr-only">Price not captured</span>
+    </>
+  )}
+  <span class:list={["chip", chip.variant]}>{chip.label}</span>
+</p>
