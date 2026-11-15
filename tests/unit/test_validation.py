@@ -187,7 +187,7 @@ def test_offer_referencing_a_disabled_seller_fails(tmp_path: Path) -> None:
         enabled_reason="Phase 2: marketplace provenance not signed off",
         adapter_module="",
         collection_method="curated",
-        rate_limit_rps_float=0.0,
+        rate_limit_rps=0.0,
     )
     _write_json(data_dir / "sellers.json", {"sellers": [seller]})
 

@@ -1,6 +1,6 @@
 {
   "project": "Orchard (apple-price-au)",
-  "updated": "2026-11-15T10:33:07Z",
+  "updated": "2026-11-15T10:40:54Z",
   "cards": [
     {
       "id": "APA-001",
@@ -181,7 +181,7 @@
       "title": "Docs wave 1: README, architecture, data model, registry, brand",
       "type": "docs",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-docs",
       "labels": [
         "m1",
@@ -198,8 +198,10 @@
         "Australian English throughout; no marketing filler"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:40:54Z",
+      "notes": [
+        "Director verified: 29/29 seller ids present, no fabricated sellers, money documented as numbers, field list matches data/schema"
+      ]
     },
     {
       "id": "APA-009",

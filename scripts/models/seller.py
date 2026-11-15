@@ -40,10 +40,10 @@ class Seller(OrchardModel):
     supported_regions: list[NonEmptyStr] = Field(default_factory=lambda: ["AU"], min_length=1)
     categories: list[SellerCategory] = Field(min_length=1)
     collection_method: CollectionMethod
-    rate_limit_rps_float: float = Field(
+    rate_limit_rps: float = Field(
         ge=0,
         le=20,
-        validation_alias=AliasChoices("rate_limit_rps_float", "rate_limit_rps"),
+        validation_alias=AliasChoices("rate_limit_rps", "rate_limit_rps_float"),
         description="Requests per second permitted for this seller's adapter; 0 for curated-only sellers.",
     )
     crawl_delay_seconds: float = Field(ge=0, le=120)
@@ -85,10 +85,10 @@ class Seller(OrchardModel):
                 raise ValueError(
                     f"collection_method '{self.collection_method.value}' requires adapter_module"
                 )
-            if self.rate_limit_rps_float <= 0:
+            if self.rate_limit_rps <= 0:
                 raise ValueError(
                     f"collection_method '{self.collection_method.value}' requires "
-                    "rate_limit_rps_float greater than 0"
+                    "rate_limit_rps greater than 0"
                 )
         return self
 

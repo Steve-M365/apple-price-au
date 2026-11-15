@@ -70,7 +70,7 @@ def valid_seller(**overrides: Any) -> dict[str, Any]:
         "supported_regions": ["AU"],
         "categories": ["mac", "ipad", "iphone", "accessory"],
         "collection_method": "automated_jsonld",
-        "rate_limit_rps_float": 0.5,
+        "rate_limit_rps": 0.5,
         "crawl_delay_seconds": 3,
         "authorised_reseller": True,
         "authorised_evidence_url": "https://www.apple.com/au/",
@@ -331,17 +331,16 @@ def test_deal_round_trip() -> None:
 
 
 def test_seller_accepts_legacy_rate_limit_key_and_curated_sellers() -> None:
-    legacy = valid_seller(rate_limit_rps_float=None, rate_limit_rps=0.33)
-    legacy.pop("rate_limit_rps_float")
+    legacy = valid_seller(rate_limit_rps=0.33)
     seller = Seller.model_validate(legacy)
-    assert seller.rate_limit_rps_float == 0.33
-    assert "rate_limit_rps_float" in seller.model_dump()
+    assert seller.rate_limit_rps == 0.33
+    assert "rate_limit_rps" in seller.model_dump()
 
     curated = valid_seller(
         seller_id="jbhifi",
         seller_type="national_reseller",
         collection_method="curated",
-        rate_limit_rps_float=0.0,
+        rate_limit_rps=0.0,
         adapter_module="",
         categories=["mac", "ipad", "gift_card", "business"],
     )

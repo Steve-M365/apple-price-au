@@ -7,10 +7,10 @@ Apple AU and Australian retailers charge, keep education pricing separate from
 retail, detect deals, value gift cards and cashback, and rank the realistic ways
 to buy a product.
 
-Status: **Milestone 1 (foundation) in progress.** The repository currently holds
-the toolchain, the board and these documents. Models, seed data, the validation
-CLI and an empty site build arrive inside Milestone 1; collectors and the public
-site are Milestones 2–4. Nothing here is a live price feed yet.
+Status: **Milestone 1 (foundation) in progress.** The domain models, a 20-product
+seed catalogue, the 29-seller registry, the validation CLI, the generated JSON
+Schemas and the Astro scaffold are in place. Collectors, the deal engine and the
+public pages are Milestones 2–4. Nothing here is a live price feed yet.
 
 ## What it is
 
@@ -45,13 +45,14 @@ current.
 |---|---|---|
 | `url` | Where did this come from? | Every offer links to the exact page captured. No URL, no offer. |
 | `captured_at` | When was it true? | UTC ISO 8601 on every observation. Never inferred from a file timestamp. |
-| `verification_status` | How much do we trust it? | `verified`, `unverified` or `stale`. Stored, not guessed at render. |
+| `verification_status` | How much do we trust it? | `verified`, `curated_unverified`, `unverified` or `indicative`. Stored, not guessed at render. |
 | `confidence` | Is it the right product? | Match confidence 0.00–1.00. Below 0.85 the offer goes to a human review queue and is withheld. |
-| freshness | Is it still current? | `config/freshness.yml` sets a maximum age per source. Past it, the price is `stale` and renders as **indicative**. |
+| freshness | Is it still current? | `config/freshness.yml` sets a maximum age per seller class and category. Past it, the stored verdict becomes `indicative`. |
 
 Consequences you can rely on:
 
-- A stale or unverified price is labelled "indicative" and cannot win best price.
+- A price beyond its freshness budget, or one never verified, is labelled
+  **indicative** and cannot win best price.
 - Education pricing is never merged into retail pricing; eligibility is part of
   the price.
 - Gift card, cashback, points and trade-in each apply once, on distinct spend.
@@ -72,33 +73,43 @@ Availability, honestly:
 | Command | State |
 |---|---|
 | `uv sync` | Works. Python 3.12, dependencies from `uv.lock`. |
-| `uv run pytest -q` | Configured; the suite will be added in `APA-007`. Until then pytest collects nothing and exits 5. |
-| `uv run python -m scripts.validation.validate_data` | Arrives with `APA-003` (Milestone 1). |
-| `cd site && npm ci && npm run dev` | Arrives with `APA-009` (Milestone 1); there is no `site/package.json` yet. |
+| `uv run pytest -q` | Works. 114 tests pass, 2 skipped, no network. |
+| `uv run python -m scripts.validation.validate_data` | Works. Exit `0` on the current tree, with 21 warnings for datasets and adapters not yet built. |
+| `cd site && npm ci && npm run dev` | Works. Astro 5 with Tailwind 4; Node 22 or later. |
+
+Two more commands that exist and are worth knowing:
+
+```bash
+uv run python -m scripts.models.export_schema --check
+uv run ruff check
+```
 
 Validation exits `0` clean, `1` on a hard failure and `2` on an unexpected
-crash. A hard failure blocks publish and deploy.
+crash. A hard failure blocks publish and deploy. The schema check exits `1` when
+`data/schema/` is stale.
 
 ## Repository map
 
-The milestone column is the release that delivers the path, not a claim that it
-exists today. Milestone 1 is in progress.
+The milestone column says when a path arrives. Milestone 1 is in progress and
+its paths exist; M2–M4 paths do not.
 
 | Path | What lives there | Milestone |
 |---|---|---|
 | `scripts/models/` | Pydantic v2 models, enums, JSON Schema export — the schema contract | M1 |
-| `scripts/validation/` | Dataset validation CLI and invariants | M1 |
+| `scripts/validation/` | Dataset validation CLI, invariants and the freshness policy | M1 |
 | `scripts/collectors/` | One adapter per source, shared rate limiter and robots gate | M2 |
 | `scripts/matching/` | Layered product matching and the review queue | M2 |
 | `scripts/deals/` | Deterministic deal detection | M3 |
 | `scripts/gift_cards/` | Gift-card and effective-price maths | M3 |
 | `scripts/alerts/` | Discord alert selection and dedupe | M4 |
-| `data/products.json`, `data/sellers.json` | Seed catalogue and source registry | M1 |
-| `data/schema/` | Exported JSON Schema for every model | M1 |
+| `data/products.json`, `data/sellers.json` | Seed catalogue (20 products) and source registry (29 sellers) | M1 |
+| `data/evidence/` | Capture records backing each Apple AU RRP | M1 |
+| `data/schema/` | Generated JSON Schema for every model — never hand-edited | M1 |
 | `data/snapshots/` | Append-only raw captures, one directory per day | M2 |
 | `data/latest_offers.json` | Derived published offer set — never hand-edited | M2 |
+| `data/matching/` | Review queue and match decisions | M2 |
 | `data/history/`, `data/deals/`, `data/gift_cards/`, `data/health/` | Derived feeds | M3/M4 |
-| `config/freshness.yml` | Per-source freshness thresholds | M1 |
+| `config/freshness.yml` | Freshness budget by seller type and category, with a per-record fallback | M1 |
 | `config/deal_rules.yml`, `config/alerts.yml` | Deal and alert thresholds | M3/M4 |
 | `site/` | Astro frontend, static output | M1 scaffold, M3 pages |
 | `fixtures/` | Saved retailer HTML and expected parses, for offline tests | M2 |
@@ -111,8 +122,8 @@ exists today. Milestone 1 is in progress.
 | Document | Covers | State |
 |---|---|---|
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Pipeline stages, trust boundaries, adapter isolation, determinism, why no database | Written for the full pipeline; stages marked by milestone |
-| [DATA-MODEL.md](docs/DATA-MODEL.md) | Every entity, field, enum and identifier; the SQLite target DDL and migration path | Contract for M1 models |
-| [SOURCE-REGISTRY.md](docs/SOURCE-REGISTRY.md) | 29 sources, methods, proposed rate limits, policy status and risks | Planning; **no robots.txt check has been performed** |
+| [DATA-MODEL.md](docs/DATA-MODEL.md) | Every field, type, nullability and enum from `scripts/models/`; the generated schemas; the SQLite target DDL | Current, generated from the code |
+| [SOURCE-REGISTRY.md](docs/SOURCE-REGISTRY.md) | All 29 sellers from `data/sellers.json`, methods, rate limits, policy status and risks | Current; **no robots/terms finding recorded** |
 | [PRD.md](docs/PRD.md) | Problem, users, scope, non-scope, success measures, MVP acceptance | Current |
 | [BRAND.md](docs/BRAND.md) | Provisional name, trademark position, rename checklist | Current |
 | [AGENTS.md](AGENTS.md) | Team, board usage, non-negotiables, how to work a card | Current |

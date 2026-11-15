@@ -198,11 +198,11 @@
       "title": "Quote Only",
       "type": "boolean"
     },
-    "rate_limit_rps_float": {
+    "rate_limit_rps": {
       "description": "Requests per second permitted for this seller's adapter; 0 for curated-only sellers.",
       "maximum": 20,
       "minimum": 0,
-      "title": "Rate Limit Rps Float",
+      "title": "Rate Limit Rps",
       "type": "number"
     },
     "returns_policy_url": {
@@ -294,7 +294,7 @@
     "seller_type",
     "categories",
     "collection_method",
-    "rate_limit_rps_float",
+    "rate_limit_rps",
     "crawl_delay_seconds"
   ],
   "title": "Seller",
