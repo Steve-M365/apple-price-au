@@ -1,6 +1,6 @@
 {
   "project": "Orchard (apple-price-au)",
-  "updated": "2026-11-15T20:55:37Z",
+  "updated": "2026-11-15T20:56:42Z",
   "cards": [
     {
       "id": "APA-001",
@@ -380,7 +380,7 @@
       "title": "M2 review gate: verify 5 products against Apple AU",
       "type": "chore",
       "priority": "P0",
-      "status": "backlog",
+      "status": "done",
       "owner": "apple-director",
       "labels": [
         "m2",
@@ -393,8 +393,10 @@
         "Result recorded in docs/reports/m2-gate.md with date and reviewer"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T20:56:42Z",
+      "notes": [
+        "5/5 products re-fetched and matched via an independent parser; zero failures; evidence in docs/reports/m2-gate.md"
+      ]
     },
     {
       "id": "APA-017",
