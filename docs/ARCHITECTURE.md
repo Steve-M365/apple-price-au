@@ -38,7 +38,7 @@ write", "will fetch", "will block". Only the validation stage exists after M1.
                   │                              publish (M2/M3) ◀──────────┘            │
                   │                                    │                                │
                   │                                    ▼                                │
-                  │                          deploy (M4) ─▶ alert (M4)                  │
+                  │                      deploy (M1) ─▶ alert (M6, planned)            │
                   └─────────────────────────────────────────────────────────────────────┘
                                                        │
                     data/snapshots/                    │  data/*.json (derived)
@@ -65,7 +65,7 @@ is visible and resumable.
 | 5 | validate | M1 | all committed datasets | report + exit code | hard failure stops publish and deploy |
 | 6 | deal | M3 | validated offers, history, rules | `Deal` records | no evidence or expired → not emitted |
 | 7 | publish | M2/M3 | validated + derived records | `latest_offers.json`, feeds | atomic write, previous file kept on failure |
-| 8 | deploy | M4 | committed JSON, site build | static site on Pages | failed gate leaves the last good site live |
+| 8 | deploy | M1 (early) | committed JSON, site build | static site on Pages | failed gate leaves the last good site live |
 | 9 | alert | M4 | current deals, `sent.json` | Discord message | missing webhook is a warning, not a failure |
 
 ### 1. Collect (M2)
@@ -165,10 +165,11 @@ is visible and resumable.
   published-confidence offers appear. Best price per product is derived, never
   written by hand.
 
-### 8. Deploy (M4)
+### 8. Deploy (implemented, pulled forward from M4 to M1)
 
-- **Where:** `.github/workflows/deploy-site.yml` (`APA-046`), planned. No
-  workflow file exists in the repository yet: `.github/workflows/` is empty.
+- **Where:** `.github/workflows/deploy-site.yml`. This landed at the end of M1
+  so the published site could be verified end to end; the data-driven parts of
+  the stage still arrive with the collectors.
 - **Input:** committed JSON, the site source.
 - **Output:** a GitHub Pages artefact and a live site whose footer records the
   data commit SHA.

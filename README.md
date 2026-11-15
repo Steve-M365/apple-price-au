@@ -7,18 +7,26 @@ Apple AU and Australian retailers charge, keep education pricing separate from
 retail, detect deals, value gift cards and cashback, and rank the realistic ways
 to buy a product.
 
-Status: **Milestone 1 (foundation) in progress.** The domain models, a 20-product
-seed catalogue, the 29-seller registry, the validation CLI, the generated JSON
-Schemas and the Astro scaffold are in place. Collectors, the deal engine and the
-public pages are Milestones 2–4. Nothing here is a live price feed yet.
+Status: **Milestone 1 (foundation) in progress; the static site is deployed.**
+The domain models, a 20-product seed catalogue, the 29-seller registry, the
+validation CLI, the generated JSON Schemas and the Astro scaffold are in place.
+The site is live at <https://steve-m365.github.io/apple-price-au/> but
+deliberately empty: no offer is published yet, so it shows none. Collectors,
+the deal engine and the price pages are Milestones 2–4. Nothing here is a live
+price feed.
+
+Live site: <https://steve-m365.github.io/apple-price-au/>. It is published from
+`main` by `.github/workflows/deploy-site.yml`;
+[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) records how that works, including the
+validation gate and rollback.
 
 ## What it is
 
 - A record of **observations**: a price, a seller, a source URL and the UTC time
   it was captured.
 - Australia only, AUD only. `Australia/Melbourne` for display, UTC for storage.
-- Static by design: the published site will be generated from committed JSON
-  and served from GitHub Pages, with no runtime API.
+- Static by design: the site is generated from committed JSON and served from
+  GitHub Pages, with no runtime API.
 - Deliberately small: no accounts, no payments, no purchasing.
 
 ## What it is not
@@ -114,20 +122,21 @@ its paths exist; M2–M4 paths do not.
 | `site/` | Astro frontend, static output | M1 scaffold, M3 pages |
 | `fixtures/` | Saved retailer HTML and expected parses, for offline tests | M2 |
 | `tests/` | pytest suite, offline by default | M1 |
-| `.github/workflows/` | Validation (M1), collection, deploy and alert workflows | M1/M4 |
+| `.github/workflows/` | `validate-data.yml` and `deploy-site.yml`; collection and alert workflows later | M1/M4 |
 | `.kanban/` | The team board — the source of truth for work in flight | M1 |
 
 ## Documentation
 
 | Document | Covers | State |
 |---|---|---|
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Pipeline stages, trust boundaries, adapter isolation, determinism, why no database | Written for the full pipeline; stages marked by milestone |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Pipeline stages, trust boundaries, adapter isolation, determinism, why no database | Written for the full pipeline; its deploy section predates the live pipeline — see DEPLOYMENT.md |
+| [DEPLOYMENT.md](docs/DEPLOYMENT.md) | What actually deploys, the validation gate, triggers, Pages configuration, rollback, deploy verification and the custom-domain path | Current, as built on 2026-11-15 |
 | [DATA-MODEL.md](docs/DATA-MODEL.md) | Every field, type, nullability and enum from `scripts/models/`; the generated schemas; the SQLite target DDL | Current, generated from the code |
 | [SOURCE-REGISTRY.md](docs/SOURCE-REGISTRY.md) | All 29 sellers from `data/sellers.json`, methods, rate limits, policy status and risks | Current; **no robots/terms finding recorded** |
 | [PRD.md](docs/PRD.md) | Problem, users, scope, non-scope, success measures, MVP acceptance | Current |
 | [BRAND.md](docs/BRAND.md) | Provisional name, trademark position, rename checklist | Current |
 | [AGENTS.md](AGENTS.md) | Team, board usage, non-negotiables, how to work a card | Current |
-| `docs/OPERATIONS.md` | Runbook, collection and deployment procedures | Planned (M4, `APA-049`) |
+| `docs/OPERATIONS.md` | Runbook and collection procedures; deployment is in DEPLOYMENT.md | Planned (M4, `APA-049`) |
 | `docs/GIFT-CARD-RULES.md` | Gift-card valuation rules referenced by `.env.example` | Planned (M3, `APA-031`) |
 | `docs/ROADMAP.md` | Future work beyond Milestone 4 | Planned |
 
