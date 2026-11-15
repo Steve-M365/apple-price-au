@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "11-inch iPad Air Wi‑Fi 128GB — Space Grey",
+  "url": "https://www.apple.com/au-edu/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi",
+  "mainEntityOfPage": "https://www.apple.com/au-edu/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi",
+  "color": "Space Grey",
+  "offers": [
+    {
+      "@type": "Offer",
+      "priceCurrency": "AUD",
+      "price": 1169.0,
+      "sku": "MH304X/A",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AUD"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AU",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 14,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      }
+    }
+  ],
+  "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-finish-select-gallery-202405-11inch-space-gray-wifi?wid=5120&hei=2880&fmt=jpeg&qlt=90&.v=1713820129982",
+  "description": "Get A$65 - A$1,340 off a new 11-inch or 13-inch iPad Air when you trade in an eligible device with Apple. Available in four bold colours. Buy now at apple.com.",
+  "audience": [
+    {
+      "@type": "EducationalAudience",
+      "educationalRole": "teacher"
+    },
+    {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    }
+  ]
+}

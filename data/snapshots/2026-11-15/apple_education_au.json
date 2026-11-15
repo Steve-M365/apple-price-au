@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "snapshot": {
+    "seller_id": "apple_education_au",
+    "source": "Apple Education Store, apple.com/au-edu/shop",
+    "store_url": "https://www.apple.com/au-edu/store",
+    "price_basis": "edu",
+    "captured_at": "2026-11-15T20:55:27.265959Z",
+    "run_id": "20261115T205459Z-fd65dd45",
+    "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+    "method": "One plain unauthenticated GET per product page with the OrchardPriceBot user agent. The price is read from the server-rendered Product JSON-LD offers[].price (priceCurrency AUD) and cross-checked against the catalogue SKU. No browser emulation, no cookies, no sign-in.",
+    "store_observation": {
+      "education_prices_public": true,
+      "sign_in_required_to_view_price": false,
+      "verification_vendor": "UNiDAYS",
+      "verification_gate": "checkout",
+      "verification_source_url": "https://www.apple.com/au-edu/shop/buy-mac",
+      "verification_verified_in_run": true,
+      "verification_note": "Apple names UNiDAYS and says verification happens during checkout",
+      "observed_quotes": [
+        {
+          "question": "Are education prices displayed publicly without signing in?",
+          "answer": "yes",
+          "url": "https://www.apple.com/au-edu/shop/buy-mac/macbook-air/13-inch-midnight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+          "evidence": "A plain unauthenticated GET returned HTTP 200 and the page renders \"From A$1,939.00\" with an \"Education Savings\" badge; the Product JSON-LD carries offers[0].price 1939.00 AUD. No cookie, no sign-in, no verification."
+        },
+        {
+          "question": "Where does UNiDAYS verification gate the purchase?",
+          "answer": "checkout",
+          "url": "https://www.apple.com/au-edu/shop/buy-mac",
+          "evidence": "\"Continue shopping and verify later\" is offered next to \"Verify with UNiDAYS now\", and the page transcript reads: \"Just shop the Education Store on apple.com and verify your eligibility during checkout with a UNiDAYS account.\" The product page FAQ reads: \"You may need to verify your eligibility with an active school email or other documentation during check-out. Verification varies by country.\""
+        },
+        {
+          "question": "What does Apple state about eligibility and purchase limits?",
+          "answer": "published on the education sales policy page, recorded verbatim below",
+          "url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+          "evidence": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made."
+        }
+      ]
+    },
+    "eligibility": [
+      "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+      "A lecturer or staff member at an accredited Australian university",
+      "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+      "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+    ],
+    "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+    "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+    "annual_limit_verified_in_run": true,
+    "eligibility_verified_in_run": true,
+    "terms_capture": {
+      "source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "captured_at": "2026-11-15T20:51:47.347063Z",
+      "source_hash": "sha256:c21a6f6c1be776d8a24ed06484d2872bf697b3535c24a6119945abc5da672b2c",
+      "note": "eligibility and purchase-quantity wording found on the live page"
+    },
+    "policy": {
+      "seller_id": "apple_education_au",
+      "allowed": true,
+      "reason": "robots.txt allows /au-edu/shop/buy-mac: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/browse/open/salespolicies/edu: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/buy-mac/macbook-air/13-inch-midnight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/buy-mac/macbook-pro/14-inch-space-black-standard-display-apple-m6-chip-12-core-cpu-12-core-gpu-16gb-memory-1tb-storage: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/buy-mac/imac/24-inch-blue-m6-chip-10-core-cpu-10-core-gpu-16gb-memory-256gb-storage-stand: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-256gb-storage: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/buy-ipad/ipad/128gb-blue-wifi: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi: 5 rule(s) apply to this user agent and none match; robots.txt allows /au-edu/shop/buy-ipad/ipad-pro/11-inch-display-256gb-space-black-wifi-standard-glass: 5 rule(s) apply to this user agent and none match",
+      "robots_url": "https://www.apple.com/robots.txt",
+      "checked_at": "2026-11-15T20:54:59.984628+00:00",
+      "crawl_delay_seconds": null,
+      "decisions": [
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-mac: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/browse/open/salespolicies/edu: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-mac/macbook-air/13-inch-midnight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-mac/macbook-pro/14-inch-space-black-standard-display-apple-m6-chip-12-core-cpu-12-core-gpu-16gb-memory-1tb-storage: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-mac/imac/24-inch-blue-m6-chip-10-core-cpu-10-core-gpu-16gb-memory-256gb-storage-stand: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-256gb-storage: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-ipad/ipad/128gb-blue-wifi: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        },
+        {
+          "allowed": true,
+          "reason": "robots.txt allows /au-edu/shop/buy-ipad/ipad-pro/11-inch-display-256gb-space-black-wifi-standard-glass: 5 rule(s) apply to this user agent and none match",
+          "robots_url": "https://www.apple.com/robots.txt",
+          "status": 200,
+          "matched_rule": null
+        }
+      ]
+    },
+    "targets": 8,
+    "offers_recorded": 8,
+    "stock_basis": "NOT OBSERVED. The Education Store product page carries no per-configuration stock statement, so in_stock=false on every offer means 'not asserted', never 'unavailable'. A stock lookup is a separate capture (fulfillment-messages) and out of scope for this card.",
+    "errors": 0
+  },
+  "offers": [
+    {
+      "offer_id": "apple-edu-apple-imac-24-inch-m6-16gb-256gb-blue-20261115",
+      "product_id": "apple-imac-24-inch-m6-16gb-256gb-blue",
+      "seller_id": "apple_education_au",
+      "url": "https://www.apple.com/au-edu/shop/buy-mac/imac/24-inch-blue-m6-chip-10-core-cpu-10-core-gpu-16gb-memory-256gb-storage-stand",
+      "price_aud": 2319.0,
+      "standard_price_aud": 2399.0,
+      "saving_aud": 80.0,
+      "saving_pct": 3.33,
+      "eligibility": [
+        "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+        "A lecturer or staff member at an accredited Australian university",
+        "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+        "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+      ],
+      "verification": "UNiDAYS",
+      "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+      "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "in_stock": null,
+      "price_basis": "edu",
+      "verification_status": "verified",
+      "freshness_max_age_hours": 168,
+      "captured_at": "2026-11-15T20:52:03.848024Z",
+      "source_hash": "sha256:99a7403e2b9ce8202ebc565d78b0f5a5a4e0b2192d8fc11c6b31b015ee21b30e",
+      "run_id": "20261115T205459Z-fd65dd45"
+    },
+    {
+      "offer_id": "apple-edu-apple-ipad-11-inch-a16-128gb-blue-20261115",
+      "product_id": "apple-ipad-11-inch-a16-128gb-blue",
+      "seller_id": "apple_education_au",
+      "url": "https://www.apple.com/au-edu/shop/buy-ipad/ipad/128gb-blue-wifi",
+      "price_aud": 719.0,
+      "standard_price_aud": 749.0,
+      "saving_aud": 30.0,
+      "saving_pct": 4.01,
+      "eligibility": [
+        "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+        "A lecturer or staff member at an accredited Australian university",
+        "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+        "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+      ],
+      "verification": "UNiDAYS",
+      "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+      "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "in_stock": null,
+      "price_basis": "edu",
+      "verification_status": "verified",
+      "freshness_max_age_hours": 168,
+      "captured_at": "2026-11-15T20:52:10.593220Z",
+      "source_hash": "sha256:567d31e41e3414bf373534b8f5ca6c53452103325bd7b95b00aaad47ca8a20da",
+      "run_id": "20261115T205459Z-fd65dd45"
+    },
+    {
+      "offer_id": "apple-edu-apple-ipad-air-11-inch-m4-128gb-space-grey-20261115",
+      "product_id": "apple-ipad-air-11-inch-m4-128gb-space-grey",
+      "seller_id": "apple_education_au",
+      "url": "https://www.apple.com/au-edu/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi",
+      "price_aud": 1169.0,
+      "standard_price_aud": 1249.0,
+      "saving_aud": 80.0,
+      "saving_pct": 6.41,
+      "eligibility": [
+        "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+        "A lecturer or staff member at an accredited Australian university",
+        "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+        "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+      ],
+      "verification": "UNiDAYS",
+      "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+      "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "in_stock": null,
+      "price_basis": "edu",
+      "verification_status": "verified",
+      "freshness_max_age_hours": 168,
+      "captured_at": "2026-11-15T20:52:13.642075Z",
+      "source_hash": "sha256:e51cfcc17589a55324c86d66469956344850e9aab62c4f3ad6d6663976a7b65e",
+      "run_id": "20261115T205459Z-fd65dd45"
+    },
+    {
+      "offer_id": "apple-edu-apple-ipad-pro-11-inch-m5-256gb-space-black-20261115",
+      "product_id": "apple-ipad-pro-11-inch-m5-256gb-space-black",
+      "seller_id": "apple_education_au",
+      "url": "https://www.apple.com/au-edu/shop/buy-ipad/ipad-pro/11-inch-display-256gb-space-black-wifi-standard-glass",
+      "price_aud": 1829.0,
+      "standard_price_aud": 1999.0,
+      "saving_aud": 170.0,
+      "saving_pct": 8.5,
+      "eligibility": [
+        "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+        "A lecturer or staff member at an accredited Australian university",
+        "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+        "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+      ],
+      "verification": "UNiDAYS",
+      "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+      "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "in_stock": null,
+      "price_basis": "edu",
+      "verification_status": "verified",
+      "freshness_max_age_hours": 168,
+      "captured_at": "2026-11-15T20:52:17.000412Z",
+      "source_hash": "sha256:e186cb662d6a1335c7b52977728423a537dc7d7c570188a068920dccbde086ca",
+      "run_id": "20261115T205459Z-fd65dd45"
+    },
+    {
+      "offer_id": "apple-edu-apple-mac-mini-m6-16gb-256gb-20261115",
+      "product_id": "apple-mac-mini-m6-16gb-256gb",
+      "seller_id": "apple_education_au",
+      "url": "https://www.apple.com/au-edu/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-256gb-storage",
+      "price_aud": 1289.0,
+      "standard_price_aud": 1449.0,
+      "saving_aud": 160.0,
+      "saving_pct": 11.04,
+      "eligibility": [
+        "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+        "A lecturer or staff member at an accredited Australian university",
+        "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+        "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+      ],
+      "verification": "UNiDAYS",
+      "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+      "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "in_stock": null,
+      "price_basis": "edu",
+      "verification_status": "verified",
+      "freshness_max_age_hours": 168,
+      "captured_at": "2026-11-15T20:52:07.131661Z",
+      "source_hash": "sha256:80fdef010f500c9bed679d355c701be45acb4f3c97a3683aff00843a75b9e2ea",
+      "run_id": "20261115T205459Z-fd65dd45"
+    },
+    {
+      "offer_id": "apple-edu-apple-macbook-air-13-inch-m5-16gb-512gb-midnight-20261115",
+      "product_id": "apple-macbook-air-13-inch-m5-16gb-512gb-midnight",
+      "seller_id": "apple_education_au",
+      "url": "https://www.apple.com/au-edu/shop/buy-mac/macbook-air/13-inch-midnight-m5-chip-10-core-cpu-8-core-gpu-16gb-memory-512gb-storage",
+      "price_aud": 1939.0,
+      "standard_price_aud": 2099.0,
+      "saving_aud": 160.0,
+      "saving_pct": 7.62,
+      "eligibility": [
+        "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+        "A lecturer or staff member at an accredited Australian university",
+        "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+        "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+      ],
+      "verification": "UNiDAYS",
+      "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+      "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "in_stock": null,
+      "price_basis": "edu",
+      "verification_status": "verified",
+      "freshness_max_age_hours": 168,
+      "captured_at": "2026-11-15T20:51:54.795272Z",
+      "source_hash": "sha256:40916284271d1b537185115f1ba0c8e278f164eebfb73ac7ce0903ebc64bd701",
+      "run_id": "20261115T205459Z-fd65dd45"
+    },
+    {
+      "offer_id": "apple-edu-apple-macbook-air-15-inch-m5-16gb-512gb-midnight-20261115",
+      "product_id": "apple-macbook-air-15-inch-m5-16gb-512gb-midnight",
+      "seller_id": "apple_education_au",
+      "url": "https://www.apple.com/au-edu/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage",
+      "price_aud": 2339.0,
+      "standard_price_aud": 2499.0,
+      "saving_aud": 160.0,
+      "saving_pct": 6.4,
+      "eligibility": [
+        "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+        "A lecturer or staff member at an accredited Australian university",
+        "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+        "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+      ],
+      "verification": "UNiDAYS",
+      "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+      "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "in_stock": null,
+      "price_basis": "edu",
+      "verification_status": "verified",
+      "freshness_max_age_hours": 168,
+      "captured_at": "2026-11-15T20:51:57.747108Z",
+      "source_hash": "sha256:497db5297cb624eb44f26cf04b6d90b0b5cc61e6066f5ab7a3b2d5ca3b52f59d",
+      "run_id": "20261115T205459Z-fd65dd45"
+    },
+    {
+      "offer_id": "apple-edu-apple-macbook-pro-14-inch-m6-16gb-1tb-space-black-20261115",
+      "product_id": "apple-macbook-pro-14-inch-m6-16gb-1tb-space-black",
+      "seller_id": "apple_education_au",
+      "url": "https://www.apple.com/au-edu/shop/buy-mac/macbook-pro/14-inch-space-black-standard-display-apple-m6-chip-12-core-cpu-12-core-gpu-16gb-memory-1tb-storage",
+      "price_aud": 3039.0,
+      "standard_price_aud": 3199.0,
+      "saving_aud": 160.0,
+      "saving_pct": 5.0,
+      "eligibility": [
+        "A full-time or part-time student aged 18 or over with a current student union card or student identification card and studying at or accepted into an accredited Australian university or other Apple-approved institution",
+        "A lecturer or staff member at an accredited Australian university",
+        "A teacher or lecturer working at an Apple-approved and registered education establishment within Australia",
+        "A parent purchasing on behalf of their child, who is a student currently attending or accepted into an accredited Australian university or other Apple-approved institution"
+      ],
+      "verification": "UNiDAYS",
+      "annual_limit_summary": "Those eligible to purchase from the Apple Store for Education will be allowed to purchase the following quantities of products per year. Not all products have special Education Pricing. Desktop: One (1) may be purchased per year; Mac mini: One (1) may be purchased per year; MacBook: One (1) may be purchased per year; Displays: One (1) may be purchased per year; iPad: Two (2) may be purchased per year; Apple Watch: One (1) Apple Watch with Education Pricing may be purchased per year; Accessories: Two (2) accessories with Education Pricing may be purchased per year. The above purchases can be made either online or in an Apple Retail Store. Total product quantities remain the same regardless of where your purchase is made.",
+      "annual_limit_source_url": "https://www.apple.com/au-edu/shop/browse/open/salespolicies/edu",
+      "in_stock": null,
+      "price_basis": "edu",
+      "verification_status": "verified",
+      "freshness_max_age_hours": 168,
+      "captured_at": "2026-11-15T20:52:01.556144Z",
+      "source_hash": "sha256:fad26b4a2e0379649b67ece3fd56c8e672798483ea8d019a3c888d051a4fdaa9",
+      "run_id": "20261115T205459Z-fd65dd45"
+    }
+  ],
+  "errors": [],
+  "blocked": []
+}

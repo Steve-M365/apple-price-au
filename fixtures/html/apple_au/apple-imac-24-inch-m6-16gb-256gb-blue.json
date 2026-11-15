@@ -1,0 +1,9 @@
+{
+  "product_id": "apple-imac-24-inch-m6-16gb-256gb-blue",
+  "url": "https://www.apple.com/au/shop/buy-mac/imac/24-inch-blue-m6-chip-10-core-cpu-10-core-gpu-16gb-memory-256gb-storage-stand",
+  "captured_at": "2026-11-15T11:10:35Z",
+  "http_status": 200,
+  "parse_path": "jsonld",
+  "synthetic": false,
+  "html": "<!doctype html>\n<html>\n<head>\n<title>Buy iMac, 24”, M6 Chip, 10-core CPU, 10-core GPU, Blue, Stand, 16GB memory, 256GB storage - Apple (AU)</title>\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"iMac, 24”, M6 Chip, 10-core CPU, 10-core GPU, Blue, Stand, 16GB memory, 256GB storage\",\"url\":\"https://www.apple.com/au/shop/buy-mac/imac/24-inch-blue-m6-chip-10-core-cpu-10-core-gpu-16gb-memory-256gb-storage-stand\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-mac/imac/24-inch-blue-m6-chip-10-core-cpu-10-core-gpu-16gb-memory-256gb-storage-stand\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":2399.00,\"sku\":\"MH094X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/imac-specs-select-202610-blue-10-10?wid=5120&hei=3280&fmt=jpeg&qlt=90&.v=1791427427148\",\"description\":\"Buy the 24” iMac all-in-one desktop computer in Blue with the M6 chip, 16GB memory and 256GB storage. Get free shipping when you order at apple.com.\"}</script>\n</head>\n<body>\n\"currentPrice\":{\"amount\":\"A$2,399.00\"\n\"currentPrice\":{\"amount\":\"A$2,699.00\"\n</body>\n</html>\n"
+}

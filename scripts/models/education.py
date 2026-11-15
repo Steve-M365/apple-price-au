@@ -44,7 +44,11 @@ class EducationOffer(OrchardModel):
     verification: NonEmptyStr
     annual_limit_summary: NonEmptyStr
     annual_limit_source_url: HttpUrl
-    in_stock: bool
+    #: Tri-state. ``True`` = confirmed available, ``False`` = confirmed
+    #: unavailable, ``None`` = the source carries no stock statement. A boolean
+    #: alone cannot express "not observed", and encoding that as ``False``
+    #: would publish a false "out of stock" claim.
+    in_stock: bool | None = None
     price_basis: PriceBasis = PriceBasis.EDU
     verification_status: VerificationStatus
     freshness_max_age_hours: int = Field(default=24, gt=0, le=720)

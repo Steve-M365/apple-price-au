@@ -1,0 +1,9 @@
+{
+  "product_id": "apple-iphone-17-6-3-inch-256gb-black",
+  "url": "https://www.apple.com/au/shop/buy-iphone/iphone-17/6.3-inch-display-256gb-black",
+  "captured_at": "2026-11-15T11:10:59Z",
+  "http_status": 200,
+  "parse_path": "jsonld",
+  "synthetic": false,
+  "html": "<!doctype html>\n<html>\n<head>\n<title>Buy iPhone 17 256GB Black - Apple (AU)</title>\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"iPhone 17 256GB Black\",\"url\":\"https://www.apple.com/au/shop/buy-iphone/iphone-17/6.3-inch-display-256gb-black\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-iphone/iphone-17/6.3-inch-display-256gb-black\",\"color\":\"Black\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":1549.00,\"sku\":\"MG6J4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-202509-black?wid=5120&hei=2880&fmt=jpeg&qlt=90&.v=1757606624242\",\"description\":\"Buy an iPhone 17 from only A$64.54 per month with Afterpay Pay Monthly. Plus, trade in to lower your monthly payments. Buy now with free shipping.\"}</script>\n</head>\n<body>\n<span class=\"current_price\">A$1,549.00\n<span class=\"current_price\">A$1,949.00\n\"currentPrice\":{\"amount\":\"A$1,949.00\"\n\"currentPrice\":{\"amount\":\"A$1,549.00\"\n</body>\n</html>\n"
+}

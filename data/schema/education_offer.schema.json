@@ -64,8 +64,16 @@
       "type": "integer"
     },
     "in_stock": {
-      "title": "In Stock",
-      "type": "boolean"
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "In Stock"
     },
     "offer_id": {
       "minLength": 1,
@@ -152,7 +160,6 @@
     "verification",
     "annual_limit_summary",
     "annual_limit_source_url",
-    "in_stock",
     "verification_status",
     "captured_at",
     "source_hash",

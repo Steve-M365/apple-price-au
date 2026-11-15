@@ -1,0 +1,10 @@
+{
+  "product_id": "apple-airpods-pro-3",
+  "url": "https://www.apple.com/au/shop/buy-airpods/airpods-pro-3",
+  "captured_at": "2026-11-15T11:11:29Z",
+  "http_status": 200,
+  "parse_path": "html",
+  "synthetic": true,
+  "html": "<!doctype html>\n<html>\n<head>\n<title>Buy AirPods Pro 3 - Apple (AU)</title>\n</head>\n<body>\n<span class=\"current_price\">A$429.00\n\"currentPrice\":{\"amount\":\"A$429.00\"\n</body>\n</html>\n",
+  "note": "Synthetic: the real 2026-11-15 AirPods Pro 3 capture with its JSON-LD Product block removed, leaving the buy-block markup the fallback reads."
+}

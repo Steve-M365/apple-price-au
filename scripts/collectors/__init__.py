@@ -19,6 +19,8 @@ package rather than from individual modules.
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, Any
+
 from .base import (
     BaseAdapter,
     BlockedSource,
@@ -59,8 +61,28 @@ from .policy import (
     parse_robots,
 )
 
+if TYPE_CHECKING:  # pragma: no cover - typing only
+    from .apple_au import AppleAuAdapter
+
+#: Adapters are resolved on first access rather than imported eagerly. A collector
+#: that imports itself through this package would otherwise be found in
+#: ``sys.modules`` before ``python -m`` executes it, and runpy warns about that
+#: double import on every run.
+_LAZY_EXPORTS = {"AppleAuAdapter": ".apple_au"}
+
+
+def __getattr__(name: str) -> Any:
+    target = _LAZY_EXPORTS.get(name)
+    if target is None:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    from importlib import import_module
+
+    return getattr(import_module(target, __package__), name)
+
+
 __all__ = [
     "DEFAULT_USER_AGENT",
+    "AppleAuAdapter",
     "BaseAdapter",
     "BlockedSource",
     "Capabilities",

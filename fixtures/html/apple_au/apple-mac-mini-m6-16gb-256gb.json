@@ -1,0 +1,9 @@
+{
+  "product_id": "apple-mac-mini-m6-16gb-256gb",
+  "url": "https://www.apple.com/au/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-256gb-storage",
+  "captured_at": "2026-11-15T11:10:38Z",
+  "http_status": 200,
+  "parse_path": "jsonld",
+  "synthetic": false,
+  "html": "<!doctype html>\n<html>\n<head>\n<title>Buy Mac mini, M6 Chip, 12-core CPU, 12-core GPU, 16GB memory, 256GB storage - Apple (AU)</title>\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Mac mini, M6 Chip, 12-core CPU, 12-core GPU, 16GB memory, 256GB storage\",\"url\":\"https://www.apple.com/au/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-256gb-storage\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-mac/mac-mini/m6-chip-12-core-cpu-12-core-gpu-16gb-memory-256gb-storage\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":1449.00,\"sku\":\"MHQK4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mac-mini-chip-unselect-202608-gallery-1?wid=5120&hei=3280&fmt=jpeg&qlt=90&.v=1785998455498\",\"description\":\"Buy the Mac mini with the M6 chip, 16GB memory and 256GB storage. Get free shipping when you order at apple.com.\"}</script>\n</head>\n<body>\n\"currentPrice\":{\"amount\":\"A$2,699.00\"\n\"currentPrice\":{\"amount\":\"A$2,999.00\"\n\"currentPrice\":{\"amount\":\"A$1,449.00\"\n</body>\n</html>\n"
+}

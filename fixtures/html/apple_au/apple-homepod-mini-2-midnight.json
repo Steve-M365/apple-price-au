@@ -1,0 +1,9 @@
+{
+  "product_id": "apple-homepod-mini-2-midnight",
+  "url": "https://www.apple.com/au/shop/buy-homepod/homepod-mini/midnight",
+  "captured_at": "2026-11-15T11:11:40Z",
+  "http_status": 200,
+  "parse_path": "jsonld",
+  "synthetic": false,
+  "html": "<!doctype html>\n<html>\n<head>\n<title>Buy HomePod mini 2 — Midnight - Apple (AU)</title>\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"HomePod mini 2 — Midnight\",\"url\":\"https://www.apple.com/au/shop/buy-homepod/homepod-mini/midnight\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-homepod/homepod-mini/midnight\",\"color\":\"Midnight\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":229.00,\"sku\":\"MGHJ4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/homepod-mini-select-midnight-202610?wid=1080&hei=880&fmt=jpeg&qlt=90&.v=1790870392655\",\"description\":\"HomePod mini 2 features room‑filling sound and Siri AI, your AI smart home assistant. Buy now with free shipping.\"}</script>\n</head>\n<body>\n<span class=\"current_price\">A$229.00\n\"currentPrice\":{\"amount\":\"A$229.00\"\n</body>\n</html>\n"
+}

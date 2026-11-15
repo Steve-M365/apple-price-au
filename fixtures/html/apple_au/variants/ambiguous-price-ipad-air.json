@@ -1,0 +1,10 @@
+{
+  "product_id": "apple-ipad-air-11-inch-m4-128gb-space-grey",
+  "url": "https://www.apple.com/au/shop/buy-ipad/ipad-air/11-inch-display-128gb-space-grey-wifi",
+  "captured_at": "2026-11-15T11:10:47Z",
+  "http_status": 200,
+  "parse_path": "html",
+  "synthetic": true,
+  "html": "<!doctype html>\n<html>\n<head>\n<title>Buy 11-inch iPad Air Wi‑Fi 128GB — Space Grey - Apple (AU)</title>\n</head>\n<body>\n<span class=\"current_price\">A$1,799.00\n<span class=\"current_price\">A$2,299.00\n<span class=\"current_price\">A$1,249.00\n<span class=\"current_price\">A$1,449.00\n<span class=\"current_price\">A$2,049.00\n<span class=\"current_price\">A$2,549.00\n<span class=\"current_price\">A$1,499.00\n<span class=\"current_price\">A$1,699.00\n<span class=\"current_price\">A$2,149.00\n<span class=\"current_price\">A$1,599.00\n<span class=\"current_price\">A$2,649.00\n<span class=\"current_price\">A$2,399.00\n<span class=\"current_price\">A$2,899.00\n<span class=\"current_price\">A$1,849.00\n\"currentPrice\":{\"amount\":\"A$2,649.00\"\n\"currentPrice\":{\"amount\":\"A$1,799.00\"\n\"currentPrice\":{\"amount\":\"A$2,399.00\"\n\"currentPrice\":{\"amount\":\"A$1,249.00\"\n\"currentPrice\":{\"amount\":\"A$2,049.00\"\n\"currentPrice\":{\"amount\":\"A$1,849.00\"\n\"currentPrice\":{\"amount\":\"A$2,549.00\"\n\"currentPrice\":{\"amount\":\"A$1,449.00\"\n\"currentPrice\":{\"amount\":\"A$1,499.00\"\n\"currentPrice\":{\"amount\":\"A$1,699.00\"\n\"currentPrice\":{\"amount\":\"A$2,899.00\"\n\"currentPrice\":{\"amount\":\"A$2,299.00\"\n\"currentPrice\":{\"amount\":\"A$1,599.00\"\n\"currentPrice\":{\"amount\":\"A$2,149.00\"\n\"currentPrice\":{\"amount\":\"A$219.00\"\n\"currentPrice\":{\"amount\":\"A$139.00\"\n\"currentPrice\":{\"amount\":\"A$449.00\"\n\"currentPrice\":{\"amount\":\"A$499.00\"\n</body>\n</html>\n",
+  "note": "Synthetic: the real 2026-11-15 iPad Air capture with JSON-LD removed. Its buy block prices many variants, so the fallback must refuse rather than guess."
+}

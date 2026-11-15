@@ -1,6 +1,6 @@
 {
   "project": "Orchard (apple-price-au)",
-  "updated": "2026-11-15T11:09:23Z",
+  "updated": "2026-11-15T20:55:37Z",
   "cards": [
     {
       "id": "APA-001",
@@ -259,7 +259,7 @@
       "title": "Apple AU collector: JSON-LD with HTML fallback",
       "type": "feature",
       "priority": "P0",
-      "status": "backlog",
+      "status": "done",
       "owner": "apple-adapter",
       "labels": [
         "m2",
@@ -273,15 +273,18 @@
         "Fixture-based tests pass with the network disabled"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T20:55:37Z",
+      "notes": [
+        "backlog -> ready",
+        "Director verified live: 20/20 Apple AU offers and 8 education offers, prices re-fetched and matched; semantics corrected (tri-state stock, offer id format, 168h freshness)"
+      ]
     },
     {
       "id": "APA-012",
       "title": "Apple Education collector and eligibility metadata",
       "type": "feature",
       "priority": "P0",
-      "status": "backlog",
+      "status": "done",
       "owner": "apple-adapter",
       "labels": [
         "m2",
@@ -297,8 +300,11 @@
         "Observed behaviour of the store (public price display vs gated) is written into SOURCE-REGISTRY.md"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T20:55:37Z",
+      "notes": [
+        "backlog -> ready",
+        "Director verified live: 20/20 Apple AU offers and 8 education offers, prices re-fetched and matched; semantics corrected (tri-state stock, offer id format, 168h freshness)"
+      ]
     },
     {
       "id": "APA-013",
@@ -1260,6 +1266,28 @@
       ],
       "created": "2026-11-15T11:09:23Z",
       "updated": "2026-11-15T11:09:23Z",
+      "notes": []
+    },
+    {
+      "id": "APA-057",
+      "title": "Validate snapshot evidence in the data gate",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "owner": "apple-data",
+      "labels": [
+        "validation",
+        "evidence"
+      ],
+      "description": "The validation CLI checks data/latest_offers.json and the published feeds, but the append-only evidence under data/snapshots/ is never re-validated once written. A collector with a bad model change, or a hand-edited snapshot, would sail past the gate because nothing reads those files. Snapshots are the traceability layer for every published price, so they need the same treatment as published data.",
+      "acceptance": [
+        "validate_data re-validates every file in data/snapshots/ against the relevant model (Offer or EducationOffer)",
+        "A malformed snapshot is a hard failure naming the file and offer index",
+        "Snapshot filenames are checked for the YYYY-MM-DD directory convention",
+        "Runtime stays reasonable as snapshot count grows (sample or stream rather than loading everything into one dict)"
+      ],
+      "created": "2026-11-15T20:55:37Z",
+      "updated": "2026-11-15T20:55:37Z",
       "notes": []
     }
   ]
