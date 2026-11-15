@@ -1,13 +1,13 @@
 {
   "project": "Orchard (apple-price-au)",
-  "updated": "2026-11-15T10:16:05Z",
+  "updated": "2026-11-15T10:33:07Z",
   "cards": [
     {
       "id": "APA-001",
       "title": "Repo scaffold, toolchain pins and formatting",
       "type": "chore",
       "priority": "P0",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-scaffold",
       "labels": [
         "m1",
@@ -22,15 +22,17 @@
         "`.gitignore` excludes .env, node_modules, dist, .astro, __pycache__, .venv"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:28:30Z",
+      "notes": [
+        "Director verified: tests + validate_data + build green"
+      ]
     },
     {
       "id": "APA-002",
       "title": "Pydantic domain models and JSON Schema export",
       "type": "feature",
       "priority": "P0",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-data",
       "labels": [
         "m1",
@@ -45,15 +47,17 @@
         "Invalid prices (negative, non-numeric, wrong currency) are rejected with a typed error"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:28:30Z",
+      "notes": [
+        "Director verified: tests + validate_data + build green"
+      ]
     },
     {
       "id": "APA-003",
       "title": "Validation CLI with hard and soft failures",
       "type": "feature",
       "priority": "P0",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-data",
       "labels": [
         "m1",
@@ -68,15 +72,17 @@
         "Hard-failure paths are covered by tests and produce actionable messages naming the file and field"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:28:30Z",
+      "notes": [
+        "Director verified: tests + validate_data + build green"
+      ]
     },
     {
       "id": "APA-004",
       "title": "Seller registry with 21 documented sellers",
       "type": "feature",
       "priority": "P0",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-data",
       "labels": [
         "m1",
@@ -91,15 +97,17 @@
         "Registry validates against the Seller model and is covered by a test"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:28:30Z",
+      "notes": [
+        "Director verified: tests + validate_data + build green"
+      ]
     },
     {
       "id": "APA-005",
       "title": "Seed catalogue: 20 products with evidenced Apple AU RRP",
       "type": "feature",
       "priority": "P0",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-data",
       "labels": [
         "m1",
@@ -115,15 +123,17 @@
         "A test asserts no duplicate product_id and no null RRP without an unverified marker"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:28:30Z",
+      "notes": [
+        "Director verified: tests + validate_data + build green"
+      ]
     },
     {
       "id": "APA-006",
       "title": "Dataset invariant checks and freshness policy",
       "type": "feature",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-data",
       "labels": [
         "m1",
@@ -137,15 +147,17 @@
         "Any offer past its threshold is rendered as indicative by the site contract (field present in output)"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:33:07Z",
+      "notes": [
+        "Director verified green"
+      ]
     },
     {
       "id": "APA-007",
       "title": "Test suite foundation and coverage gate",
       "type": "chore",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-qa",
       "labels": [
         "m1",
@@ -159,8 +171,10 @@
         "tests/conftest.py provides reusable loaders for data/*.json and fixtures/"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:33:07Z",
+      "notes": [
+        "Director verified green"
+      ]
     },
     {
       "id": "APA-008",
@@ -192,7 +206,7 @@
       "title": "Astro scaffold with Tailwind and an empty build",
       "type": "feature",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "owner": "apple-web",
       "labels": [
         "m1",
@@ -207,8 +221,10 @@
         "Build runs offline"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:28:30Z",
+      "notes": [
+        "Director verified: tests + validate_data + build green"
+      ]
     },
     {
       "id": "APA-010",
@@ -216,7 +232,7 @@
       "type": "chore",
       "priority": "P0",
       "status": "done",
-      "owner": "apple-director",
+      "owner": "apple-qa",
       "labels": [
         "m1",
         "process"
@@ -230,8 +246,11 @@
         "AGENTS.md documents the flow: backlog -> ready -> in_progress -> in_review -> done"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-15T10:33:07Z",
+      "notes": [
+        "workflow still missing; reassigned to apple-qa",
+        "Director verified green"
+      ]
     },
     {
       "id": "APA-011",

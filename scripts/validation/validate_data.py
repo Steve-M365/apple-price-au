@@ -26,9 +26,8 @@ import json
 import sys
 import traceback
 from collections.abc import Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import UTC, datetime
-from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Final, cast
 
@@ -45,10 +44,14 @@ from scripts.models.offer import Offer
 from scripts.models.product import Product
 from scripts.models.run import RunManifest
 from scripts.models.seller import Seller
+from scripts.validation.freshness import (
+    FreshnessConfig,
+    effective_verification,
+    load_freshness_config,
+    measure_age_hours,
+)
 
 DEFAULT_REVIEW_QUEUE_THRESHOLD: Final = 50
-PENDING_AGE_WARNING_HOURS: Final = Decimal("336")  # 14 days
-ONE_HOUR: Final = Decimal(3600)
 
 __all__ = [
     "DATASETS",
@@ -155,15 +158,6 @@ class Loaded:
     filename: str
     items: list[object]
     present: bool
-
-
-@dataclass(frozen=True, slots=True)
-class FreshnessConfig:
-    """Freshness budgets read from ``config/freshness.yml``."""
-
-    default_hours: Decimal | None = None
-    by_seller_type: dict[str, Decimal] = field(default_factory=dict)
-    by_category: dict[str, Decimal] = field(default_factory=dict)
 
 
 @dataclass(frozen=True, slots=True)
@@ -404,58 +398,6 @@ def _read_yaml(
     return cast(dict[str, object], payload)
 
 
-def _as_decimal(value: object) -> Decimal | None:
-    if isinstance(value, bool) or value is None:
-        return None
-    if isinstance(value, Decimal):
-        return value
-    if isinstance(value, (int, float, str)):
-        try:
-            return Decimal(str(value))
-        except InvalidOperation:
-            return None
-    if isinstance(value, dict):
-        mapping = cast(dict[str, object], value)
-        for key in ("max_age_hours", "hours", "value", "threshold"):
-            if key in mapping:
-                return _as_decimal(mapping[key])
-    return None
-
-
-def _as_decimal_map(value: object) -> dict[str, Decimal]:
-    if not isinstance(value, dict):
-        return {}
-    mapping = cast(dict[object, object], value)
-    converted: dict[str, Decimal] = {}
-    for key, raw in mapping.items():
-        parsed = _as_decimal(raw)
-        if parsed is not None:
-            converted[str(key)] = parsed
-    return converted
-
-
-def _load_freshness_config(root: Path, warnings: list[Issue]) -> FreshnessConfig:
-    payload = _read_yaml(root / "config" / "freshness.yml", "config/freshness.yml", warnings)
-    if payload is None:
-        return FreshnessConfig()
-
-    default_hours = _as_decimal(payload.get("default_max_age_hours"))
-    if default_hours is None:
-        defaults = payload.get("defaults")
-        if isinstance(defaults, dict):
-            default_hours = _as_decimal(cast(dict[str, object], defaults).get("max_age_hours"))
-    if default_hours is None:
-        default_hours = _as_decimal(payload.get("max_age_hours"))
-
-    by_seller_type = _as_decimal_map(payload.get("by_seller_type") or payload.get("seller_type"))
-    by_category = _as_decimal_map(payload.get("by_category") or payload.get("category"))
-    return FreshnessConfig(
-        default_hours=default_hours,
-        by_seller_type=by_seller_type,
-        by_category=by_category,
-    )
-
-
 def _load_validation_config(root: Path, warnings: list[Issue]) -> ValidationConfig:
     payload = _read_yaml(root / "config" / "validation.yml", "config/validation.yml", warnings)
     if payload is None:
@@ -486,24 +428,41 @@ def _check_freshness(
     now: datetime,
     warnings: list[Issue],
 ) -> bool:
-    threshold = config.default_hours
-    if seller_type is not None and seller_type in config.by_seller_type:
-        threshold = config.by_seller_type[seller_type]
-    elif category is not None and category in config.by_category:
-        threshold = config.by_category[category]
-    if threshold is None:
-        threshold = Decimal(record.freshness_max_age_hours)
+    """Apply the shared freshness policy and report a stale or skewed capture.
 
-    age_hours = Decimal(str((now - record.captured_at).total_seconds())) / ONE_HOUR
-    if age_hours <= threshold:
+    Returns true when the record is stale, so callers can count it. The
+    arithmetic and the threshold precedence live in
+    :mod:`scripts.validation.freshness`; this function only turns the verdict
+    into a validation issue.
+    """
+    verdict = effective_verification(
+        record,
+        seller_type=seller_type,
+        category=category,
+        config=config,
+        now=now,
+    )
+    field_name = f"{filename}[{index}].captured_at"
+
+    if verdict.clock_skew:
+        warnings.append(
+            Issue(
+                "future_captured_at",
+                filename,
+                field_name,
+                "captured_at is in the future; age clamped to 0 and the price is not treated as stale",
+            )
+        )
+
+    if not verdict.stale:
         return False
+
     warnings.append(
         Issue(
             "stale_offer",
             filename,
-            f"{filename}[{index}].captured_at",
-            f"captured {age_hours:.1f} h ago, beyond the {threshold} h freshness budget; "
-            "render as indicative",
+            field_name,
+            f"{verdict.reason}; render as indicative",
         )
     )
     return True
@@ -518,6 +477,7 @@ def _check_review_queue(
     candidates: Sequence[tuple[int, MatchCandidate]],
     filename: str,
     config: ValidationConfig,
+    freshness: FreshnessConfig,
     now: datetime,
     warnings: list[Issue],
 ) -> None:
@@ -531,13 +491,16 @@ def _check_review_queue(
                 f"{config.review_queue_warn_threshold} threshold",
             )
         )
+
+    threshold = freshness.review_queue_max_age_hours
     stale: list[tuple[int, MatchCandidate]] = []
-    for index, candidate in candidates:
-        if candidate.status is not MatchStatus.PENDING:
-            continue
-        age = Decimal(str((now - candidate.captured_at).total_seconds())) / ONE_HOUR
-        if age > PENDING_AGE_WARNING_HOURS:
-            stale.append((index, candidate))
+    if threshold > 0:
+        for index, candidate in candidates:
+            if candidate.status is not MatchStatus.PENDING:
+                continue
+            age_hours, _clock_skew = measure_age_hours(candidate.captured_at, now)
+            if age_hours > threshold:
+                stale.append((index, candidate))
     if stale:
         index, oldest = stale[0]
         warnings.append(
@@ -545,8 +508,8 @@ def _check_review_queue(
                 "review_queue_stale",
                 filename,
                 f"{filename}[{index}].status",
-                f"{len(stale)} pending candidates are older than "
-                f"{PENDING_AGE_WARNING_HOURS / Decimal(24)} days; oldest is {oldest.candidate_id!r}",
+                f"{len(stale)} pending candidates are older than the "
+                f"{threshold} h review budget; oldest is {oldest.candidate_id!r}",
             )
         )
 
@@ -559,7 +522,11 @@ def run_validation(data_dir: Path, *, now: datetime | None = None) -> Report:
     hard: list[Issue] = []
     warnings: list[Issue] = []
     registries: dict[str, dict[str, str]] = {}
-    freshness = _load_freshness_config(root, warnings)
+    freshness, freshness_problems = load_freshness_config(root / "config" / "freshness.yml")
+    for problem in freshness_problems:
+        warnings.append(
+            Issue("bad_config", "config/freshness.yml", "config/freshness.yml", problem)
+        )
     validation_config = _load_validation_config(root, warnings)
 
     loaded: dict[str, Loaded] = {
@@ -767,7 +734,12 @@ def run_validation(data_dir: Path, *, now: datetime | None = None) -> Report:
         stale_count += int(stale)
 
     _check_review_queue(
-        candidates, loaded["candidates"].filename, validation_config, generated_at, warnings
+        candidates,
+        loaded["candidates"].filename,
+        validation_config,
+        freshness,
+        generated_at,
+        warnings,
     )
 
     # Run manifests should exist for every offer's run.

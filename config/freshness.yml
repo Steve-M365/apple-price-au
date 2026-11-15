@@ -1,0 +1,40 @@
+# Freshness policy for every captured price.
+#
+# Read by scripts/validation/freshness.py and applied by
+# scripts/validation/validate_data.py. A price older than its budget is
+# published as "indicative", never as current. Hours are durations; 0 means
+# "no expiry" for classes that have no live public price to go stale.
+#
+# Precedence, highest first: by_category, then by_seller_type, then
+# default_max_age_hours, then the offer's own freshness_max_age_hours.
+
+# Apple moves prices on its own schedule (product refreshes, currency and GST
+# changes), not on a retailer sale cycle, so its pages stay representative for
+# two days without re-capture.
+default_max_age_hours: 36
+
+by_seller_type:
+  # Apple's own store changes price only when Apple changes it.
+  apple_direct: 48
+  # National chains run short promotions, but a published price is usually
+  # good for a day and a half.
+  national_reseller: 36
+  # Specialist Apple resellers hold list prices longer than the big chains.
+  specialist_reseller: 48
+  # Third-party sellers are volatile: stock and price can move within hours.
+  online_marketplace: 24
+  # Gift-card promotions are date-bounded, so a day is the useful lifetime.
+  gift_card_seller: 24
+  # Quote-only routes publish no price that can go stale; never auto-expire.
+  business_reseller: 0
+  # Education pricing is annual and eligibility-bound, not a sale cycle.
+  education_reseller: 0
+
+by_category:
+  # Accessories and AppleCare move rarely; they outlive a hardware price.
+  accessory: 72
+  applecare: 72
+
+# A pending match older than a day is losing value: the listing it refers to
+# has probably changed. Older pending candidates raise a review-queue warning.
+review_queue_max_age_hours: 24

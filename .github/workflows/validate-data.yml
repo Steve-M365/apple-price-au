@@ -1,0 +1,161 @@
+name: validate-data
+
+# The data gate. Every dataset, model or schema change runs the full Python
+# suite and the validation CLI. A hard validation failure fails this job, and
+# the deploy workflow (when it lands) will consume it via ``needs:``.
+#
+# Deliberately no secrets: this workflow reads the repository and nothing else.
+
+on:
+  push:
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "config/**"
+      - "tests/**"
+      - ".github/workflows/validate-data.yml"
+  pull_request:
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "config/**"
+      - "tests/**"
+      - ".github/workflows/validate-data.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-data-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Datasets, models and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Sync dependencies
+        run: uv sync --locked
+
+      - name: Install actionlint
+        # The workflow contract tests assert against real workflow files, so the
+        # linter has to be present in CI rather than silently skipped.
+        run: |
+          set -euo pipefail
+          version=1.7.7
+          curl -fsSL -o actionlint.tar.gz \
+            "https://github.com/rhysd/actionlint/releases/download/v${version}/actionlint_${version}_linux_amd64.tar.gz"
+          tar -xzf actionlint.tar.gz actionlint
+          sudo install -m 0755 actionlint /usr/local/bin/actionlint
+          actionlint -version
+
+      - name: Lint workflows
+        run: actionlint .github/workflows/*.yml
+
+      - name: Lint
+        run: uv run ruff check scripts tests
+
+      - name: Check formatting
+        run: uv run ruff format --check scripts tests
+
+      - name: Type-check the models and validation CLI
+        run: uv run mypy --strict scripts/models scripts/validation
+
+      - name: Test with coverage
+        run: |
+          uv run pytest -q \
+            --cov=scripts \
+            --cov-report=term-missing \
+            --cov-report=xml:coverage.xml \
+            --cov-fail-under=85
+
+      - name: Validate datasets
+        id: validate
+        # NOTE: run WITHOUT --strict while config/validation.yml has
+        # require_adapter_modules: false, otherwise the pre-adapter warnings
+        # turn the gate red by default. APA-030 flips this workflow to
+        # `--strict` in the same commit that lands the adapter framework, so no
+        # adapter can ship behind a green gate without existing.
+        run: |
+          set -euo pipefail
+          status=0
+          uv run python -m scripts.validation.validate_data \
+            --json > validation-report.json || status=$?
+          uv run python - "${status}" <<'PY'
+          import json
+          import os
+          import sys
+
+          status = int(sys.argv[1])
+          summary_path = os.environ["GITHUB_STEP_SUMMARY"]
+
+          try:
+              with open("validation-report.json", encoding="utf-8") as handle:
+                  report = json.load(handle)
+          except (OSError, json.JSONDecodeError) as exc:
+              with open(summary_path, "a", encoding="utf-8") as summary:
+                  summary.write("## Orchard data validation\n\n")
+                  summary.write(f"**Result:** FAIL — report unavailable ({exc})\n")
+              print(f"validation report unavailable: {exc}", file=sys.stderr)
+              sys.exit(status or 2)
+
+          stats = report.get("stats", {})
+          hard = report.get("hard", [])
+          warnings = report.get("warnings", [])
+          verdict = "PASS" if report.get("ok") and status == 0 and not hard else "FAIL"
+
+          rows = [
+              ("Products", stats.get("products", 0)),
+              ("Sellers", stats.get("sellers", 0)),
+              ("Offers", stats.get("offers", 0)),
+              ("Hard failures", len(hard)),
+              ("Warnings", len(warnings)),
+          ]
+          lines = [
+              "## Orchard data validation",
+              "",
+              "| Check | Count |",
+              "| --- | ---: |",
+          ]
+          lines.extend(f"| {name} | {value} |" for name, value in rows)
+          lines.extend(["", f"**Result:** {verdict}"])
+          with open(summary_path, "a", encoding="utf-8") as summary:
+              summary.write("\n".join(lines) + "\n")
+
+          for issue in hard:
+              print(
+                  f"HARD {issue.get('file', '?')}: {issue.get('message', '?')} "
+                  f"[{issue.get('code', '?')}]",
+                  file=sys.stderr,
+              )
+          for issue in warnings:
+              print(
+                  f"WARN {issue.get('file', '?')}: {issue.get('message', '?')} "
+                  f"[{issue.get('code', '?')}]"
+              )
+          print(f"stats: {json.dumps(stats, sort_keys=True)}")
+          print(f"RESULT: {verdict}")
+          sys.exit(status)
+          PY
+
+      - name: Upload the validation report
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: validation-report
+          path: validation-report.json
+          if-no-files-found: warn
+          retention-days: 14
