@@ -86,6 +86,16 @@ These are not style preferences. Violating one is worse than stopping.
 9. **Australian English** in all user-facing copy and docs: colour, catalogue,
    normalise, behaviour, organisation, prioritise, licence (noun).
 
+## Dependency policy
+
+`npm audit` is not a build gate. The site is fully static: it renders committed
+JSON, accepts no user input and runs no server, so an advisory inside Astro's
+build-time tree is a builder-machine exposure, not runtime attack surface.
+Advisories are reviewed, recorded on the board with a reason, and acted on when
+they gain a runtime path. Major-version upgrades are scheduled work, never a
+knee-jerk reaction to an audit line. Current position: Astro 5.18.2 retained
+deliberately (APA-054).
+
 ## Working a card
 
 1. `python3 .kanban/kanban.py show <ID>` — the acceptance criteria are the

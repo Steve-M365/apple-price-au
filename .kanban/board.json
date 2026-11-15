@@ -1,6 +1,6 @@
 {
   "project": "Orchard (apple-price-au)",
-  "updated": "2026-11-15T10:40:54Z",
+  "updated": "2026-11-15T10:42:30Z",
   "cards": [
     {
       "id": "APA-001",
@@ -1189,6 +1189,29 @@
       "created": "2026-11-15T10:16:05Z",
       "updated": "2026-11-15T10:16:05Z",
       "notes": []
+    },
+    {
+      "id": "APA-054",
+      "title": "Astro advisories on 5.18.2: reviewed, accepted, no upgrade",
+      "type": "chore",
+      "priority": "P2",
+      "status": "done",
+      "owner": "apple-qa",
+      "labels": [
+        "security",
+        "dependencies"
+      ],
+      "description": "npm audit reports 5 advisories (1 critical: astro; 3 high: sharp, zod, zod-to-ts; 1 low: esbuild). Every one is inside Astro's build-time dependency tree. The only fix npm offers is astro@7.4.12, a major upgrade. Decision (2026-11-15, user): do not upgrade. Rationale: the site is fully static, renders only committed JSON, accepts no user input and runs no server, so these are build-machine exposures, not runtime attack surface; the critical advisory is an Astro advisory with no reachable path in this configuration; a major upgrade during M1 would trade a known, bounded, non-runtime risk for an unquantified build break.",
+      "acceptance": [
+        "Decision recorded with date and rationale on the board",
+        "Revisit trigger documented: review again before the M5 public launch, or immediately if a non-build-time advisory appears, or if any advisory gains a runtime path",
+        "No dependency change made by this card"
+      ],
+      "created": "2026-11-15T10:42:19Z",
+      "updated": "2026-11-15T10:42:30Z",
+      "notes": [
+        "Accepted by the user on 2026-11-15: do not upgrade. Rationale and revisit trigger are in the description; no dependency changed."
+      ]
     }
   ]
 }
