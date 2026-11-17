@@ -3,13 +3,14 @@
   "url": "https://www.apple.com/au/shop/buy-airpods/airpods-pro-3",
   "final_url": "https://www.apple.com/au/shop/buy-airpods/airpods-pro-3",
   "http_status": 200,
-  "fetched_at": "2026-11-15T10:24:22Z",
-  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "fetched_at": "2026-11-15T23:40:35.680108Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
   "extraction_method": "jsonld",
   "price_rendered": "A$429.00",
   "price_numeric": 429.0,
   "currency": "AUD",
   "page_sku": "MFHP4X/A",
-  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"AirPods Pro 3\" … \":\"https://www.apple.com/au/shop/buy-airpods/airpods-pro-3\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":429.00,\"sku\":\"MFHP4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-3-hero-select-202509?wid=976&hei=916&fmt=jpeg&qlt=90&.v=1758077264484\",\"description\":\"AirPods Pro 3 with heart rate sensing during workouts and the world’s best in-ear Active Noise Cancellation (ANC). Free shipping and engraving at apple.com/au.\"}",
-  "note": "price taken from the Product JSON-LD Offer.price on the product page; rendered string 'A$429.00' also found in the HTML at offset 124740"
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"AirPods Pro 3\",\"url\":\"https://www.apple.com/au/shop/buy-airpods/airpods-pro-3\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-airpods/airpods-pro-3\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":429.00,\"sku\":\"MFHP4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-3-hero-select-202509?wid=976&hei=916&fmt=jpeg&qlt=90&.v=1758077264484\",\"description\":\"AirPods Pro 3 with heart rate sensing during workouts and the world’s best in-ear Active Noise Cancellation (ANC). Free shipping and engraving at apple.com/au.\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
 }

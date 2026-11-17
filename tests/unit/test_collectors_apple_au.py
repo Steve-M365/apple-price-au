@@ -199,11 +199,14 @@ def tiny_catalogue(tmp_path: Path) -> Path:
 # --------------------------------------------------------------------------- #
 
 
-def test_one_live_fixture_per_catalogue_product() -> None:
+def test_every_committed_fixture_names_a_catalogue_product() -> None:
     catalogue = _catalogue()
     saved = {_load(path)["product_id"] for path in _real_fixtures()}
-    assert len(catalogue) == 20
-    assert saved == set(catalogue)
+    assert saved, "no committed live fixtures"
+    # The fixtures were captured for the original seed catalogue. Every one must
+    # still name a live product; the generated catalogue has since grown past
+    # the seed, so the fixture set is a subset rather than the whole catalogue.
+    assert saved <= set(catalogue)
 
 
 def test_fixtures_are_trimmed_captures_not_pages() -> None:
@@ -586,11 +589,17 @@ def test_dry_run_fetches_nothing(capsys: pytest.CaptureFixture[str]) -> None:
     output = capsys.readouterr().out
     assert "dry run" in output
     assert "nothing fetched" in output
-    assert "apple-macbook-air-13-inch-m5-16gb-512gb-midnight" in output
+    # Which two products a --limit run picks depends on catalogue order, so
+    # assert the shape: two catalogued products, no duplicates, nothing fetched.
+    catalogued = set(_catalogue())
+    shown = [line for line in output.splitlines() if line.startswith("  apple-")]
+    assert len(shown) == 2
+    assert len({line.split()[0] for line in shown}) == 2
+    assert all(line.split()[0] in catalogued for line in shown)
 
 
 def test_policy_urls_cover_the_catalogue(tmp_path: Path) -> None:
     adapter = _adapter(tmp_path)
     urls = adapter.policy_urls()
-    assert len(urls) == 20
+    assert len(urls) == len(load_products())
     assert all("apple.com/au/shop/" in url for url in urls)

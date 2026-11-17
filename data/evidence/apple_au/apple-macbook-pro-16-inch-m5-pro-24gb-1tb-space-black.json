@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-macbook-pro-16-inch-m5-pro-24gb-1tb-space-black",
+  "url": "https://www.apple.com/au/shop/buy-mac/macbook-pro/16-inch-space-black-standard-display-apple-m5-pro-chip-18-core-cpu-20-core-gpu-24gb-memory-1tb-storage",
+  "final_url": "https://www.apple.com/au/shop/buy-mac/macbook-pro/16-inch-space-black-standard-display-apple-m5-pro-chip-18-core-cpu-20-core-gpu-24gb-memory-1tb-storage",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:39:53.066210Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$4,799.00",
+  "price_numeric": 4799.0,
+  "currency": "AUD",
+  "page_sku": "MGEA4X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"MacBook Pro, 16-inch, M5 Pro Chip, 18-core CPU, 20-core GPU, Space Black, Standard display, 24GB memory, 1TB storage\",\"url\":\"https://www.apple.com/au/shop/buy-mac/macbook-pro/16-inch-space-black-standard-display-apple-m5-pro-chip-18-core-cpu-20-core-gpu-24gb-memory-1tb-storage\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-mac/macbook-pro/16-inch-space-black-standard-display-apple-m5-pro-chip-18-core-cpu-20-core-gpu-24gb-memory-1tb-storage\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":4799.00,\"sku\":\"MGEA4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mac-macbook-pro-specs-select-202610-16inch-spaceblack?wid=5120&hei=3280&fmt=jpeg&qlt=90&.v=1791427324577\",\"description\":\"16-inch MacBook Pro with the M5 Pro chip. Built for AI. All-day battery life. Buy now with free delivery at apple.com.\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}

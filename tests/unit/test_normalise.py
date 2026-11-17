@@ -1,7 +1,7 @@
 """Tests for :mod:`scripts.normalise` — APA-013.
 
-The fixtures are the committed catalogue itself: every one of the 20 real
-products in ``data/products.json`` has a live-captured Apple AU JSON-LD title in
+The fixtures are the committed catalogue itself: every real product in
+``data/products.json`` has a live-captured Apple AU JSON-LD title in
 ``data/evidence/apple_au/<product_id>.json``. Feeding that raw title back
 through the normaliser must reproduce the exact ``product_id``, canonical
 ``name`` and configuration already in the catalogue, otherwise the collectors
@@ -98,7 +98,7 @@ def test_evidence_coverage(
     assert not missing, (
         f"covered {covered}/{len(catalogue)}; no captured title for: {', '.join(missing)}"
     )
-    assert covered == len(catalogue) == 20
+    assert covered == len(catalogue)
 
 
 def test_real_page_title_reproduces_catalogue(
@@ -109,7 +109,7 @@ def test_real_page_title_reproduces_catalogue(
     """Every real Apple page title must round-trip to its committed identity.
 
     A product with no captured title would be counted as uncovered rather than
-    silently passing; :func:`test_evidence_coverage` asserts the count is 20/20.
+    silently passing; :func:`test_evidence_coverage` asserts every row is covered.
     """
     checked = 0
     failures: list[str] = []

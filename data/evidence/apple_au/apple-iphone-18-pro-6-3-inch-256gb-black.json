@@ -3,13 +3,14 @@
   "url": "https://www.apple.com/au/shop/buy-iphone/iphone-18-pro/6.3-inch-display-256gb-black",
   "final_url": "https://www.apple.com/au/shop/buy-iphone/iphone-18-pro/6.3-inch-display-256gb-black",
   "http_status": 200,
-  "fetched_at": "2026-11-15T10:24:22Z",
-  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "fetched_at": "2026-11-16T02:36:13.848489Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
   "extraction_method": "jsonld",
   "price_rendered": "A$2,099.00",
   "price_numeric": 2099.0,
   "currency": "AUD",
   "page_sku": "MJRP4X/A",
-  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"iPhone 18 Pro 256GB Black\" … iphone-18-pro/6.3-inch-display-256gb-black\",\"color\":\"Black\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":2099.00,\"sku\":\"MJRP4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-202609-6-3inch-black?wid=5120&hei=2880&fmt=jpeg&qlt=90&.v=1787003534949\",\"description\":\"Get the new iPhone 18 Pro or iPhone 18 Pro Max from Apple. Shop online with free shipping.\"}",
-  "note": "price taken from the Product JSON-LD Offer.price on the product page; rendered string 'A$2,099.00' also found in the HTML at offset 161700"
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"iPhone 18 Pro 256GB Black\",\"url\":\"https://www.apple.com/au/shop/buy-iphone/iphone-18-pro/6.3-inch-display-256gb-black\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-iphone/iphone-18-pro/6.3-inch-display-256gb-black\",\"color\":\"Black\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":2099.00,\"sku\":\"MJRP4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-202609-6-3inch-black?wid=5120&hei=2880&fmt=jpeg&qlt=90&.v=1787003534949\",\"description\":\"Get the new iPhone 18 Pro or iPhone 18 Pro Max from Apple. Shop online with free shipping.\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
 }

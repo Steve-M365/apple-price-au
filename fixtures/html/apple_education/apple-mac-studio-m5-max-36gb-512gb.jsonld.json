@@ -1,0 +1,43 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Mac Studio, M5 Max Chip, 18-core CPU, 32-core GPU, 36GB memory, 512GB storage",
+  "url": "https://www.apple.com/au-edu/shop/buy-mac/mac-studio/m5-max-chip-18-core-cpu-32-core-gpu-36gb-memory-512gb-storage",
+  "mainEntityOfPage": "https://www.apple.com/au-edu/shop/buy-mac/mac-studio/m5-max-chip-18-core-cpu-32-core-gpu-36gb-memory-512gb-storage",
+  "offers": [
+    {
+      "@type": "Offer",
+      "priceCurrency": "AUD",
+      "price": 3949.0,
+      "sku": "MHL64X/A",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": "AUD"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AU",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 14,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      }
+    }
+  ],
+  "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mac-studio-chip-unselect-202608-gallery-1?wid=5120&hei=3280&fmt=jpeg&qlt=90&.v=1786042910172",
+  "description": "Buy the Mac Studio desktop with the M5 Max chip, 36GB memory and 512GB storage. Get free shipping when you order at apple.com.",
+  "audience": [
+    {
+      "@type": "EducationalAudience",
+      "educationalRole": "student"
+    },
+    {
+      "@type": "EducationalAudience",
+      "educationalRole": "teacher"
+    }
+  ]
+}

@@ -34,6 +34,72 @@
       "generation": null
     },
     {
+      "family": "macbook_pro_proled_xdr",
+      "category": "mac",
+      "match": "macbook\\s+pro\\s+with\\s+proled\\s+xdr\\s+display",
+      "model": "MacBook Pro with PROLED XDR Display",
+      "slug": "macbook-pro-proled-xdr",
+      "name": "{model} {screen_size} {chip_short} {memory} {storage} {colour}",
+      "emit": [
+        "screen_size",
+        "chip",
+        "memory",
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "memory",
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "macbook_neo",
+      "category": "mac",
+      "match": "macbook\\s+neo",
+      "model": "MacBook Neo",
+      "slug": "macbook-neo",
+      "name": "{model} {colour} {storage}",
+      "emit": [
+        "colour",
+        "storage"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "mac_studio",
+      "category": "mac",
+      "match": "mac\\s+studio",
+      "model": "Mac Studio",
+      "slug": "mac-studio",
+      "name": "{model} {chip_short} {memory} {storage}",
+      "emit": [
+        "chip",
+        "memory",
+        "storage"
+      ],
+      "capacities": [
+        "memory",
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
       "family": "macbook_air",
       "category": "mac",
       "match": "macbook\\s+air",
@@ -172,6 +238,26 @@
       "generation": null
     },
     {
+      "family": "ipad_mini",
+      "category": "ipad",
+      "match": "ipad\\s+mini",
+      "model": "iPad mini",
+      "slug": "ipad-mini",
+      "name": "{model} {storage} {colour} ({connectivity})",
+      "emit": [
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "Wi-Fi"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
       "family": "ipad",
       "category": "ipad",
       "match": "ipad",
@@ -218,9 +304,69 @@
       "generation": null
     },
     {
+      "family": "iphone_17e",
+      "category": "iphone",
+      "match": "iphone\\s+17e",
+      "model": "iPhone 17e",
+      "slug": "iphone-17e",
+      "name": "{model} {storage} {colour}",
+      "emit": [
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "5G"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "iphone_16",
+      "category": "iphone",
+      "match": "iphone\\s+16",
+      "model": "iPhone 16",
+      "slug": "iphone-16",
+      "name": "{model} {storage} {colour}",
+      "emit": [
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "5G"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
+      "family": "iphone_duo",
+      "category": "iphone",
+      "match": "iphone\\s+duo",
+      "model": "iPhone Duo",
+      "slug": "iphone-duo",
+      "name": "{model} {storage} {colour}",
+      "emit": [
+        "storage",
+        "colour"
+      ],
+      "capacities": [
+        "storage"
+      ],
+      "defaults": {
+        "connectivity": "5G"
+      },
+      "fixed": {},
+      "generation": null
+    },
+    {
       "family": "iphone_17",
       "category": "iphone",
-      "match": "iphone\\s+17",
+      "match": "iphone\\s+17(?!e)",
       "model": "iPhone 17",
       "slug": "iphone-17",
       "name": "{model} {screen_size} {storage} {colour}",
@@ -292,6 +438,54 @@
       "match": "apple\\s+watch\\s+se\\s+(?P<number>\\d{1,2})",
       "model": "Apple Watch SE {number}",
       "slug": "watch-se-{number}",
+      "name": "{model} {size} {colour} {case_material} {connectivity} ({band})",
+      "emit": [
+        "size",
+        "colour",
+        "case_material",
+        "connectivity"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": null,
+      "required": [
+        "size",
+        "colour",
+        "case_material",
+        "connectivity",
+        "band"
+      ]
+    },
+    {
+      "family": "apple_watch_ultra",
+      "category": "watch",
+      "match": "apple\\s+watch\\s+ultra\\s+(?P<number>\\d{1,2})",
+      "model": "Apple Watch Ultra {number}",
+      "slug": "watch-ultra-{number}",
+      "name": "{model} {size} {colour} {connectivity} ({band})",
+      "emit": [
+        "size",
+        "colour",
+        "connectivity"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": null,
+      "required": [
+        "size",
+        "colour",
+        "connectivity",
+        "band"
+      ]
+    },
+    {
+      "family": "apple_watch_hermes",
+      "category": "watch",
+      "match": "apple\\s+watch\\s+herm[eè]s\\s+series\\s+(?P<number>\\d{1,2})",
+      "model": "Apple Watch Hermès Series {number}",
+      "slug": "watch-hermes-series-{number}",
       "name": "{model} {size} {colour} {case_material} {connectivity} ({band})",
       "emit": [
         "size",
@@ -387,6 +581,21 @@
       "generation": "{number}"
     },
     {
+      "family": "homepod",
+      "category": "homepod",
+      "match": "homepod(?!\\s+mini)",
+      "model": "HomePod",
+      "slug": "homepod",
+      "name": "{model} {colour}",
+      "emit": [
+        "colour"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {},
+      "generation": null
+    },
+    {
       "family": "apple_pencil",
       "category": "accessory",
       "match": "apple\\s+pencil\\s+pro",
@@ -398,6 +607,55 @@
       "defaults": {},
       "fixed": {
         "type": "stylus"
+      },
+      "generation": null
+    },
+    {
+      "family": "magic_mouse",
+      "category": "accessory",
+      "match": "magic\\s+mouse",
+      "model": "Magic Mouse",
+      "slug": "magic-mouse",
+      "name": "{model} {colour}",
+      "emit": [
+        "colour"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {
+        "connection": "USB-C"
+      },
+      "generation": null
+    },
+    {
+      "family": "magic_trackpad",
+      "category": "accessory",
+      "match": "magic\\s+trackpad",
+      "model": "Magic Trackpad",
+      "slug": "magic-trackpad",
+      "name": "{model} {colour}",
+      "emit": [
+        "colour"
+      ],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {
+        "connection": "USB-C"
+      },
+      "generation": null
+    },
+    {
+      "family": "siri_remote",
+      "category": "accessory",
+      "match": "siri\\s+remote",
+      "model": "Siri Remote",
+      "slug": "siri-remote",
+      "name": "{model}",
+      "emit": [],
+      "capacities": [],
+      "defaults": {},
+      "fixed": {
+        "type": "remote"
       },
       "generation": null
     }
@@ -577,7 +835,8 @@
     {
       "canonical": "Natural Titanium",
       "aliases": [
-        "natural titanium"
+        "natural titanium",
+        "natural"
       ]
     },
     {
@@ -596,6 +855,42 @@
       "canonical": "White Titanium",
       "aliases": [
         "white titanium"
+      ]
+    },
+    {
+      "canonical": "Star White",
+      "aliases": [
+        "star white"
+      ]
+    },
+    {
+      "canonical": "Night Sky",
+      "aliases": [
+        "night sky"
+      ]
+    },
+    {
+      "canonical": "Blush",
+      "aliases": [
+        "blush"
+      ]
+    },
+    {
+      "canonical": "Citrus",
+      "aliases": [
+        "citrus"
+      ]
+    },
+    {
+      "canonical": "Radiant Gold",
+      "aliases": [
+        "radiant gold"
+      ]
+    },
+    {
+      "canonical": "Dark Bronze",
+      "aliases": [
+        "dark bronze"
       ]
     }
   ],
@@ -670,6 +965,7 @@
     "case",
     "cellular",
     "chip",
+    "c",
     "color",
     "colour",
     "core",
@@ -701,6 +997,7 @@
     "mini",
     "mm",
     "mount",
+    "multi",
     "nano",
     "nd",
     "new",
@@ -721,15 +1018,18 @@
     "steel",
     "storage",
     "st",
+    "surface",
     "tb",
     "texture",
     "the",
     "th",
     "titanium",
+    "touch",
     "trail",
     "uk",
     "unified",
     "us",
+    "usb",
     "vesa",
     "wi",
     "wifi",

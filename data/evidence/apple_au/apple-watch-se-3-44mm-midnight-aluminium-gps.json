@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-watch-se-3-44mm-midnight-aluminium-gps",
+  "url": "https://www.apple.com/au/shop/buy-watch/apple-watch-se/44-mm-gps-midnight-aluminium-black-sport-band-se",
+  "final_url": "https://www.apple.com/au/shop/buy-watch/apple-watch-se/44-mm-gps-midnight-aluminium-black-sport-band-se",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:40:19.616552Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$449.00",
+  "price_numeric": 449.0,
+  "currency": "AUD",
+  "page_sku": "Z0YQ+MEP34X/A+MJVV4FE/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Apple Watch SE 3 GPS, 44-mm Midnight Aluminium Case with Black Sport Band\",\"url\":\"https://www.apple.com/au/shop/buy-watch/apple-watch-se/44-mm-gps-midnight-aluminium-black-sport-band-se\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-watch/apple-watch-se/44-mm-gps-midnight-aluminium-black-sport-band-se\",\"color\":\"Midnight/Black\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":449.00,\"sku\":\"Z0YQ+MEP34X/A+MJVV4FE/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MJVV4ref_SR_SE_VW_34FR+watch-case-44-aluminum-midnight-nc-se3_VW_34FR+watch-face-44-aluminum-midnight-se3_VW_34FR_GEO_AU?wid=2000&hei=2000&fmt=png-alpha&.v=ZDBRUnMvMXVnUnNMN3ZYRmZIcWV5cnFPOHloWjNpK0lhdm45WTdiR1R1VlNpbmxWRXZGZnY4LzZZMkcwekpTb1VxdVkrbFpOQ3hIcTVRcDJCM1krUm5qblBjd2JiYm5raG5NaEt4aVI1UUlsbzEzVXl1Vmk5NFIvT0hFSlVVNHdpS2p6UE9iQ1Z2bWhzRFBHUjV2R2JLUXhpaTdZNjB1dUozeW84VlV2S280YTZwMFR4cjNYVDNVOWRxS2R4UXJmZkcyeXZpNm5WRktvRklQbkdOeGplcDd1dmFCVEV6UHI2UFk3eGlBekVBVQ\",\"description\":\"Shop Apple Watch SE 3 Midnight black aluminium case in 40-mm and 44-mm sizes with built-in GPS and Crash Detection. Buy now at apple.com/au.\",\"material\":\"Aluminium\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}

@@ -1,6 +1,6 @@
 {
   "project": "Orchard (apple-price-au)",
-  "updated": "2026-11-15T20:56:42Z",
+  "updated": "2026-11-16T22:58:39Z",
   "cards": [
     {
       "id": "APA-001",
@@ -336,7 +336,7 @@
       "title": "Full Apple AU catalogue generation",
       "type": "feature",
       "priority": "P1",
-      "status": "backlog",
+      "status": "done",
       "owner": "apple-data",
       "labels": [
         "m2",
@@ -350,8 +350,10 @@
         "Catalogue size and category counts reported in the run summary"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-16T22:58:39Z",
+      "notes": [
+        "Director audited: 45 products, 45 evidence files, all HTTP 200 and JSON-LD, zero price mismatches, 8 categories. 'MacBook Neo' looked fabricated and was verified live against Apple AU (A$1,049)."
+      ]
     },
     {
       "id": "APA-015",

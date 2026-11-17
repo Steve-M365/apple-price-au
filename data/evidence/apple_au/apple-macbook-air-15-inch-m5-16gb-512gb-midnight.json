@@ -3,13 +3,14 @@
   "url": "https://www.apple.com/au/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage",
   "final_url": "https://www.apple.com/au/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage",
   "http_status": 200,
-  "fetched_at": "2026-11-15T10:24:22Z",
-  "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "fetched_at": "2026-11-16T03:03:37.147259Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
   "extraction_method": "jsonld",
   "price_rendered": "A$2,499.00",
   "price_numeric": 2499.0,
   "currency": "AUD",
   "page_sku": "MDVH4X/A",
-  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"MacBook Air, 15-inch, M5 Chip, 10-core CPU, 10-core GPU, Midnight, 16GB memory, 512GB storage\" … -m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":2499.00,\"sku\":\"MDVH4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-specs-select-202601-15inch-midnight?wid=5120&hei=3280&fmt=jpeg&qlt=90&.v=1767641218158\",\"description\":\"15-inch MacBook Air laptop with the M5 chip. Built for AI. Lightweight, with all-day battery life. Buy now with free delivery at apple.com.\"}",
-  "note": "price taken from the Product JSON-LD Offer.price on the product page; rendered string 'A$2,499.00' also found in the HTML at offset 312051"
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"MacBook Air, 15-inch, M5 Chip, 10-core CPU, 10-core GPU, Midnight, 16GB memory, 512GB storage\",\"url\":\"https://www.apple.com/au/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-mac/macbook-air/15-inch-midnight-m5-chip-10-core-cpu-10-core-gpu-16gb-memory-512gb-storage\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":2499.00,\"sku\":\"MDVH4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-air-specs-select-202601-15inch-midnight?wid=5120&hei=3280&fmt=jpeg&qlt=90&.v=1767641218158\",\"description\":\"15-inch MacBook Air laptop with the M5 chip. Built for AI. Lightweight, with all-day battery life. Buy now with free delivery at apple.com.\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
 }

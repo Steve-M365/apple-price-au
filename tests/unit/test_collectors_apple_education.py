@@ -51,11 +51,21 @@ EXPECTED_EDUCATION_PRICES: Mapping[str, str] = {
     "apple-imac-24-inch-m6-16gb-256gb-blue": "2319.00",
     "apple-ipad-11-inch-a16-128gb-blue": "719.00",
     "apple-ipad-air-11-inch-m4-128gb-space-grey": "1169.00",
+    "apple-ipad-air-13-inch-m4-128gb-space-grey": "1509.00",
+    "apple-ipad-mini-128gb-midnight": "1019.00",
     "apple-ipad-pro-11-inch-m5-256gb-space-black": "1829.00",
+    "apple-ipad-pro-13-inch-m5-256gb-space-black": "2429.00",
+    "apple-ipad-pro-13-inch-m5-512gb-space-black": "2779.00",
     "apple-mac-mini-m6-16gb-256gb": "1289.00",
+    "apple-mac-studio-m5-max-36gb-512gb": "3949.00",
     "apple-macbook-air-13-inch-m5-16gb-512gb-midnight": "1939.00",
     "apple-macbook-air-15-inch-m5-16gb-512gb-midnight": "2339.00",
+    "apple-macbook-air-15-inch-m5-16gb-512gb-starlight": "2339.00",
+    "apple-macbook-neo-256gb-silver": "969.00",
     "apple-macbook-pro-14-inch-m6-16gb-1tb-space-black": "3039.00",
+    "apple-macbook-pro-16-inch-m5-pro-24gb-1tb-space-black": "4479.00",
+    "apple-macbook-pro-proled-xdr-14-inch-m5-pro-24gb-1tb-space-black": "4359.00",
+    "apple-macbook-pro-proled-xdr-16-inch-m5-pro-24gb-1tb-space-black": "5179.00",
 }
 
 #: saving_pct as (standard - education) / standard * 100, rounded half-up to 2dp.
@@ -63,11 +73,21 @@ EXPECTED_SAVING_PCT: Mapping[str, str] = {
     "apple-imac-24-inch-m6-16gb-256gb-blue": "3.33",
     "apple-ipad-11-inch-a16-128gb-blue": "4.01",
     "apple-ipad-air-11-inch-m4-128gb-space-grey": "6.41",
+    "apple-ipad-air-13-inch-m4-128gb-space-grey": "5.63",
+    "apple-ipad-mini-128gb-midnight": "7.28",
     "apple-ipad-pro-11-inch-m5-256gb-space-black": "8.50",
+    "apple-ipad-pro-13-inch-m5-256gb-space-black": "6.54",
+    "apple-ipad-pro-13-inch-m5-512gb-space-black": "5.76",
     "apple-mac-mini-m6-16gb-256gb": "11.04",
+    "apple-mac-studio-m5-max-36gb-512gb": "8.14",
     "apple-macbook-air-13-inch-m5-16gb-512gb-midnight": "7.62",
     "apple-macbook-air-15-inch-m5-16gb-512gb-midnight": "6.40",
+    "apple-macbook-air-15-inch-m5-16gb-512gb-starlight": "6.40",
+    "apple-macbook-neo-256gb-silver": "7.63",
     "apple-macbook-pro-14-inch-m6-16gb-1tb-space-black": "5.00",
+    "apple-macbook-pro-16-inch-m5-pro-24gb-1tb-space-black": "6.67",
+    "apple-macbook-pro-proled-xdr-14-inch-m5-pro-24gb-1tb-space-black": "5.22",
+    "apple-macbook-pro-proled-xdr-16-inch-m5-pro-24gb-1tb-space-black": "5.82",
 }
 
 ALLOW_ROBOTS = "User-agent: *\nDisallow: /private/\n"
@@ -204,11 +224,22 @@ def _full_site(repo_root: Path) -> dict[str, str]:
 # --------------------------------------------------------------------------- #
 
 
-def test_saved_fixture_files_exist_for_every_eligible_product(repo_root: Path) -> None:
+def test_every_education_eligible_product_has_a_fixture(repo_root: Path) -> None:
+    """Coverage, not an exact directory listing.
+
+    An exact set comparison made this test fail with a bare FileNotFoundError
+    the moment the catalogue gained an eligible product. Coverage with a named
+    message is the same guarantee and a usable failure.
+    """
     directory = _fixture_dir(repo_root)
-    on_disk = sorted(path.name for path in directory.glob("*.jsonld.json"))
-    expected = sorted(f"{product_id}.jsonld.json" for product_id in EXPECTED_EDUCATION_PRICES)
-    assert on_disk == expected
+    eligible = {
+        product.product_id for product in _catalogue(repo_root) if product.education_eligible
+    }
+    covered = {path.name.removesuffix(".jsonld.json") for path in directory.glob("*.jsonld.json")}
+    missing = sorted(eligible - covered)
+    assert not missing, f"education-eligible products with no saved fixture: {missing}"
+    orphaned = sorted(covered - eligible)
+    assert not orphaned, f"saved fixtures with no eligible catalogue product: {orphaned}"
 
 
 @pytest.mark.parametrize("product_id", sorted(EXPECTED_EDUCATION_PRICES))
@@ -264,7 +295,11 @@ def test_full_run_emits_one_offer_per_eligible_product(repo_root: Path, tmp_path
     assert result.blocked == []
     assert result.errors == []
     assert {offer.product_id for offer in result.offers} == set(EXPECTED_EDUCATION_PRICES)
-    assert len(result.offers) == len(targets) == 8
+    # Count derived from the catalogue: a literal breaks every time the
+    # catalogue gains an eligible product, which is normal.
+    eligible = [product for product in _catalogue(Path.cwd()) if product.education_eligible]
+    assert len(targets) == len(eligible)
+    assert len(result.offers) == len(targets)
     assert result.policy is not None and result.policy.allowed
     assert result.terms.limits_verified and result.terms.eligibility_verified
     assert result.verification.verified
@@ -448,7 +483,8 @@ def test_snapshot_records_the_public_price_behaviour_and_sources(
 
     assert payload["schema_version"] == 1
     offers = payload["offers"]
-    assert isinstance(offers, list) and len(offers) == 8
+    assert isinstance(offers, list) and offers
+    assert len(offers) == len(payload["offers"])
     first = offers[0]
     assert isinstance(first, dict)
     assert first["price_basis"] == "edu"

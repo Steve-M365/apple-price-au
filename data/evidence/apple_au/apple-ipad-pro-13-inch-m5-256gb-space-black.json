@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-ipad-pro-13-inch-m5-256gb-space-black",
+  "url": "https://www.apple.com/au/shop/buy-ipad/ipad-pro/13-inch-display-256gb-space-black-wifi-standard-glass",
+  "final_url": "https://www.apple.com/au/shop/buy-ipad/ipad-pro/13-inch-display-256gb-space-black-wifi-standard-glass",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:39:09.500803Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$2,599.00",
+  "price_numeric": 2599.0,
+  "currency": "AUD",
+  "page_sku": "MDYJ4X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"13-inch iPad Pro Wi‑Fi 256GB with standard glass — Space Black\",\"url\":\"https://www.apple.com/au/shop/buy-ipad/ipad-pro/13-inch-display-256gb-space-black-wifi-standard-glass\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-ipad/ipad-pro/13-inch-display-256gb-space-black-wifi-standard-glass\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Apple\"},\"model\":\"iPad Pro\",\"color\":\"Space Black\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":2599.00,\"sku\":\"MDYJ4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-pro-finish-select-202405-13inch-spaceblack-glossy-wifi?wid=5120&hei=2880&fmt=jpeg&qlt=90&.v=1758631565582\",\"description\":\"Buy an iPad Pro from only A$216.58 per month with Afterpay Pay Monthly. Plus, trade in to lower your monthly payments. Buy now with free shipping.\",\"additionalProperty\":[{\"@type\":\"PropertyValue\",\"propertyID\":\"storage_capacity\",\"name\":\"Storage\",\"value\":\"256GB\"},{\"@type\":\"PropertyValue\",\"propertyID\":\"size\",\"name\":\"Screen Size\",\"value\":\"13-inch\"},{\"@type\":\"PropertyValue\",\"propertyID\":\"display_type\",\"name\":\"Display Glass\",\"value\":\"Standard glass\"},{\"@type\":\"PropertyValue\",\"propertyID\":\"color\",\"name\":\"Color\",\"value\":\"Space Black\"},{\"@type\":\"PropertyValue\",\"propertyID\":\"connectivity\",\"name\":\"Connectivity\",\"value\":\"Wi-Fi\"}],\"isVariantOf\":{\"@type\":\"ProductGroup\",\"name\":\"iPad Pro\",\"productGroupID\":\"ipad-pro\",\"url\":\"https://www.apple.com/au/shop/buy-ipad/ipad-pro\"}}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}

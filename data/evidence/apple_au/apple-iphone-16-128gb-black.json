@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-iphone-16-128gb-black",
+  "url": "https://www.apple.com/au/shop/buy-iphone/iphone-16/6.1-inch-display-128gb-black",
+  "final_url": "https://www.apple.com/au/shop/buy-iphone/iphone-16/6.1-inch-display-128gb-black",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:39:11.208090Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$1,349.00",
+  "price_numeric": 1349.0,
+  "currency": "AUD",
+  "page_sku": "MYE73X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"iPhone 16 128GB Black\",\"url\":\"https://www.apple.com/au/shop/buy-iphone/iphone-16/6.1-inch-display-128gb-black\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-iphone/iphone-16/6.1-inch-display-128gb-black\",\"color\":\"Black\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":1349.00,\"sku\":\"MYE73X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-16-finish-select-202409-6-1inch-black?wid=5120&hei=2880&fmt=jpeg&qlt=90&.v=1723677130930\",\"description\":\"Get A$60 - A$1,690 off an iPhone 16 when you trade in an iPhone X or newer. 0% financing available. Buy now with free shipping.\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}

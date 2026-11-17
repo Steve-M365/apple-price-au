@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-watch-series-12-46mm-space-grey-aluminium-gps",
+  "url": "https://www.apple.com/au/shop/buy-watch/apple-watch/46-mm-gps-space-gray-aluminium-after-dark-black-nike-sport-band",
+  "final_url": "https://www.apple.com/au/shop/buy-watch/apple-watch/46-mm-gps-space-gray-aluminium-after-dark-black-nike-sport-band",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:40:06.801494Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$739.00",
+  "price_numeric": 739.0,
+  "currency": "AUD",
+  "page_sku": "Z0YQ+MJFT4X/A+MKTN4FE/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Apple Watch Series 12 GPS, 46-mm Space Grey Aluminium Case with After Dark Black Nike Sport Band\",\"url\":\"https://www.apple.com/au/shop/buy-watch/apple-watch/46-mm-gps-space-gray-aluminium-after-dark-black-nike-sport-band\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-watch/apple-watch/46-mm-gps-space-gray-aluminium-after-dark-black-nike-sport-band\",\"color\":\"Space Grey/After Dark Black\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":739.00,\"sku\":\"Z0YQ+MJFT4X/A+MKTN4FE/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MKTN4ref_VW_34FR_NCE+watch-case-46-aluminum-spacegray-nc-s12_VW_34FR+watch-face-46-nonceramic-nike-runafterdarkblack-s12_VW_34FR_GEO_AU?wid=2000&hei=2000&fmt=png-alpha&.v=ZG13Y29zS0dTNDJ5cWttMStFLzRLTzNBUDJrcVJULytKcGloTXUxMUdXQkZSSTIyZmhjNFBMeC9tYkVLMC9iNzUwTi92OXg4TkROSmxXMXN5dlZtZzlGNnlaeXQ4NGFKQTAzc0NGeHR2aWFDcWhCQTYrREU1VTk3akJUVWJuS2FDWjdPb1d4NnkxWkh4TW9JY29kTVZiZVVyMDY2bE05MW1KK0pQSmw1ZGhRcGFPcnN2alduMmgwSFlOK1VuVUVvMEVpaXBZQkFzVjVwOTVaOUhuUUloQklXSnhNVGVHRS9INE15bVZFL0FyUllQR3g2Tll2KzBHbWpHK1RqSzFsVQ\",\"description\":\"Shop Apple Watch Series 12 space grey aluminium case in 42-mm and 46-mm sizes with built-in GPS and temperature sensing. Buy now at apple.com/au.\",\"material\":\"Aluminium\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}

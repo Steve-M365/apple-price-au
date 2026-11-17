@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-ipad-mini-128gb-midnight",
+  "url": "https://www.apple.com/au/shop/buy-ipad/ipad-mini/128gb-midnight-wifi-standard-glass",
+  "final_url": "https://www.apple.com/au/shop/buy-ipad/ipad-mini/128gb-midnight-wifi-standard-glass",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:39:00.066984Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$1,099.00",
+  "price_numeric": 1099.0,
+  "currency": "AUD",
+  "page_sku": "MJ6F4X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"iPad mini Wi‑Fi 128GB with standard glass — Midnight\",\"url\":\"https://www.apple.com/au/shop/buy-ipad/ipad-mini/128gb-midnight-wifi-standard-glass\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-ipad/ipad-mini/128gb-midnight-wifi-standard-glass\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Apple\"},\"model\":\"iPad mini\",\"color\":\"Midnight\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":1099.00,\"sku\":\"MJ6F4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-mini-finish-select-202610-midnight-wifi?wid=5120&hei=2880&fmt=jpeg&qlt=90&.v=1792603138244\",\"description\":\"The all-new iPad mini, powered by the A20 Pro chip. Get free delivery or in-store pick-up. Buy now at apple.com/au.\",\"additionalProperty\":[{\"@type\":\"PropertyValue\",\"propertyID\":\"storage_capacity\",\"name\":\"Storage\",\"value\":\"128GB\"},{\"@type\":\"PropertyValue\",\"propertyID\":\"display_type\",\"name\":\"Display Glass\",\"value\":\"Standard glass\"},{\"@type\":\"PropertyValue\",\"propertyID\":\"color\",\"name\":\"Color\",\"value\":\"Midnight\"},{\"@type\":\"PropertyValue\",\"propertyID\":\"connectivity\",\"name\":\"Connectivity\",\"value\":\"Wi-Fi\"}],\"isVariantOf\":{\"@type\":\"ProductGroup\",\"name\":\"iPad mini\",\"productGroupID\":\"ipad-mini\",\"url\":\"https://www.apple.com/au/shop/buy-ipad/ipad-mini\"}}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}

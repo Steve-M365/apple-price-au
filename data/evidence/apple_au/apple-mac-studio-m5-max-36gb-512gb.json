@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-mac-studio-m5-max-36gb-512gb",
+  "url": "https://www.apple.com/au/shop/buy-mac/mac-studio/m5-max-chip-18-core-cpu-32-core-gpu-36gb-memory-512gb-storage",
+  "final_url": "https://www.apple.com/au/shop/buy-mac/mac-studio/m5-max-chip-18-core-cpu-32-core-gpu-36gb-memory-512gb-storage",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:39:36.892038Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$4,299.00",
+  "price_numeric": 4299.0,
+  "currency": "AUD",
+  "page_sku": "MHL64X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Mac Studio, M5 Max Chip, 18-core CPU, 32-core GPU, 36GB memory, 512GB storage\",\"url\":\"https://www.apple.com/au/shop/buy-mac/mac-studio/m5-max-chip-18-core-cpu-32-core-gpu-36gb-memory-512gb-storage\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-mac/mac-studio/m5-max-chip-18-core-cpu-32-core-gpu-36gb-memory-512gb-storage\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":4299.00,\"sku\":\"MHL64X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mac-studio-chip-unselect-202608-gallery-1?wid=5120&hei=3280&fmt=jpeg&qlt=90&.v=1786042910172\",\"description\":\"Buy the Mac Studio desktop with the M5 Max chip, 36GB memory and 512GB storage. Get free shipping when you order at apple.com.\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}

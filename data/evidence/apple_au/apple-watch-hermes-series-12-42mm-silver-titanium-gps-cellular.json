@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-watch-hermes-series-12-42mm-silver-titanium-gps-cellular",
+  "url": "https://www.apple.com/au/shop/buy-watch/apple-watch-hermes/42mm-cellular-silver-titanium-b%C3%A9ton-kilim-single-tour",
+  "final_url": "https://www.apple.com/au/shop/buy-watch/apple-watch-hermes/42mm-cellular-silver-titanium-b%C3%A9ton-kilim-single-tour",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:40:08.617133Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$2,409.00",
+  "price_numeric": 2409.0,
+  "currency": "AUD",
+  "page_sku": "Z0YQ+MJJY4X/A+MJMW4FE/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Apple Watch Hermès Series 12 GPS + Cellular, 42‑mm Silver Titanium Case with Béton Kilim Single Tour\",\"url\":\"https://www.apple.com/au/shop/buy-watch/apple-watch-hermes/42mm-cellular-silver-titanium-béton-kilim-single-tour\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-watch/apple-watch-hermes/42mm-cellular-silver-titanium-béton-kilim-single-tour\",\"color\":\"Silver/Béton\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":2409.00,\"sku\":\"Z0YQ+MJJY4X/A+MJMW4FE/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MJMW4_VW_34FR+watch-case-42-titanium-silver-cell-hermes12s_VW_34FR+watch-face-42-kilim-beton-hermes12s_VW_34FR_GEO_AU?wid=2000&hei=2000&fmt=png-alpha&.v=eXBlSHFyUmdJTk9IZjAwOGNYUXVyVkxhUDRYNzNWdjhRQnRqUXg3SUorVldTd2V0YWlzUWFWa2EzSi9ZNk5ZZG81bDZHRmNnM2JQQmRWRzdYT3VlemFDNnRTWFd1cXI2dDVYTkJHMEFweG5xcWFBR2Y2NkMzWHFleWFRaWx5SjdqUms5WXNNSHVHbi93bTZzZGptQU9rNlVGOVdQcFowcG9uRDZCbXBnYTB4VjV3djZmTU14NnRlQ2xSWEp4bENTb3kzdFVweEtoOXpFSDVETTVNZjlEQVBZd0hsWWc4c1Y4RlNXRUVyT1Jaaw\",\"description\":\"Shop Apple Watch Hermès Series 12 silver titanium case in 42-mm and 46-mm sizes with built-in mobile connectivity and GPS. Buy now at apple.com/au.\",\"material\":\"Titanium\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}

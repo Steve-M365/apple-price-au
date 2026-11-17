@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-11-16T10:17:09.797700Z",
+  "seller_id": "apple_au",
+  "pages_fetched": 47,
+  "catalogue_size": 45,
+  "categories": {
+    "accessory": 6,
+    "airpods": 3,
+    "homepod": 3,
+    "ipad": 7,
+    "iphone": 7,
+    "mac": 11,
+    "tv": 1,
+    "watch": 7
+  },
+  "added": [],
+  "skipped": [
+    {
+      "url": "https://www.apple.com/au/shop/buy-airpods/airpods-5/without-wireless-charging-case",
+      "reason": "normalise: cannot normalise 'AirPods\\xa05': missing required axis: case"
+    },
+    {
+      "url": "https://www.apple.com/au/shop/buy-iphone/iphone-18-pro/6.9-inch-display-256gb-black",
+      "reason": "duplicate identity: apple-iphone-18-pro-6-3-inch-256gb-black already tracked at https://www.apple.com/au/shop/buy-iphone/iphone-18-pro/6.3-inch-display-256gb-black"
+    }
+  ],
+  "price_changes": []
+}

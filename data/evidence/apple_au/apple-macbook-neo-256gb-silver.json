@@ -1,0 +1,16 @@
+{
+  "product_id": "apple-macbook-neo-256gb-silver",
+  "url": "https://www.apple.com/au/shop/buy-mac/macbook-neo/silver-256gb",
+  "final_url": "https://www.apple.com/au/shop/buy-mac/macbook-neo/silver-256gb",
+  "http_status": 200,
+  "fetched_at": "2026-11-15T23:39:45.933641Z",
+  "user_agent": "OrchardPriceBot/1.0 (+https://github.com/Steve-M365/apple-price-au)",
+  "extraction_method": "jsonld",
+  "price_rendered": "A$1,049.00",
+  "price_numeric": 1049.0,
+  "currency": "AUD",
+  "page_sku": "MHFA4X/A",
+  "raw_fragment": "{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"MacBook Neo, Silver, 256GB\",\"url\":\"https://www.apple.com/au/shop/buy-mac/macbook-neo/silver-256gb\",\"mainEntityOfPage\":\"https://www.apple.com/au/shop/buy-mac/macbook-neo/silver-256gb\",\"offers\":[{\"@type\":\"Offer\",\"priceCurrency\":\"AUD\",\"price\":1049.00,\"sku\":\"MHFA4X/A\",\"shippingDetails\":{\"@type\":\"OfferShippingDetails\",\"shippingRate\":{\"@type\":\"MonetaryAmount\",\"value\":0,\"currency\":\"AUD\"}},\"hasMerchantReturnPolicy\":{\"@type\":\"MerchantReturnPolicy\",\"applicableCountry\":\"AU\",\"returnPolicyCategory\":\"https://schema.org/MerchantReturnFiniteReturnWindow\",\"merchantReturnDays\":14,\"returnMethod\":\"https://schema.org/ReturnByMail\",\"returnFees\":\"https://schema.org/FreeReturn\"}}],\"image\":\"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-neo-color-select-202603-silver-256gb?wid=5120&hei=3280&fmt=jpeg&qlt=90&.v=1770944488804\",\"description\":\"Buy the MacBook Neo laptop in Silver and 256GB storage. Get free shipping when you order at apple.com.\"}",
+  "availability": null,
+  "note": "price taken from the Product JSON-LD Offer.price on the product page; availability as published: not stated"
+}
