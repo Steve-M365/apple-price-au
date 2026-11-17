@@ -1,0 +1,12 @@
+{
+  "run_id": "20261117T022411Z-b63569f2",
+  "adapter": "AppleEducationAdapter",
+  "started_at": "2026-11-17T02:24:11.012134Z",
+  "finished_at": "2026-11-17T02:25:47.452524Z",
+  "fetched": 2,
+  "parsed": 2,
+  "matched": 2,
+  "rejected": 0,
+  "blocked_by_policy": 0,
+  "errors": []
+}

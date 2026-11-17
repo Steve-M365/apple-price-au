@@ -84,7 +84,12 @@ from .base import (
 )
 from .http import HttpClient, HttpError, load_settings
 from .policy import RobotsGate
-from .snapshot import SnapshotConflictError, snapshot_path, write_snapshot
+from .snapshot import (
+    SnapshotConflictError,
+    snapshot_path,
+    write_run_manifest,
+    write_snapshot,
+)
 
 __all__ = [
     "CONFIDENCE_CONFIG",
@@ -118,6 +123,7 @@ REPO_ROOT: Final = Path(__file__).resolve().parents[2]
 PRODUCTS_PATH: Final = REPO_ROOT / "data" / "products.json"
 FIXTURES_DIR: Final = REPO_ROOT / "fixtures" / "html" / "apple_au"
 SNAPSHOTS_DIR: Final = REPO_ROOT / "data" / "snapshots"
+RUNS_DIR: Final = REPO_ROOT / "data" / "runs"
 
 #: Which read produced the price. Recorded per product so a partial fallback
 #: (JSON-LD gone, markup still fine) is visible in the run report.
@@ -787,6 +793,8 @@ class AppleAuAdapter(BaseAdapter):
         self._catalogue = catalogue
         self._fixtures_dir = fixtures_dir
         self._run_id = new_run_id(clock())
+        #: When the most recent run began, for the run manifest.
+        self.started_at: datetime | None = None
         #: Which read produced each offer in the most recent run, for reporting.
         self.parse_paths: dict[str, ParsePath] = {}
 
@@ -801,6 +809,7 @@ class AppleAuAdapter(BaseAdapter):
 
     def _collect(self, targets: list[Product]) -> CollectionResult:
         started = self._clock()
+        self.started_at = started
         self._run_id = new_run_id(started)
         self.parse_paths = {}
         offers: list[Offer] = []
@@ -914,6 +923,7 @@ def _parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
     parser.add_argument(
         "--no-snapshot", action="store_true", help="collect without writing a snapshot"
     )
+    parser.add_argument("--runs", type=Path, default=RUNS_DIR, help="run manifest root")
     return parser.parse_args(argv)
 
 
@@ -990,6 +1000,31 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
         size_kb = written.stat().st_size / 1024
         print(f"snapshot: {written} ({size_kb:.1f} KB, {len(result.offers)} offers)")
+
+    finished = utc_now()
+    manifest = write_run_manifest(
+        seller_id=adapter.seller_id,
+        adapter=type(adapter).__name__,
+        run_id=adapter.run_id,
+        started_at=adapter.started_at or finished,
+        finished_at=finished,
+        fetched=len(products),
+        parsed=len(result.offers),
+        matched=len(result.offers),
+        rejected=len(result.errors),
+        blocked_by_policy=len(result.blocked),
+        errors=[
+            {
+                "product_id": error.product_id,
+                "url": error.url,
+                "message": error.message,
+                "error_type": error.error_type,
+            }
+            for error in result.errors
+        ],
+        root=args.runs,
+    )
+    print(f"manifest: {manifest}")
 
     return 0 if result.offers else 1
 

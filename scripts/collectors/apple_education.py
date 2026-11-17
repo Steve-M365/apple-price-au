@@ -69,7 +69,12 @@ from .base import (
 )
 from .http import HttpClient, HttpError, load_settings
 from .policy import RobotsGate
-from .snapshot import SNAPSHOT_SCHEMA_VERSION, SnapshotConflictError, snapshot_path
+from .snapshot import (
+    SNAPSHOT_SCHEMA_VERSION,
+    SnapshotConflictError,
+    snapshot_path,
+    write_run_manifest,
+)
 
 __all__ = [
     "ANNUAL_LIMIT_SOURCE_URL",
@@ -108,6 +113,7 @@ PRODUCTS_PATH: Final = _REPO_ROOT / "data" / "products.json"
 
 #: Append-only evidence root. Snapshots live under a capture-date directory.
 SNAPSHOT_ROOT: Final = _REPO_ROOT / "data" / "snapshots"
+RUNS_DIR: Final = _REPO_ROOT / "data" / "runs"
 
 SELLER_ID: Final = "apple_education_au"
 
@@ -433,6 +439,8 @@ class AppleEducationAdapter(BaseAdapter):
             clock=clock,
         )
         self._run_id = run_id or f"{utc_now():%Y%m%dT%H%M%SZ}-{uuid4().hex[:8]}"
+        #: When the most recent run began, for the run manifest.
+        self.started_at: datetime | None = None
         self._products_path = Path(products_path)
         self._education_offers: list[EducationOffer] = []
         self._policy: PolicyResult | None = None
@@ -502,6 +510,7 @@ class AppleEducationAdapter(BaseAdapter):
 
     def collect_education(self, targets: list[Product]) -> EducationCollectionResult:
         """Run the gate, then capture education prices for ``targets``."""
+        self.started_at = utc_now()
         self._education_offers = []
         result = self.collect(targets)
         return EducationCollectionResult(
@@ -1012,6 +1021,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--products", type=Path, default=PRODUCTS_PATH, help="catalogue path")
     parser.add_argument("--snapshot", type=Path, default=None, help="snapshot path override")
+    parser.add_argument("--runs", type=Path, default=RUNS_DIR, help="run manifest root")
     args = parser.parse_args(argv)
 
     if args.limit is not None and args.limit < 1:
@@ -1054,12 +1064,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         targets=targets,
     )
     path = args.snapshot or snapshot_path_for(result.fetched_at)
-    if args.limit is not None and path.exists():
-        # A truncated run is not a complete capture of the day's education prices,
-        # so it must never replace the day's evidence with a subset.
+    if args.limit is not None:
+        # A limited run is a smoke test, never the day's evidence. Writing it
+        # under the day's name once made a 2-of-18 capture look like the
+        # complete education set for that date. The run manifest records it.
         print(
-            f"snapshot not written: {path} already exists and this was a --limit run; "
-            "re-run without --limit to refresh the day's capture"
+            f"snapshot not written: partial run of {len(targets)} product(s); "
+            "the day's capture has to be complete"
         )
         return 0
     try:
@@ -1070,6 +1081,31 @@ def main(argv: Sequence[str] | None = None) -> int:
         written = write_snapshot(payload, fallback)
         print(f"note: {path} already holds different evidence; wrote {written}")
     print(f"snapshot: {written}")
+
+    finished = utc_now()
+    manifest = write_run_manifest(
+        seller_id=adapter.seller_id,
+        adapter=type(adapter).__name__,
+        run_id=adapter.run_id,
+        started_at=adapter.started_at or finished,
+        finished_at=finished,
+        fetched=len(targets),
+        parsed=len(result.offers),
+        matched=len(result.offers),
+        rejected=len(result.errors),
+        blocked_by_policy=len(result.blocked),
+        errors=[
+            {
+                "product_id": error.product_id,
+                "url": error.url,
+                "message": error.message,
+                "error_type": error.error_type,
+            }
+            for error in result.errors
+        ],
+        root=args.runs,
+    )
+    print(f"manifest: {manifest}")
     return 0
 
 

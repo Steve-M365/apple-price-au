@@ -1,6 +1,6 @@
 {
   "project": "Orchard (apple-price-au)",
-  "updated": "2026-11-16T22:58:39Z",
+  "updated": "2026-11-17T09:38:43Z",
   "cards": [
     {
       "id": "APA-001",
@@ -360,7 +360,7 @@
       "title": "Snapshot writer with hashing and run manifest",
       "type": "feature",
       "priority": "P1",
-      "status": "backlog",
+      "status": "done",
       "owner": "apple-adapter",
       "labels": [
         "m2",
@@ -374,8 +374,10 @@
         "Timestamps are UTC ISO 8601; display timezone is applied only at render"
       ],
       "created": "2026-11-15T10:16:05Z",
-      "updated": "2026-11-15T10:16:05Z",
-      "notes": []
+      "updated": "2026-11-17T09:38:43Z",
+      "notes": [
+        "Director completed: run manifests written per run for both collectors including failed/partial runs, directory loader in the gate, 12 new tests"
+      ]
     },
     {
       "id": "APA-016",

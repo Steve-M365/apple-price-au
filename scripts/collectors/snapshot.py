@@ -26,12 +26,14 @@ from __future__ import annotations
 import json
 import os
 import tempfile
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Final
 
-from scripts.models import Offer
+from pydantic import HttpUrl, ValidationError
+
+from scripts.models import Offer, RunError, RunManifest
 from scripts.models.common import format_utc
 
 __all__ = [
@@ -117,6 +119,89 @@ def render_snapshot(
     """Render the snapshot as deterministic, human-diffable JSON text."""
     payload = build_snapshot(seller_id, run_id, offers, captured_at)
     return json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+
+
+def write_run_manifest(
+    *,
+    seller_id: str,
+    adapter: str,
+    run_id: str,
+    started_at: datetime,
+    finished_at: datetime,
+    fetched: int,
+    parsed: int,
+    matched: int,
+    rejected: int,
+    blocked_by_policy: int,
+    errors: Sequence[Mapping[str, object]] = (),
+    root: Path | None = None,
+) -> Path:
+    """Record what one adapter run did, including the runs that failed.
+
+    A manifest is written for every run, successful or not, because the useful
+    question later is "which sources were quiet this week, and why" -- and a
+    missing manifest cannot answer it. The filename is the run id, which is
+    unique per run, so an append-only write never collides.
+    """
+    manifest = RunManifest(
+        run_id=run_id,
+        adapter=adapter,
+        started_at=started_at,
+        finished_at=finished_at,
+        fetched=fetched,
+        parsed=parsed,
+        matched=matched,
+        rejected=rejected,
+        blocked_by_policy=blocked_by_policy,
+        errors=[
+            RunError(
+                product_id=_optional_str(item.get("product_id")),
+                url=_optional_url(item.get("url")),
+                message=_optional_str(item.get("message")) or "unspecified error",
+                error_type=_optional_str(item.get("error_type")) or "unknown",
+            )
+            for item in errors
+        ],
+    )
+    directory = root or Path("data/runs")
+    directory.mkdir(parents=True, exist_ok=True)
+    target = directory / f"{seller_id}-{run_id}.json"
+    _write_bytes(target, (manifest.model_dump_json(indent=2) + "\n").encode("utf-8"))
+    return target
+
+
+def _optional_url(value: object) -> HttpUrl | None:
+    """Return a validated URL or None; the model rejects empty or malformed text."""
+    text = _optional_str(value)
+    if text is None:
+        return None
+    try:
+        return HttpUrl(text)
+    except ValidationError:
+        return None
+
+
+def _optional_str(value: object) -> str | None:
+    """Return a non-empty string or None; the models reject empty strings."""
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text or None
+
+
+def _write_bytes(path: Path, data: bytes) -> Path:
+    """Atomic write shared by snapshots and run manifests."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    handle, temporary = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=".tmp")
+    try:
+        with os.fdopen(handle, "wb") as stream:
+            stream.write(data)
+        os.chmod(temporary, 0o644)
+        os.replace(temporary, path)
+    except BaseException:  # pragma: no cover - defensive cleanup
+        Path(temporary).unlink(missing_ok=True)
+        raise
+    return path
 
 
 def write_snapshot(

@@ -116,6 +116,11 @@ class DatasetSpec:
     key: str
     paths: tuple[str, ...]
     list_keys: tuple[str, ...]
+    #: Some datasets are one file per record rather than one file per dataset.
+    #: Run manifests are written per run so parallel adapters never contend for
+    #: a single index file, so the loader reads a directory instead.
+    directory: str | None = None
+    model: type[BaseModel] | None = None
 
 
 DATASETS: Final[tuple[DatasetSpec, ...]] = (
@@ -146,7 +151,13 @@ DATASETS: Final[tuple[DatasetSpec, ...]] = (
         ("matching/review_queue.json",),
         ("candidates", "review_queue", "pending", "queue", "items"),
     ),
-    DatasetSpec("runs", ("runs.json", "health/runs.json"), ("runs", "manifests", "items")),
+    DatasetSpec(
+        "runs",
+        ("runs.json", "health/runs.json"),
+        ("runs", "manifests", "items"),
+        directory="runs",
+        model=RunManifest,
+    ),
 )
 
 
@@ -183,6 +194,65 @@ def _locate(data_dir: Path, spec: DatasetSpec) -> Path | None:
         if candidate.is_file():
             return candidate
     return None
+
+
+def _load_directory(
+    data_dir: Path,
+    spec: DatasetSpec,
+    hard: list[Issue],
+    warnings: list[Issue],
+) -> Loaded:
+    """Load a dataset stored as one JSON file per record.
+
+    Each file is validated against ``spec.model`` here, so a bad manifest is
+    named by its own filename rather than by an index into a merged list.
+    """
+    assert spec.directory is not None
+    directory = data_dir / spec.directory
+    label = f"{spec.directory}/"
+    files = sorted(directory.glob("*.json")) if directory.is_dir() else []
+    if not files:
+        warnings.append(
+            Issue("missing_dataset", label, label, "dataset not found; treated as empty")
+        )
+        return Loaded(key=spec.key, filename=label, items=[], present=False)
+
+    items: list[object] = []
+    for path in files:
+        filename = path.relative_to(data_dir).as_posix()
+        try:
+            payload: object = json.loads(path.read_text(encoding="utf-8"))
+        except OSError as exc:
+            hard.append(Issue("unreadable_dataset", filename, filename, f"cannot read file: {exc}"))
+            continue
+        except json.JSONDecodeError as exc:
+            hard.append(
+                Issue(
+                    "invalid_json",
+                    filename,
+                    filename,
+                    f"invalid JSON: {exc.msg} (line {exc.lineno})",
+                )
+            )
+            continue
+        if spec.model is not None:
+            try:
+                spec.model.model_validate(payload)
+            except ValidationError as exc:
+                for error in exc.errors()[:5]:
+                    location = ".".join(str(part) for part in error["loc"]) or "<root>"
+                    hard.append(
+                        Issue(
+                            "invalid_record",
+                            filename,
+                            f"{filename}.{location}",
+                            f"{error['msg']} (input: {error.get('input')!r})",
+                        )
+                    )
+                continue
+        items.append(payload)
+
+    return Loaded(key=spec.key, filename=label, items=items, present=True)
 
 
 def _extract_items(
@@ -226,6 +296,9 @@ def _load_dataset(
     hard: list[Issue],
     warnings: list[Issue],
 ) -> Loaded:
+    if spec.directory is not None:
+        return _load_directory(data_dir, spec, hard, warnings)
+
     path = _locate(data_dir, spec)
     if path is None:
         canonical = spec.paths[0]

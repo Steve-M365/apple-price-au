@@ -540,3 +540,25 @@ def test_limited_cli_run_never_replaces_a_complete_snapshot(
     assert code == 0
     written = json.loads(snapshot.read_text(encoding="utf-8"))
     assert written["snapshot"]["captured_at"] == "2026-11-15T00:00:00Z"
+
+
+def test_limited_cli_run_never_creates_a_days_evidence(
+    repo_root: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A partial run must not become the day's education evidence at all.
+
+    The earlier guard only refused to *overwrite* an existing day file, so on a
+    fresh date a two-product smoke test wrote the day's snapshot and a consumer
+    would have read it as the complete education set. Now a limited run never
+    writes under the day's name.
+    """
+    from scripts.collectors import apple_education
+
+    adapter = _adapter(repo_root, tmp_path, _full_site(repo_root))
+    monkeypatch.setattr(apple_education, "_build_adapter", lambda _path: adapter)
+    snapshot = tmp_path / "2026-11-17" / "apple_education_au.json"
+
+    code = apple_education.main(["--limit", "2", "--snapshot", str(snapshot)])
+
+    assert code == 0
+    assert not snapshot.exists(), "a limited run wrote the day's evidence"
